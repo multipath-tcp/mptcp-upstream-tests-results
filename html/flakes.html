@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Inspired by NIPA's flakes: https://github.com/linux-netdev/nipa -->
+    <meta charset="UTF-8">
+    <title>MPTCP Tests Flakes</title>
+    <!-- From Twemoji, Copyright 2020 Twitter, Inc. CC-BY 4.0. -->
+    <link rel="shortcut icon" href="/favicon-flakes.png" type="image/png" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="flakes.js"></script>
+    <script>
+        do_it();
+    </script>
+    <style>
+      table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      td, th {
+        border: 1px solid #eeeeee;
+        text-align: left;
+        padding: 8px;
+      }
+
+      tr {
+        white-space: nowrap;
+      }
+
+      tr:nth-child(even) {
+        background-color: #eeeeee;
+      }
+      .row {
+        display: flex;
+      }
+
+      .column {
+        flex: 50%;
+        padding: 1em;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        body {
+          color: #eee;
+          background: #121212;
+        }
+
+        a {
+          color: #809fff;
+        }
+
+        tr:nth-child(even) {
+          background-color: #000000;
+        }
+      }
+    </style>
+</head>
+<body>
+    <div class="row">
+        <fieldset>
+            <legend>Filtering:</legend>
+            <div class="row">
+                <div class="column">
+                    <label for="branch">Branch: </label><br />
+                    <select id="branch" name="branch" onchange='do_it()'>
+                        <option value="export" selected="selected">export</option>
+                        <option value="export-net">export-net</option>
+                    </select>
+                </div>
+                <div class="column">
+                    <label for="mode">Mode: </label><br />
+                    <select id="mode" name="mode" onchange='do_it()'>
+                        <option value="normal" selected="selected">Normal</option>
+                        <option value="debug">Debug</option>
+                        <option value="btf">BPF</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <span id="fl-warn-box" style="color: red">Loading...</span>
+            </div>
+        </fieldset>
+    </div>
+    <div class="row">
+        <div class="column">
+            <h3>Test flakiness, sorted by the number of flips</h3>
+            <table id="results">
+            </table>
+        </div>
+    </div>
+</body>
+</html>
