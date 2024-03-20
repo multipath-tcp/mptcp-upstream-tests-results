@@ -25,11 +25,8 @@ function colorify(cell, result)
   cell.setAttribute("style", style);
 }
 
-function load_result_table(data_raw)
+function load_result_table(data_raw, table_name)
 {
-  let warn_box = document.getElementById("fl-warn-box");
-  warn_box.innerHTML = "";
-
   // Get all tags names
   var tags = new Array();
   $.each(data_raw, function(i, item) {
@@ -74,9 +71,9 @@ function load_result_table(data_raw)
   });
 
   // Remove all rows but first (leave headers)
-  $("#results tr").remove();
+  $("#results-" + table_name + " tr").remove();
   // Display
-  let table = document.getElementById("results");
+  let table = document.getElementById("results-" + table_name);
 
   let header = table.insertRow();
   header.insertCell(0); // name
@@ -103,12 +100,45 @@ function load_result_table(data_raw)
   }
 }
 
+let xfr_todo = 3;
+
+function remove_loading()
+{
+  if (--xfr_todo > 0)
+    return;
+
+  let warn_box = document.getElementById("fl-warn-box");
+  warn_box.innerHTML = "";
+}
+
+function load_result_table_normal(data_raw)
+{
+  load_result_table(data_raw, "normal");
+  remove_loading();
+}
+
+function load_result_table_debug(data_raw)
+{
+  load_result_table(data_raw, "debug");
+  remove_loading();
+}
+
+function load_result_table_btf(data_raw)
+{
+  load_result_table(data_raw, "btf");
+  remove_loading();
+}
+
 function do_it()
 {
   $(document).ready(function() {
     let branch = document.getElementById("branch").value;
-    let mode = document.getElementById("mode").value;
+    var path;
 
-    $.get("results/" + branch + "/" + mode + ".json", load_result_table)
+    path = "results/" + branch;
+
+    $.get(path + "/normal.json", load_result_table_normal);
+    $.get(path + "/debug.json", load_result_table_debug);
+    $.get(path + "/btf.json", load_result_table_btf);
   });
 }
