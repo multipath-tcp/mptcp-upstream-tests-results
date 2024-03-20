@@ -129,13 +129,20 @@ function load_result_table_btf(data_raw)
   remove_loading();
 }
 
+let matched = false;
+
 function do_it()
 {
   $(document).ready(function() {
-    let branch = document.getElementById("branch").value;
+    var matches = /branch=([a-z-]+)/.exec(window.location.search);
+    var selector = document.getElementById("branch");
     var path;
 
-    path = "results/" + branch;
+    if (!matched && matches)
+      selector.value = matches[1];
+    matched = true;
+
+    path = "results/" + selector.value;
 
     $.get(path + "/normal.json", load_result_table_normal);
     $.get(path + "/debug.json", load_result_table_debug);
