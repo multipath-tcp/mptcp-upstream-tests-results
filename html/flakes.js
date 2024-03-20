@@ -35,9 +35,10 @@ function load_result_table(data_raw)
   $.each(data_raw, function(i, item) {
     tags.push([item.tag, item.run_id]);
   });
+  tags.reverse();
 
   var test_row = {};
-  var tags_errors = new Set(); // TODO: handle errors
+  var tags_errors = new Set();
 
   /* Format:
     [{"results":
