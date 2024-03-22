@@ -6,7 +6,7 @@ function colorify(cell, result)
 
   if (result == null || !("result" in result)) {
     ret = "";
-    cmt = "";
+    cmt = null;
   } else {
     ret = result.result;
     cmt = result.comment;
@@ -19,10 +19,12 @@ function colorify(cell, result)
   } else {
     style = "background-color:red";
   }
-
-  if (cmt != "")
-    cell.innerHTML = "<span title=\"" + cmt + "\" data-toggle=\"tooltip\"/>";
   cell.setAttribute("style", style);
+
+  if (cmt != null) {
+    cell.setAttribute("title", cmt);
+    cell.setAttribute("data-toggle", "tooltip");
+  }
 }
 
 function load_result_table(data_raw, table_name)
