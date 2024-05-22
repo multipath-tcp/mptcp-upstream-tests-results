@@ -16,6 +16,8 @@ function colorify(cell, result)
     style = "background-color:green";
   } else if (ret == "skip") {
     style = "background-color:blue";
+  } else if (ret == "flaky") {
+    style = "background-color:orange";
   } else {
     style = "background-color:red";
   }
