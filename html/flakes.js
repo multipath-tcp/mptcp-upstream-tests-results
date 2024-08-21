@@ -45,7 +45,7 @@ function load_result_table(data_raw, table_name)
     [{"results":
         {"<file>":
           {<id>:
-            {"result": "<pass/fail>", "name": "<name>", "comment": "<cmt>"}
+            {"result": "<pass/fail>", "name": "<name>", "comment": "<cmt>", "time_ms": "<time>"}
           }
         }
       "run_id": "<run_id>",
@@ -66,9 +66,15 @@ function load_result_table(data_raw, table_name)
           for (let i = 1; i <= tags.length; i++)
             test_row[tn][tags[i - 1][0]] = null;
         }
+        var cmt = "";
+        if ('comment' in result)
+          cmt += result.comment;
+        if ('time_ms' in result)
+          cmt += " time=" + result.time_ms + "ms";
+        cmt = cmt.trim();
         test_row[tn][item.tag] = {
           "result": result.result,
-          "comment": result.comment
+          "comment": cmt
         };
       });
     });
