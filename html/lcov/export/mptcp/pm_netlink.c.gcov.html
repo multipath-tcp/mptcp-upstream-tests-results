@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2024-10-07 10:12:02</td>
+            <td class="headerValue">2024-10-07 19:25:55</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -121,15 +121,15 @@
 <span id="L43"><span class="lineNum">      43</span>                 :             : #define MPTCP_PM_ADDR_MAX       8</span>
 <span id="L44"><span class="lineNum">      44</span>                 :             : #define ADD_ADDR_RETRANS_MAX    3</span>
 <span id="L45"><span class="lineNum">      45</span>                 :             : </span>
-<span id="L46"><span class="lineNum">      46</span>                 :<span class="tlaGNC tlaBgGNC">       15745 : static struct pm_nl_pernet *pm_nl_get_pernet(const struct net *net)</span></span>
+<span id="L46"><span class="lineNum">      46</span>                 :<span class="tlaGNC tlaBgGNC">       15688 : static struct pm_nl_pernet *pm_nl_get_pernet(const struct net *net)</span></span>
 <span id="L47"><span class="lineNum">      47</span>                 :             : {</span>
-<span id="L48"><span class="lineNum">      48</span>                 :<span class="tlaGNC">       29506 :         return net_generic(net, pm_nl_pernet_id);</span></span>
+<span id="L48"><span class="lineNum">      48</span>                 :<span class="tlaGNC">       29464 :         return net_generic(net, pm_nl_pernet_id);</span></span>
 <span id="L49"><span class="lineNum">      49</span>                 :             : }</span>
 <span id="L50"><span class="lineNum">      50</span>                 :             : </span>
 <span id="L51"><span class="lineNum">      51</span>                 :             : static struct pm_nl_pernet *</span>
-<span id="L52"><span class="lineNum">      52</span>                 :<span class="tlaGNC">       12234 : pm_nl_get_pernet_from_msk(const struct mptcp_sock *msk)</span></span>
+<span id="L52"><span class="lineNum">      52</span>                 :<span class="tlaGNC">       12250 : pm_nl_get_pernet_from_msk(const struct mptcp_sock *msk)</span></span>
 <span id="L53"><span class="lineNum">      53</span>                 :             : {</span>
-<span id="L54"><span class="lineNum">      54</span>                 :<span class="tlaGNC">       24458 :         return pm_nl_get_pernet(sock_net((struct sock *)msk));</span></span>
+<span id="L54"><span class="lineNum">      54</span>                 :<span class="tlaGNC">       24421 :         return pm_nl_get_pernet(sock_net((struct sock *)msk));</span></span>
 <span id="L55"><span class="lineNum">      55</span>                 :             : }</span>
 <span id="L56"><span class="lineNum">      56</span>                 :             : </span>
 <span id="L57"><span class="lineNum">      57</span>                 :<span class="tlaGNC">        8711 : bool mptcp_addresses_equal(const struct mptcp_addr_info *a,</span></span>
@@ -290,47 +290,47 @@
 <span id="L206"><span class="lineNum">     206</span>                 :<span class="tlaGNC">         307 :         return found;</span></span>
 <span id="L207"><span class="lineNum">     207</span>                 :             : }</span>
 <span id="L208"><span class="lineNum">     208</span>                 :             : </span>
-<span id="L209"><span class="lineNum">     209</span>                 :<span class="tlaGNC">        4368 : unsigned int mptcp_pm_get_add_addr_signal_max(const struct mptcp_sock *msk)</span></span>
+<span id="L209"><span class="lineNum">     209</span>                 :<span class="tlaGNC">        4358 : unsigned int mptcp_pm_get_add_addr_signal_max(const struct mptcp_sock *msk)</span></span>
 <span id="L210"><span class="lineNum">     210</span>                 :             : {</span>
-<span id="L211"><span class="lineNum">     211</span>                 :<span class="tlaGNC">        4302 :         const struct pm_nl_pernet *pernet = pm_nl_get_pernet_from_msk(msk);</span></span>
+<span id="L211"><span class="lineNum">     211</span>                 :<span class="tlaGNC">        4292 :         const struct pm_nl_pernet *pernet = pm_nl_get_pernet_from_msk(msk);</span></span>
 <span id="L212"><span class="lineNum">     212</span>                 :             : </span>
-<span id="L213"><span class="lineNum">     213</span>                 :<span class="tlaGNC">        5010 :         return READ_ONCE(pernet-&gt;add_addr_signal_max);</span></span>
+<span id="L213"><span class="lineNum">     213</span>                 :<span class="tlaGNC">        4999 :         return READ_ONCE(pernet-&gt;add_addr_signal_max);</span></span>
 <span id="L214"><span class="lineNum">     214</span>                 :             : }</span>
 <span id="L215"><span class="lineNum">     215</span>                 :             : EXPORT_SYMBOL_GPL(mptcp_pm_get_add_addr_signal_max);</span>
 <span id="L216"><span class="lineNum">     216</span>                 :             : </span>
-<span id="L217"><span class="lineNum">     217</span>                 :<span class="tlaGNC">        4428 : unsigned int mptcp_pm_get_add_addr_accept_max(const struct mptcp_sock *msk)</span></span>
+<span id="L217"><span class="lineNum">     217</span>                 :<span class="tlaGNC">        4418 : unsigned int mptcp_pm_get_add_addr_accept_max(const struct mptcp_sock *msk)</span></span>
 <span id="L218"><span class="lineNum">     218</span>                 :             : {</span>
-<span id="L219"><span class="lineNum">     219</span>                 :<span class="tlaGNC">        4428 :         struct pm_nl_pernet *pernet = pm_nl_get_pernet_from_msk(msk);</span></span>
+<span id="L219"><span class="lineNum">     219</span>                 :<span class="tlaGNC">        4418 :         struct pm_nl_pernet *pernet = pm_nl_get_pernet_from_msk(msk);</span></span>
 <span id="L220"><span class="lineNum">     220</span>                 :             : </span>
-<span id="L221"><span class="lineNum">     221</span>                 :<span class="tlaGNC">        4762 :         return READ_ONCE(pernet-&gt;add_addr_accept_max);</span></span>
+<span id="L221"><span class="lineNum">     221</span>                 :<span class="tlaGNC">        4752 :         return READ_ONCE(pernet-&gt;add_addr_accept_max);</span></span>
 <span id="L222"><span class="lineNum">     222</span>                 :             : }</span>
 <span id="L223"><span class="lineNum">     223</span>                 :             : EXPORT_SYMBOL_GPL(mptcp_pm_get_add_addr_accept_max);</span>
 <span id="L224"><span class="lineNum">     224</span>                 :             : </span>
-<span id="L225"><span class="lineNum">     225</span>                 :<span class="tlaGNC">        5150 : unsigned int mptcp_pm_get_subflows_max(const struct mptcp_sock *msk)</span></span>
+<span id="L225"><span class="lineNum">     225</span>                 :<span class="tlaGNC">        5142 : unsigned int mptcp_pm_get_subflows_max(const struct mptcp_sock *msk)</span></span>
 <span id="L226"><span class="lineNum">     226</span>                 :             : {</span>
-<span id="L227"><span class="lineNum">     227</span>                 :<span class="tlaGNC">        5150 :         struct pm_nl_pernet *pernet = pm_nl_get_pernet_from_msk(msk);</span></span>
+<span id="L227"><span class="lineNum">     227</span>                 :<span class="tlaGNC">        5142 :         struct pm_nl_pernet *pernet = pm_nl_get_pernet_from_msk(msk);</span></span>
 <span id="L228"><span class="lineNum">     228</span>                 :             : </span>
-<span id="L229"><span class="lineNum">     229</span>                 :<span class="tlaGNC">        7490 :         return READ_ONCE(pernet-&gt;subflows_max);</span></span>
+<span id="L229"><span class="lineNum">     229</span>                 :<span class="tlaGNC">        7483 :         return READ_ONCE(pernet-&gt;subflows_max);</span></span>
 <span id="L230"><span class="lineNum">     230</span>                 :             : }</span>
 <span id="L231"><span class="lineNum">     231</span>                 :             : EXPORT_SYMBOL_GPL(mptcp_pm_get_subflows_max);</span>
 <span id="L232"><span class="lineNum">     232</span>                 :             : </span>
-<span id="L233"><span class="lineNum">     233</span>                 :<span class="tlaGNC">        4589 : unsigned int mptcp_pm_get_local_addr_max(const struct mptcp_sock *msk)</span></span>
+<span id="L233"><span class="lineNum">     233</span>                 :<span class="tlaGNC">        4579 : unsigned int mptcp_pm_get_local_addr_max(const struct mptcp_sock *msk)</span></span>
 <span id="L234"><span class="lineNum">     234</span>                 :             : {</span>
-<span id="L235"><span class="lineNum">     235</span>                 :<span class="tlaGNC">        4523 :         struct pm_nl_pernet *pernet = pm_nl_get_pernet_from_msk(msk);</span></span>
+<span id="L235"><span class="lineNum">     235</span>                 :<span class="tlaGNC">        4513 :         struct pm_nl_pernet *pernet = pm_nl_get_pernet_from_msk(msk);</span></span>
 <span id="L236"><span class="lineNum">     236</span>                 :             : </span>
-<span id="L237"><span class="lineNum">     237</span>                 :<span class="tlaGNC">        5231 :         return READ_ONCE(pernet-&gt;local_addr_max);</span></span>
+<span id="L237"><span class="lineNum">     237</span>                 :<span class="tlaGNC">        5220 :         return READ_ONCE(pernet-&gt;local_addr_max);</span></span>
 <span id="L238"><span class="lineNum">     238</span>                 :             : }</span>
 <span id="L239"><span class="lineNum">     239</span>                 :             : EXPORT_SYMBOL_GPL(mptcp_pm_get_local_addr_max);</span>
 <span id="L240"><span class="lineNum">     240</span>                 :             : </span>
-<span id="L241"><span class="lineNum">     241</span>                 :<span class="tlaGNC">         975 : bool mptcp_pm_nl_check_work_pending(struct mptcp_sock *msk)</span></span>
+<span id="L241"><span class="lineNum">     241</span>                 :<span class="tlaGNC">         977 : bool mptcp_pm_nl_check_work_pending(struct mptcp_sock *msk)</span></span>
 <span id="L242"><span class="lineNum">     242</span>                 :             : {</span>
-<span id="L243"><span class="lineNum">     243</span>                 :<span class="tlaGNC">         975 :         struct pm_nl_pernet *pernet = pm_nl_get_pernet_from_msk(msk);</span></span>
+<span id="L243"><span class="lineNum">     243</span>                 :<span class="tlaGNC">         977 :         struct pm_nl_pernet *pernet = pm_nl_get_pernet_from_msk(msk);</span></span>
 <span id="L244"><span class="lineNum">     244</span>                 :             : </span>
-<span id="L245"><span class="lineNum">     245</span>   [<span class="tlaGBC" title="Branch 0 was taken 785 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 190 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 478 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 238 times"> + </span>]:<span class="tlaGNC">        1691 :         if (msk-&gt;pm.subflows == mptcp_pm_get_subflows_max(msk) ||</span></span>
-<span id="L246"><span class="lineNum">     246</span>         [<span class="tlaGBC" title="Branch 0 was taken 69 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">         785 :             (find_next_and_bit(pernet-&gt;id_bitmap, msk-&gt;pm.id_avail_bitmap,</span></span>
+<span id="L245"><span class="lineNum">     245</span>   [<span class="tlaGBC" title="Branch 0 was taken 787 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 190 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 477 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 241 times"> + </span>]:<span class="tlaGNC">        1695 :         if (msk-&gt;pm.subflows == mptcp_pm_get_subflows_max(msk) ||</span></span>
+<span id="L246"><span class="lineNum">     246</span>         [<span class="tlaGBC" title="Branch 0 was taken 69 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">         787 :             (find_next_and_bit(pernet-&gt;id_bitmap, msk-&gt;pm.id_avail_bitmap,</span></span>
 <span id="L247"><span class="lineNum">     247</span>                 :             :                                MPTCP_PM_MAX_ADDR_ID + 1, 0) == MPTCP_PM_MAX_ADDR_ID + 1)) {</span>
-<span id="L248"><span class="lineNum">     248</span>                 :<span class="tlaGNC">         737 :                 WRITE_ONCE(msk-&gt;pm.work_pending, false);</span></span>
-<span id="L249"><span class="lineNum">     249</span>                 :<span class="tlaGNC">         737 :                 return false;</span></span>
+<span id="L248"><span class="lineNum">     248</span>                 :<span class="tlaGNC">         736 :                 WRITE_ONCE(msk-&gt;pm.work_pending, false);</span></span>
+<span id="L249"><span class="lineNum">     249</span>                 :<span class="tlaGNC">         736 :                 return false;</span></span>
 <span id="L250"><span class="lineNum">     250</span>                 :             :         }</span>
 <span id="L251"><span class="lineNum">     251</span>                 :             :         return true;</span>
 <span id="L252"><span class="lineNum">     252</span>                 :             : }</span>
@@ -481,23 +481,23 @@
 <span id="L394"><span class="lineNum">     394</span>                 :<span class="tlaGNC">         341 :         return true;</span></span>
 <span id="L395"><span class="lineNum">     395</span>                 :             : }</span>
 <span id="L396"><span class="lineNum">     396</span>                 :             : </span>
-<span id="L397"><span class="lineNum">     397</span>                 :<span class="tlaGNC">        3534 : void mptcp_pm_free_anno_list(struct mptcp_sock *msk)</span></span>
+<span id="L397"><span class="lineNum">     397</span>                 :<span class="tlaGNC">        3530 : void mptcp_pm_free_anno_list(struct mptcp_sock *msk)</span></span>
 <span id="L398"><span class="lineNum">     398</span>                 :             : {</span>
-<span id="L399"><span class="lineNum">     399</span>                 :<span class="tlaGNC">        3534 :         struct mptcp_pm_add_entry *entry, *tmp;</span></span>
-<span id="L400"><span class="lineNum">     400</span>                 :<span class="tlaGNC">        3534 :         struct sock *sk = (struct sock *)msk;</span></span>
-<span id="L401"><span class="lineNum">     401</span>                 :<span class="tlaGNC">        3534 :         LIST_HEAD(free_list);</span></span>
+<span id="L399"><span class="lineNum">     399</span>                 :<span class="tlaGNC">        3530 :         struct mptcp_pm_add_entry *entry, *tmp;</span></span>
+<span id="L400"><span class="lineNum">     400</span>                 :<span class="tlaGNC">        3530 :         struct sock *sk = (struct sock *)msk;</span></span>
+<span id="L401"><span class="lineNum">     401</span>                 :<span class="tlaGNC">        3530 :         LIST_HEAD(free_list);</span></span>
 <span id="L402"><span class="lineNum">     402</span>                 :             : </span>
-<span id="L403"><span class="lineNum">     403</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 3534 times"> + </span>]:<span class="tlaGNC">        3534 :         pr_debug(&quot;msk=%p\n&quot;, msk);</span></span>
+<span id="L403"><span class="lineNum">     403</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 3530 times"> + </span>]:<span class="tlaGNC">        3530 :         pr_debug(&quot;msk=%p\n&quot;, msk);</span></span>
 <span id="L404"><span class="lineNum">     404</span>                 :             : </span>
-<span id="L405"><span class="lineNum">     405</span>                 :<span class="tlaGNC">        3534 :         spin_lock_bh(&amp;msk-&gt;pm.lock);</span></span>
-<span id="L406"><span class="lineNum">     406</span>         [<span class="tlaGBC" title="Branch 0 was taken 183 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 3351 times"> + </span>]:<span class="tlaGNC">        3534 :         list_splice_init(&amp;msk-&gt;pm.anno_list, &amp;free_list);</span></span>
-<span id="L407"><span class="lineNum">     407</span>                 :<span class="tlaGNC">        3534 :         spin_unlock_bh(&amp;msk-&gt;pm.lock);</span></span>
+<span id="L405"><span class="lineNum">     405</span>                 :<span class="tlaGNC">        3530 :         spin_lock_bh(&amp;msk-&gt;pm.lock);</span></span>
+<span id="L406"><span class="lineNum">     406</span>         [<span class="tlaGBC" title="Branch 0 was taken 183 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 3347 times"> + </span>]:<span class="tlaGNC">        3530 :         list_splice_init(&amp;msk-&gt;pm.anno_list, &amp;free_list);</span></span>
+<span id="L407"><span class="lineNum">     407</span>                 :<span class="tlaGNC">        3530 :         spin_unlock_bh(&amp;msk-&gt;pm.lock);</span></span>
 <span id="L408"><span class="lineNum">     408</span>                 :             : </span>
-<span id="L409"><span class="lineNum">     409</span>         [<span class="tlaGBC" title="Branch 0 was taken 263 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 3534 times"> + </span>]:<span class="tlaGNC">        3797 :         list_for_each_entry_safe(entry, tmp, &amp;free_list, list) {</span></span>
+<span id="L409"><span class="lineNum">     409</span>         [<span class="tlaGBC" title="Branch 0 was taken 263 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 3530 times"> + </span>]:<span class="tlaGNC">        3793 :         list_for_each_entry_safe(entry, tmp, &amp;free_list, list) {</span></span>
 <span id="L410"><span class="lineNum">     410</span>                 :<span class="tlaGNC">         263 :                 sk_stop_timer_sync(sk, &amp;entry-&gt;add_timer);</span></span>
 <span id="L411"><span class="lineNum">     411</span>                 :<span class="tlaGNC">         263 :                 kfree(entry);</span></span>
 <span id="L412"><span class="lineNum">     412</span>                 :             :         }</span>
-<span id="L413"><span class="lineNum">     413</span>                 :<span class="tlaGNC">        3534 : }</span></span>
+<span id="L413"><span class="lineNum">     413</span>                 :<span class="tlaGNC">        3530 : }</span></span>
 <span id="L414"><span class="lineNum">     414</span>                 :             : </span>
 <span id="L415"><span class="lineNum">     415</span>                 :             : /* Fill all the remote addresses into the array addrs[],</span>
 <span id="L416"><span class="lineNum">     416</span>                 :             :  * and return the array size.</span>
@@ -568,33 +568,33 @@
 <span id="L480"><span class="lineNum">     480</span>                 :<span class="tlaGNC">         262 :         return i;</span></span>
 <span id="L481"><span class="lineNum">     481</span>                 :             : }</span>
 <span id="L482"><span class="lineNum">     482</span>                 :             : </span>
-<span id="L483"><span class="lineNum">     483</span>                 :<span class="tlaGNC">         884 : static void __mptcp_pm_send_ack(struct mptcp_sock *msk, struct mptcp_subflow_context *subflow,</span></span>
+<span id="L483"><span class="lineNum">     483</span>                 :<span class="tlaGNC">         885 : static void __mptcp_pm_send_ack(struct mptcp_sock *msk, struct mptcp_subflow_context *subflow,</span></span>
 <span id="L484"><span class="lineNum">     484</span>                 :             :                                 bool prio, bool backup)</span>
 <span id="L485"><span class="lineNum">     485</span>                 :             : {</span>
-<span id="L486"><span class="lineNum">     486</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 884 times"> + </span>]:<span class="tlaGNC">         884 :         struct sock *ssk = mptcp_subflow_tcp_sock(subflow);</span></span>
-<span id="L487"><span class="lineNum">     487</span>                 :<span class="tlaGNC">         884 :         bool slow;</span></span>
+<span id="L486"><span class="lineNum">     486</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 885 times"> + </span>]:<span class="tlaGNC">         885 :         struct sock *ssk = mptcp_subflow_tcp_sock(subflow);</span></span>
+<span id="L487"><span class="lineNum">     487</span>                 :<span class="tlaGNC">         885 :         bool slow;</span></span>
 <span id="L488"><span class="lineNum">     488</span>                 :             : </span>
-<span id="L489"><span class="lineNum">     489</span>   [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 884 times"> + </span><span class="tlaUNC" title="Branch 2 was not taken"> - </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC">         884 :         pr_debug(&quot;send ack for %s\n&quot;,</span></span>
+<span id="L489"><span class="lineNum">     489</span>   [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 885 times"> + </span><span class="tlaUNC" title="Branch 2 was not taken"> - </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC">         885 :         pr_debug(&quot;send ack for %s\n&quot;,</span></span>
 <span class="lineNum">        </span>          <span class="tlaUNC" title="Branch 4 was not taken"> - </span><span class="tlaUNC" title="Branch 5 was not taken"> - </span>]
 <span id="L490"><span class="lineNum">     490</span>                 :             :                  prio ? &quot;mp_prio&quot; : (mptcp_pm_should_add_signal(msk) ? &quot;add_addr&quot; : &quot;rm_addr&quot;));</span>
 <span id="L491"><span class="lineNum">     491</span>                 :             : </span>
-<span id="L492"><span class="lineNum">     492</span>                 :<span class="tlaGNC">         884 :         slow = lock_sock_fast(ssk);</span></span>
-<span id="L493"><span class="lineNum">     493</span>         [<span class="tlaGBC" title="Branch 0 was taken 28 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 856 times"> + </span>]:<span class="tlaGNC">         884 :         if (prio) {</span></span>
+<span id="L492"><span class="lineNum">     492</span>                 :<span class="tlaGNC">         885 :         slow = lock_sock_fast(ssk);</span></span>
+<span id="L493"><span class="lineNum">     493</span>         [<span class="tlaGBC" title="Branch 0 was taken 28 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 857 times"> + </span>]:<span class="tlaGNC">         885 :         if (prio) {</span></span>
 <span id="L494"><span class="lineNum">     494</span>                 :<span class="tlaGNC">          28 :                 subflow-&gt;send_mp_prio = 1;</span></span>
 <span id="L495"><span class="lineNum">     495</span>                 :<span class="tlaGNC">          28 :                 subflow-&gt;request_bkup = backup;</span></span>
 <span id="L496"><span class="lineNum">     496</span>                 :             :         }</span>
 <span id="L497"><span class="lineNum">     497</span>                 :             : </span>
-<span id="L498"><span class="lineNum">     498</span>                 :<span class="tlaGNC">         884 :         __mptcp_subflow_send_ack(ssk);</span></span>
-<span id="L499"><span class="lineNum">     499</span>                 :<span class="tlaGNC">         884 :         unlock_sock_fast(ssk, slow);</span></span>
-<span id="L500"><span class="lineNum">     500</span>                 :<span class="tlaGNC">         884 : }</span></span>
+<span id="L498"><span class="lineNum">     498</span>                 :<span class="tlaGNC">         885 :         __mptcp_subflow_send_ack(ssk);</span></span>
+<span id="L499"><span class="lineNum">     499</span>                 :<span class="tlaGNC">         885 :         unlock_sock_fast(ssk, slow);</span></span>
+<span id="L500"><span class="lineNum">     500</span>                 :<span class="tlaGNC">         885 : }</span></span>
 <span id="L501"><span class="lineNum">     501</span>                 :             : </span>
-<span id="L502"><span class="lineNum">     502</span>                 :<span class="tlaGNC">         862 : static void mptcp_pm_send_ack(struct mptcp_sock *msk, struct mptcp_subflow_context *subflow,</span></span>
+<span id="L502"><span class="lineNum">     502</span>                 :<span class="tlaGNC">         863 : static void mptcp_pm_send_ack(struct mptcp_sock *msk, struct mptcp_subflow_context *subflow,</span></span>
 <span id="L503"><span class="lineNum">     503</span>                 :             :                               bool prio, bool backup)</span>
 <span id="L504"><span class="lineNum">     504</span>                 :             : {</span>
-<span id="L505"><span class="lineNum">     505</span>                 :<span class="tlaGNC">         862 :         spin_unlock_bh(&amp;msk-&gt;pm.lock);</span></span>
-<span id="L506"><span class="lineNum">     506</span>                 :<span class="tlaGNC">         862 :         __mptcp_pm_send_ack(msk, subflow, prio, backup);</span></span>
-<span id="L507"><span class="lineNum">     507</span>                 :<span class="tlaGNC">         862 :         spin_lock_bh(&amp;msk-&gt;pm.lock);</span></span>
-<span id="L508"><span class="lineNum">     508</span>                 :<span class="tlaGNC">         862 : }</span></span>
+<span id="L505"><span class="lineNum">     505</span>                 :<span class="tlaGNC">         863 :         spin_unlock_bh(&amp;msk-&gt;pm.lock);</span></span>
+<span id="L506"><span class="lineNum">     506</span>                 :<span class="tlaGNC">         863 :         __mptcp_pm_send_ack(msk, subflow, prio, backup);</span></span>
+<span id="L507"><span class="lineNum">     507</span>                 :<span class="tlaGNC">         863 :         spin_lock_bh(&amp;msk-&gt;pm.lock);</span></span>
+<span id="L508"><span class="lineNum">     508</span>                 :<span class="tlaGNC">         863 : }</span></span>
 <span id="L509"><span class="lineNum">     509</span>                 :             : </span>
 <span id="L510"><span class="lineNum">     510</span>                 :             : static struct mptcp_pm_addr_entry *</span>
 <span id="L511"><span class="lineNum">     511</span>                 :<span class="tlaUNC tlaBgUNC">           0 : __lookup_addr_by_id(struct pm_nl_pernet *pernet, unsigned int id)</span></span>
@@ -622,24 +622,24 @@
 <span id="L531"><span class="lineNum">     531</span>                 :             :         return NULL;</span>
 <span id="L532"><span class="lineNum">     532</span>                 :             : }</span>
 <span id="L533"><span class="lineNum">     533</span>                 :             : </span>
-<span id="L534"><span class="lineNum">     534</span>                 :<span class="tlaGNC">         708 : static void mptcp_pm_create_subflow_or_signal_addr(struct mptcp_sock *msk)</span></span>
+<span id="L534"><span class="lineNum">     534</span>                 :<span class="tlaGNC">         707 : static void mptcp_pm_create_subflow_or_signal_addr(struct mptcp_sock *msk)</span></span>
 <span id="L535"><span class="lineNum">     535</span>                 :             : {</span>
-<span id="L536"><span class="lineNum">     536</span>                 :<span class="tlaGNC">         708 :         struct sock *sk = (struct sock *)msk;</span></span>
-<span id="L537"><span class="lineNum">     537</span>                 :<span class="tlaGNC">         708 :         unsigned int add_addr_signal_max;</span></span>
-<span id="L538"><span class="lineNum">     538</span>                 :<span class="tlaGNC">         708 :         bool signal_and_subflow = false;</span></span>
-<span id="L539"><span class="lineNum">     539</span>                 :<span class="tlaGNC">         708 :         unsigned int local_addr_max;</span></span>
-<span id="L540"><span class="lineNum">     540</span>                 :<span class="tlaGNC">         708 :         struct pm_nl_pernet *pernet;</span></span>
-<span id="L541"><span class="lineNum">     541</span>                 :<span class="tlaGNC">         708 :         struct mptcp_pm_local local;</span></span>
-<span id="L542"><span class="lineNum">     542</span>                 :<span class="tlaGNC">         708 :         unsigned int subflows_max;</span></span>
+<span id="L536"><span class="lineNum">     536</span>                 :<span class="tlaGNC">         707 :         struct sock *sk = (struct sock *)msk;</span></span>
+<span id="L537"><span class="lineNum">     537</span>                 :<span class="tlaGNC">         707 :         unsigned int add_addr_signal_max;</span></span>
+<span id="L538"><span class="lineNum">     538</span>                 :<span class="tlaGNC">         707 :         bool signal_and_subflow = false;</span></span>
+<span id="L539"><span class="lineNum">     539</span>                 :<span class="tlaGNC">         707 :         unsigned int local_addr_max;</span></span>
+<span id="L540"><span class="lineNum">     540</span>                 :<span class="tlaGNC">         707 :         struct pm_nl_pernet *pernet;</span></span>
+<span id="L541"><span class="lineNum">     541</span>                 :<span class="tlaGNC">         707 :         struct mptcp_pm_local local;</span></span>
+<span id="L542"><span class="lineNum">     542</span>                 :<span class="tlaGNC">         707 :         unsigned int subflows_max;</span></span>
 <span id="L543"><span class="lineNum">     543</span>                 :             : </span>
-<span id="L544"><span class="lineNum">     544</span>                 :<span class="tlaGNC">         708 :         pernet = pm_nl_get_pernet(sock_net(sk));</span></span>
+<span id="L544"><span class="lineNum">     544</span>                 :<span class="tlaGNC">         707 :         pernet = pm_nl_get_pernet(sock_net(sk));</span></span>
 <span id="L545"><span class="lineNum">     545</span>                 :             : </span>
-<span id="L546"><span class="lineNum">     546</span>                 :<span class="tlaGNC">         708 :         add_addr_signal_max = mptcp_pm_get_add_addr_signal_max(msk);</span></span>
-<span id="L547"><span class="lineNum">     547</span>                 :<span class="tlaGNC">         708 :         local_addr_max = mptcp_pm_get_local_addr_max(msk);</span></span>
-<span id="L548"><span class="lineNum">     548</span>                 :<span class="tlaGNC">         708 :         subflows_max = mptcp_pm_get_subflows_max(msk);</span></span>
+<span id="L546"><span class="lineNum">     546</span>                 :<span class="tlaGNC">         707 :         add_addr_signal_max = mptcp_pm_get_add_addr_signal_max(msk);</span></span>
+<span id="L547"><span class="lineNum">     547</span>                 :<span class="tlaGNC">         707 :         local_addr_max = mptcp_pm_get_local_addr_max(msk);</span></span>
+<span id="L548"><span class="lineNum">     548</span>                 :<span class="tlaGNC">         707 :         subflows_max = mptcp_pm_get_subflows_max(msk);</span></span>
 <span id="L549"><span class="lineNum">     549</span>                 :             : </span>
 <span id="L550"><span class="lineNum">     550</span>                 :             :         /* do lazy endpoint usage accounting for the MPC subflows */</span>
-<span id="L551"><span class="lineNum">     551</span>   [<span class="tlaGBC" title="Branch 0 was taken 423 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 285 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 423 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span>]:<span class="tlaGNC">         708 :         if (unlikely(!(msk-&gt;pm.status &amp; BIT(MPTCP_PM_MPC_ENDPOINT_ACCOUNTED))) &amp;&amp; msk-&gt;first) {</span></span>
+<span id="L551"><span class="lineNum">     551</span>   [<span class="tlaGBC" title="Branch 0 was taken 423 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 284 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 423 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span>]:<span class="tlaGNC">         707 :         if (unlikely(!(msk-&gt;pm.status &amp; BIT(MPTCP_PM_MPC_ENDPOINT_ACCOUNTED))) &amp;&amp; msk-&gt;first) {</span></span>
 <span id="L552"><span class="lineNum">     552</span>                 :<span class="tlaGNC">         423 :                 struct mptcp_subflow_context *subflow = mptcp_subflow_ctx(msk-&gt;first);</span></span>
 <span id="L553"><span class="lineNum">     553</span>                 :<span class="tlaGNC">         423 :                 struct mptcp_pm_addr_entry *entry;</span></span>
 <span id="L554"><span class="lineNum">     554</span>                 :<span class="tlaGNC">         423 :                 struct mptcp_addr_info mpc_addr;</span></span>
@@ -662,13 +662,13 @@
 <span id="L570"><span class="lineNum">     570</span>                 :<span class="tlaGNC">         423 :                 msk-&gt;pm.status |= BIT(MPTCP_PM_MPC_ENDPOINT_ACCOUNTED);</span></span>
 <span id="L571"><span class="lineNum">     571</span>                 :             :         }</span>
 <span id="L572"><span class="lineNum">     572</span>                 :             : </span>
-<span id="L573"><span class="lineNum">     573</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 708 times"> + </span>]:<span class="tlaGNC">         708 :         pr_debug(&quot;local %d:%d signal %d:%d subflows %d:%d\n&quot;,</span></span>
+<span id="L573"><span class="lineNum">     573</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 707 times"> + </span>]:<span class="tlaGNC">         707 :         pr_debug(&quot;local %d:%d signal %d:%d subflows %d:%d\n&quot;,</span></span>
 <span id="L574"><span class="lineNum">     574</span>                 :             :                  msk-&gt;pm.local_addr_used, local_addr_max,</span>
 <span id="L575"><span class="lineNum">     575</span>                 :             :                  msk-&gt;pm.add_addr_signaled, add_addr_signal_max,</span>
 <span id="L576"><span class="lineNum">     576</span>                 :             :                  msk-&gt;pm.subflows, subflows_max);</span>
 <span id="L577"><span class="lineNum">     577</span>                 :             : </span>
 <span id="L578"><span class="lineNum">     578</span>                 :             :         /* check first for announce */</span>
-<span id="L579"><span class="lineNum">     579</span>         [<span class="tlaGBC" title="Branch 0 was taken 401 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 307 times"> + </span>]:<span class="tlaGNC">         708 :         if (msk-&gt;pm.add_addr_signaled &lt; add_addr_signal_max) {</span></span>
+<span id="L579"><span class="lineNum">     579</span>         [<span class="tlaGBC" title="Branch 0 was taken 400 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 307 times"> + </span>]:<span class="tlaGNC">         707 :         if (msk-&gt;pm.add_addr_signaled &lt; add_addr_signal_max) {</span></span>
 <span id="L580"><span class="lineNum">     580</span>                 :             :                 /* due to racing events on both ends we can reach here while</span>
 <span id="L581"><span class="lineNum">     581</span>                 :             :                  * previous add address is still running: if we invoke now</span>
 <span id="L582"><span class="lineNum">     582</span>                 :             :                  * mptcp_pm_announce_addr(), that will fail and the</span>
@@ -703,9 +703,9 @@
 <span id="L610"><span class="lineNum">     610</span>                 :<span class="tlaGNC">          66 :                         signal_and_subflow = true;</span></span>
 <span id="L611"><span class="lineNum">     611</span>                 :             :         }</span>
 <span id="L612"><span class="lineNum">     612</span>                 :             : </span>
-<span id="L613"><span class="lineNum">     613</span>                 :<span class="tlaGNC">         700 : subflow:</span></span>
+<span id="L613"><span class="lineNum">     613</span>                 :<span class="tlaGNC">         699 : subflow:</span></span>
 <span id="L614"><span class="lineNum">     614</span>                 :             :         /* check if should create a new subflow */</span>
-<span id="L615"><span class="lineNum">     615</span>         [<span class="tlaGBC" title="Branch 0 was taken 312 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 668 times"> + </span>]:<span class="tlaGNC">         980 :         while (msk-&gt;pm.local_addr_used &lt; local_addr_max &amp;&amp;</span></span>
+<span id="L615"><span class="lineNum">     615</span>         [<span class="tlaGBC" title="Branch 0 was taken 312 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 667 times"> + </span>]:<span class="tlaGNC">         979 :         while (msk-&gt;pm.local_addr_used &lt; local_addr_max &amp;&amp;</span></span>
 <span id="L616"><span class="lineNum">     616</span>         [<span class="tlaGBC" title="Branch 0 was taken 300 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 12 times"> + </span>]:<span class="tlaGNC">         312 :                msk-&gt;pm.subflows &lt; subflows_max) {</span></span>
 <span id="L617"><span class="lineNum">     617</span>                 :<span class="tlaGNC">         300 :                 struct mptcp_addr_info addrs[MPTCP_PM_ADDR_MAX];</span></span>
 <span id="L618"><span class="lineNum">     618</span>                 :<span class="tlaGNC">         300 :                 bool fullmesh;</span></span>
@@ -736,7 +736,7 @@
 <span id="L642"><span class="lineNum">     642</span>                 :<span class="tlaGNC">         276 :                         __mptcp_subflow_connect(sk, &amp;local, &amp;addrs[i]);</span></span>
 <span id="L643"><span class="lineNum">     643</span>                 :<span class="tlaGNC">         262 :                 spin_lock_bh(&amp;msk-&gt;pm.lock);</span></span>
 <span id="L644"><span class="lineNum">     644</span>                 :             :         }</span>
-<span id="L645"><span class="lineNum">     645</span>                 :<span class="tlaGNC">         708 :         mptcp_pm_nl_check_work_pending(msk);</span></span>
+<span id="L645"><span class="lineNum">     645</span>                 :<span class="tlaGNC">         707 :         mptcp_pm_nl_check_work_pending(msk);</span></span>
 <span id="L646"><span class="lineNum">     646</span>                 :             : }</span>
 <span id="L647"><span class="lineNum">     647</span>                 :             : </span>
 <span id="L648"><span class="lineNum">     648</span>                 :<span class="tlaGNC">          45 : static void mptcp_pm_nl_fully_established(struct mptcp_sock *msk)</span></span>
@@ -746,8 +746,8 @@
 <span id="L652"><span class="lineNum">     652</span>                 :             : </span>
 <span id="L653"><span class="lineNum">     653</span>                 :<span class="tlaGNC">          21 : static void mptcp_pm_nl_subflow_established(struct mptcp_sock *msk)</span></span>
 <span id="L654"><span class="lineNum">     654</span>                 :             : {</span>
-<span id="L655"><span class="lineNum">     655</span>                 :<span class="tlaGNC">         251 :         mptcp_pm_create_subflow_or_signal_addr(msk);</span></span>
-<span id="L656"><span class="lineNum">     656</span>                 :<span class="tlaGNC">         251 : }</span></span>
+<span id="L655"><span class="lineNum">     655</span>                 :<span class="tlaGNC">         250 :         mptcp_pm_create_subflow_or_signal_addr(msk);</span></span>
+<span id="L656"><span class="lineNum">     656</span>                 :<span class="tlaGNC">         250 : }</span></span>
 <span id="L657"><span class="lineNum">     657</span>                 :             : </span>
 <span id="L658"><span class="lineNum">     658</span>                 :             : /* Fill all the local addresses into the array addrs[],</span>
 <span id="L659"><span class="lineNum">     659</span>                 :             :  * and return the array size.</span>
@@ -881,15 +881,15 @@
 <span id="L787"><span class="lineNum">     787</span>   [<span class="tlaGBC" title="Branch 0 was taken 428 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 428 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC">        1287 :         lockdep_assert_held(&amp;msk-&gt;pm.lock);</span></span>
 <span class="lineNum">        </span>          <span class="tlaUNC" title="Branch 4 was not taken"> - </span><span class="tlaGBC" title="Branch 5 was taken 428 times"> + </span>]
 <span id="L788"><span class="lineNum">     788</span>                 :             : </span>
-<span id="L789"><span class="lineNum">     789</span>   [<span class="tlaGBC" title="Branch 0 was taken 109 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 750 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 106 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 3 times"> + </span>]:<span class="tlaGNC">         859 :         if (!mptcp_pm_should_add_signal(msk) &amp;&amp;</span></span>
+<span id="L789"><span class="lineNum">     789</span>   [<span class="tlaGBC" title="Branch 0 was taken 108 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 751 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 106 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 2 times"> + </span>]:<span class="tlaGNC">         859 :         if (!mptcp_pm_should_add_signal(msk) &amp;&amp;</span></span>
 <span id="L790"><span class="lineNum">     790</span>         [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span>]:<span class="tlaUNC tlaBgUNC">           0 :             !mptcp_pm_should_rm_signal(msk))</span></span>
 <span id="L791"><span class="lineNum">     791</span>                 :             :                 return;</span>
 <span id="L792"><span class="lineNum">     792</span>                 :             : </span>
-<span id="L793"><span class="lineNum">     793</span>         [<span class="tlaGBC" title="Branch 0 was taken 870 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC tlaBgGNC">         870 :         mptcp_for_each_subflow(msk, subflow) {</span></span>
-<span id="L794"><span class="lineNum">     794</span>         [<span class="tlaGBC" title="Branch 0 was taken 14 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 856 times"> + </span>]:<span class="tlaGNC">         870 :                 if (__mptcp_subflow_active(subflow)) {</span></span>
-<span id="L795"><span class="lineNum">     795</span>         [<span class="tlaGBC" title="Branch 0 was taken 856 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">         856 :                         if (!subflow-&gt;stale) {</span></span>
-<span id="L796"><span class="lineNum">     796</span>                 :<span class="tlaGNC">         856 :                                 mptcp_pm_send_ack(msk, subflow, false, false);</span></span>
-<span id="L797"><span class="lineNum">     797</span>                 :<span class="tlaGNC">         856 :                                 return;</span></span>
+<span id="L793"><span class="lineNum">     793</span>         [<span class="tlaGBC" title="Branch 0 was taken 871 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC tlaBgGNC">         871 :         mptcp_for_each_subflow(msk, subflow) {</span></span>
+<span id="L794"><span class="lineNum">     794</span>         [<span class="tlaGBC" title="Branch 0 was taken 14 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 857 times"> + </span>]:<span class="tlaGNC">         871 :                 if (__mptcp_subflow_active(subflow)) {</span></span>
+<span id="L795"><span class="lineNum">     795</span>         [<span class="tlaGBC" title="Branch 0 was taken 857 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">         857 :                         if (!subflow-&gt;stale) {</span></span>
+<span id="L796"><span class="lineNum">     796</span>                 :<span class="tlaGNC">         857 :                                 mptcp_pm_send_ack(msk, subflow, false, false);</span></span>
+<span id="L797"><span class="lineNum">     797</span>                 :<span class="tlaGNC">         857 :                                 return;</span></span>
 <span id="L798"><span class="lineNum">     798</span>                 :             :                         }</span>
 <span id="L799"><span class="lineNum">     799</span>                 :             : </span>
 <span id="L800"><span class="lineNum">     800</span>         [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span>]:<span class="tlaUNC tlaBgUNC">           0 :                         if (!alt)</span></span>
@@ -1017,13 +1017,13 @@
 <span id="L922"><span class="lineNum">     922</span>                 :<span class="tlaGNC tlaBgGNC">          86 :         mptcp_pm_nl_rm_addr_or_subflow(msk, rm_list, MPTCP_MIB_RMSUBFLOW);</span></span>
 <span id="L923"><span class="lineNum">     923</span>                 :<span class="tlaGNC">          12 : }</span></span>
 <span id="L924"><span class="lineNum">     924</span>                 :             : </span>
-<span id="L925"><span class="lineNum">     925</span>                 :<span class="tlaGNC">       10265 : void mptcp_pm_nl_work(struct mptcp_sock *msk)</span></span>
+<span id="L925"><span class="lineNum">     925</span>                 :<span class="tlaGNC">       11352 : void mptcp_pm_nl_work(struct mptcp_sock *msk)</span></span>
 <span id="L926"><span class="lineNum">     926</span>                 :             : {</span>
-<span id="L927"><span class="lineNum">     927</span>                 :<span class="tlaGNC">       10265 :         struct mptcp_pm_data *pm = &amp;msk-&gt;pm;</span></span>
+<span id="L927"><span class="lineNum">     927</span>                 :<span class="tlaGNC">       11352 :         struct mptcp_pm_data *pm = &amp;msk-&gt;pm;</span></span>
 <span id="L928"><span class="lineNum">     928</span>                 :             : </span>
-<span id="L929"><span class="lineNum">     929</span>                 :<span class="tlaGNC">       10265 :         msk_owned_by_me(msk);</span></span>
+<span id="L929"><span class="lineNum">     929</span>                 :<span class="tlaGNC">       11352 :         msk_owned_by_me(msk);</span></span>
 <span id="L930"><span class="lineNum">     930</span>                 :             : </span>
-<span id="L931"><span class="lineNum">     931</span>         [<span class="tlaGBC" title="Branch 0 was taken 900 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 9365 times"> + </span>]:<span class="tlaGNC">       10265 :         if (!(pm-&gt;status &amp; MPTCP_PM_WORK_MASK))</span></span>
+<span id="L931"><span class="lineNum">     931</span>         [<span class="tlaGBC" title="Branch 0 was taken 900 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 10452 times"> + </span>]:<span class="tlaGNC">       11352 :         if (!(pm-&gt;status &amp; MPTCP_PM_WORK_MASK))</span></span>
 <span id="L932"><span class="lineNum">     932</span>                 :             :                 return;</span>
 <span id="L933"><span class="lineNum">     933</span>                 :             : </span>
 <span id="L934"><span class="lineNum">     934</span>                 :<span class="tlaGNC">         900 :         spin_lock_bh(&amp;msk-&gt;pm.lock);</span></span>
@@ -1045,9 +1045,9 @@
 <span id="L950"><span class="lineNum">     950</span>                 :<span class="tlaGNC">         379 :                 pm-&gt;status &amp;= ~BIT(MPTCP_PM_ESTABLISHED);</span></span>
 <span id="L951"><span class="lineNum">     951</span>                 :<span class="tlaGNC">         379 :                 mptcp_pm_nl_fully_established(msk);</span></span>
 <span id="L952"><span class="lineNum">     952</span>                 :             :         }</span>
-<span id="L953"><span class="lineNum">     953</span>         [<span class="tlaGBC" title="Branch 0 was taken 251 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 649 times"> + </span>]:<span class="tlaGNC">         900 :         if (pm-&gt;status &amp; BIT(MPTCP_PM_SUBFLOW_ESTABLISHED)) {</span></span>
-<span id="L954"><span class="lineNum">     954</span>                 :<span class="tlaGNC">         251 :                 pm-&gt;status &amp;= ~BIT(MPTCP_PM_SUBFLOW_ESTABLISHED);</span></span>
-<span id="L955"><span class="lineNum">     955</span>                 :<span class="tlaGNC">         251 :                 mptcp_pm_nl_subflow_established(msk);</span></span>
+<span id="L953"><span class="lineNum">     953</span>         [<span class="tlaGBC" title="Branch 0 was taken 250 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 650 times"> + </span>]:<span class="tlaGNC">         900 :         if (pm-&gt;status &amp; BIT(MPTCP_PM_SUBFLOW_ESTABLISHED)) {</span></span>
+<span id="L954"><span class="lineNum">     954</span>                 :<span class="tlaGNC">         250 :                 pm-&gt;status &amp;= ~BIT(MPTCP_PM_SUBFLOW_ESTABLISHED);</span></span>
+<span id="L955"><span class="lineNum">     955</span>                 :<span class="tlaGNC">         250 :                 mptcp_pm_nl_subflow_established(msk);</span></span>
 <span id="L956"><span class="lineNum">     956</span>                 :             :         }</span>
 <span id="L957"><span class="lineNum">     957</span>                 :             : </span>
 <span id="L958"><span class="lineNum">     958</span>                 :<span class="tlaGNC">         900 :         spin_unlock_bh(&amp;msk-&gt;pm.lock);</span></span>
@@ -1299,24 +1299,24 @@
 <span id="L1201"><span class="lineNum">    1201</span>                 :             :                                           },</span>
 <span id="L1202"><span class="lineNum">    1202</span>                 :             : };</span>
 <span id="L1203"><span class="lineNum">    1203</span>                 :             : </span>
-<span id="L1204"><span class="lineNum">    1204</span>                 :<span class="tlaGNC">         177 : void mptcp_pm_nl_subflow_chk_stale(const struct mptcp_sock *msk, struct sock *ssk)</span></span>
+<span id="L1204"><span class="lineNum">    1204</span>                 :<span class="tlaGNC">         324 : void mptcp_pm_nl_subflow_chk_stale(const struct mptcp_sock *msk, struct sock *ssk)</span></span>
 <span id="L1205"><span class="lineNum">    1205</span>                 :             : {</span>
-<span id="L1206"><span class="lineNum">    1206</span>                 :<span class="tlaGNC">         177 :         struct mptcp_subflow_context *iter, *subflow = mptcp_subflow_ctx(ssk);</span></span>
-<span id="L1207"><span class="lineNum">    1207</span>                 :<span class="tlaGNC">         177 :         struct sock *sk = (struct sock *)msk;</span></span>
-<span id="L1208"><span class="lineNum">    1208</span>                 :<span class="tlaGNC">         177 :         unsigned int active_max_loss_cnt;</span></span>
-<span id="L1209"><span class="lineNum">    1209</span>                 :<span class="tlaGNC">         177 :         struct net *net = sock_net(sk);</span></span>
-<span id="L1210"><span class="lineNum">    1210</span>                 :<span class="tlaGNC">         177 :         unsigned int stale_loss_cnt;</span></span>
-<span id="L1211"><span class="lineNum">    1211</span>                 :<span class="tlaGNC">         177 :         bool slow;</span></span>
+<span id="L1206"><span class="lineNum">    1206</span>                 :<span class="tlaGNC">         324 :         struct mptcp_subflow_context *iter, *subflow = mptcp_subflow_ctx(ssk);</span></span>
+<span id="L1207"><span class="lineNum">    1207</span>                 :<span class="tlaGNC">         324 :         struct sock *sk = (struct sock *)msk;</span></span>
+<span id="L1208"><span class="lineNum">    1208</span>                 :<span class="tlaGNC">         324 :         unsigned int active_max_loss_cnt;</span></span>
+<span id="L1209"><span class="lineNum">    1209</span>                 :<span class="tlaGNC">         324 :         struct net *net = sock_net(sk);</span></span>
+<span id="L1210"><span class="lineNum">    1210</span>                 :<span class="tlaGNC">         324 :         unsigned int stale_loss_cnt;</span></span>
+<span id="L1211"><span class="lineNum">    1211</span>                 :<span class="tlaGNC">         324 :         bool slow;</span></span>
 <span id="L1212"><span class="lineNum">    1212</span>                 :             : </span>
-<span id="L1213"><span class="lineNum">    1213</span>                 :<span class="tlaGNC">         177 :         stale_loss_cnt = mptcp_stale_loss_cnt(net);</span></span>
-<span id="L1214"><span class="lineNum">    1214</span>   [<span class="tlaGBC" title="Branch 0 was taken 169 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 8 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 169 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC">         177 :         if (subflow-&gt;stale || !stale_loss_cnt || subflow-&gt;stale_count &lt;= stale_loss_cnt)</span></span>
-<span class="lineNum">        </span>          <span class="tlaGBC" title="Branch 4 was taken 91 times"> + </span><span class="tlaGBC" title="Branch 5 was taken 78 times"> + </span>]
+<span id="L1213"><span class="lineNum">    1213</span>                 :<span class="tlaGNC">         324 :         stale_loss_cnt = mptcp_stale_loss_cnt(net);</span></span>
+<span id="L1214"><span class="lineNum">    1214</span>   [<span class="tlaGBC" title="Branch 0 was taken 318 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 6 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 318 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC">         324 :         if (subflow-&gt;stale || !stale_loss_cnt || subflow-&gt;stale_count &lt;= stale_loss_cnt)</span></span>
+<span class="lineNum">        </span>          <span class="tlaGBC" title="Branch 4 was taken 236 times"> + </span><span class="tlaGBC" title="Branch 5 was taken 82 times"> + </span>]
 <span id="L1215"><span class="lineNum">    1215</span>                 :             :                 return;</span>
 <span id="L1216"><span class="lineNum">    1216</span>                 :             : </span>
 <span id="L1217"><span class="lineNum">    1217</span>                 :             :         /* look for another available subflow not in loss state */</span>
-<span id="L1218"><span class="lineNum">    1218</span>                 :<span class="tlaGNC">          91 :         active_max_loss_cnt = max_t(int, stale_loss_cnt - 1, 1);</span></span>
-<span id="L1219"><span class="lineNum">    1219</span>         [<span class="tlaGBC" title="Branch 0 was taken 109 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 77 times"> + </span>]:<span class="tlaGNC">         186 :         mptcp_for_each_subflow(msk, iter) {</span></span>
-<span id="L1220"><span class="lineNum">    1220</span>   [<span class="tlaGBC" title="Branch 0 was taken 22 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 87 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 18 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 4 times"> + </span>]:<span class="tlaGNC">         109 :                 if (iter != subflow &amp;&amp; mptcp_subflow_active(iter) &amp;&amp;</span></span>
+<span id="L1218"><span class="lineNum">    1218</span>                 :<span class="tlaGNC">         236 :         active_max_loss_cnt = max_t(int, stale_loss_cnt - 1, 1);</span></span>
+<span id="L1219"><span class="lineNum">    1219</span>         [<span class="tlaGBC" title="Branch 0 was taken 254 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 222 times"> + </span>]:<span class="tlaGNC">         476 :         mptcp_for_each_subflow(msk, iter) {</span></span>
+<span id="L1220"><span class="lineNum">    1220</span>   [<span class="tlaGBC" title="Branch 0 was taken 22 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 232 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 18 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 4 times"> + </span>]:<span class="tlaGNC">         254 :                 if (iter != subflow &amp;&amp; mptcp_subflow_active(iter) &amp;&amp;</span></span>
 <span id="L1221"><span class="lineNum">    1221</span>         [<span class="tlaGBC" title="Branch 0 was taken 14 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 4 times"> + </span>]:<span class="tlaGNC">          18 :                     iter-&gt;stale_count &lt; active_max_loss_cnt) {</span></span>
 <span id="L1222"><span class="lineNum">    1222</span>                 :             :                         /* we have some alternatives, try to mark this subflow as idle ...*/</span>
 <span id="L1223"><span class="lineNum">    1223</span>                 :<span class="tlaGNC">          14 :                         slow = lock_sock_fast(ssk);</span></span>
@@ -1826,9 +1826,9 @@
 <span id="L1721"><span class="lineNum">    1721</span>                 :             : }</span>
 <span id="L1722"><span class="lineNum">    1722</span>                 :             : </span>
 <span id="L1723"><span class="lineNum">    1723</span>                 :             : /* caller must ensure the RCU grace period is already elapsed */</span>
-<span id="L1724"><span class="lineNum">    1724</span>                 :<span class="tlaGNC">        1130 : static void __flush_addrs(struct list_head *list)</span></span>
+<span id="L1724"><span class="lineNum">    1724</span>                 :<span class="tlaGNC">        1126 : static void __flush_addrs(struct list_head *list)</span></span>
 <span id="L1725"><span class="lineNum">    1725</span>                 :             : {</span>
-<span id="L1726"><span class="lineNum">    1726</span>         [<span class="tlaGBC" title="Branch 0 was taken 640 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1130 times"> + </span>]:<span class="tlaGNC">        1770 :         while (!list_empty(list)) {</span></span>
+<span id="L1726"><span class="lineNum">    1726</span>         [<span class="tlaGBC" title="Branch 0 was taken 640 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1126 times"> + </span>]:<span class="tlaGNC">        1766 :         while (!list_empty(list)) {</span></span>
 <span id="L1727"><span class="lineNum">    1727</span>                 :<span class="tlaGNC">         640 :                 struct mptcp_pm_addr_entry *cur;</span></span>
 <span id="L1728"><span class="lineNum">    1728</span>                 :             : </span>
 <span id="L1729"><span class="lineNum">    1729</span>                 :<span class="tlaGNC">         640 :                 cur = list_entry(list-&gt;next,</span></span>
@@ -1836,7 +1836,7 @@
 <span id="L1731"><span class="lineNum">    1731</span>                 :<span class="tlaGNC">         640 :                 list_del_rcu(&amp;cur-&gt;list);</span></span>
 <span id="L1732"><span class="lineNum">    1732</span>                 :<span class="tlaGNC">         640 :                 __mptcp_pm_release_addr_entry(cur);</span></span>
 <span id="L1733"><span class="lineNum">    1733</span>                 :             :         }</span>
-<span id="L1734"><span class="lineNum">    1734</span>                 :<span class="tlaGNC">        1130 : }</span></span>
+<span id="L1734"><span class="lineNum">    1734</span>                 :<span class="tlaGNC">        1126 : }</span></span>
 <span id="L1735"><span class="lineNum">    1735</span>                 :             : </span>
 <span id="L1736"><span class="lineNum">    1736</span>                 :<span class="tlaGNC">           3 : static void __reset_counters(struct pm_nl_pernet *pernet)</span></span>
 <span id="L1737"><span class="lineNum">    1737</span>                 :             : {</span>
@@ -2212,7 +2212,7 @@
 <span id="L2105"><span class="lineNum">    2105</span>                 :             :                 break;</span>
 <span id="L2106"><span class="lineNum">    2106</span>                 :             : #if IS_ENABLED(CONFIG_MPTCP_IPV6)</span>
 <span id="L2107"><span class="lineNum">    2107</span>                 :             :         case AF_INET6: {</span>
-<span id="L2108"><span class="lineNum">    2108</span>         [<span class="tlaGBC" title="Branch 0 was taken 57 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">         116 :                 const struct ipv6_pinfo *np = inet6_sk(ssk);</span></span>
+<span id="L2108"><span class="lineNum">    2108</span>         [<span class="tlaGBC" title="Branch 0 was taken 59 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">         116 :                 const struct ipv6_pinfo *np = inet6_sk(ssk);</span></span>
 <span id="L2109"><span class="lineNum">    2109</span>                 :             : </span>
 <span id="L2110"><span class="lineNum">    2110</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 116 times"> + </span>]:<span class="tlaGNC">         116 :                 if (nla_put_in6_addr(skb, MPTCP_ATTR_SADDR6, &amp;np-&gt;saddr))</span></span>
 <span id="L2111"><span class="lineNum">    2111</span>                 :             :                         return -EMSGSIZE;</span>
@@ -2442,7 +2442,7 @@
 <span id="L2334"><span class="lineNum">    2334</span>                 :             :                 break;</span>
 <span id="L2335"><span class="lineNum">    2335</span>                 :             : #if IS_ENABLED(CONFIG_MPTCP_IPV6)</span>
 <span id="L2336"><span class="lineNum">    2336</span>                 :             :         case AF_INET6: {</span>
-<span id="L2337"><span class="lineNum">    2337</span>         [<span class="tlaGBC" title="Branch 0 was taken 15 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC tlaBgGNC">          28 :                 const struct ipv6_pinfo *np = inet6_sk(ssk);</span></span>
+<span id="L2337"><span class="lineNum">    2337</span>         [<span class="tlaGBC" title="Branch 0 was taken 13 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC tlaBgGNC">          28 :                 const struct ipv6_pinfo *np = inet6_sk(ssk);</span></span>
 <span id="L2338"><span class="lineNum">    2338</span>                 :             : </span>
 <span id="L2339"><span class="lineNum">    2339</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 28 times"> + </span>]:<span class="tlaGNC">          28 :                 if (nla_put_in6_addr(skb, MPTCP_ATTR_SADDR6, &amp;np-&gt;saddr))</span></span>
 <span id="L2340"><span class="lineNum">    2340</span>                 :<span class="tlaUNC tlaBgUNC">           0 :                         goto nla_put_failure;</span></span>
@@ -2462,14 +2462,14 @@
 <span id="L2354"><span class="lineNum">    2354</span>                 :<span class="tlaUNC">           0 :         nlmsg_free(skb);</span></span>
 <span id="L2355"><span class="lineNum">    2355</span>                 :             : }</span>
 <span id="L2356"><span class="lineNum">    2356</span>                 :             : </span>
-<span id="L2357"><span class="lineNum">    2357</span>                 :<span class="tlaGNC tlaBgGNC">        7848 : void mptcp_event(enum mptcp_event_type type, const struct mptcp_sock *msk,</span></span>
+<span id="L2357"><span class="lineNum">    2357</span>                 :<span class="tlaGNC tlaBgGNC">        7846 : void mptcp_event(enum mptcp_event_type type, const struct mptcp_sock *msk,</span></span>
 <span id="L2358"><span class="lineNum">    2358</span>                 :             :                  const struct sock *ssk, gfp_t gfp)</span>
 <span id="L2359"><span class="lineNum">    2359</span>                 :             : {</span>
-<span id="L2360"><span class="lineNum">    2360</span>                 :<span class="tlaGNC">        7848 :         struct net *net = sock_net((const struct sock *)msk);</span></span>
-<span id="L2361"><span class="lineNum">    2361</span>                 :<span class="tlaGNC">        7848 :         struct nlmsghdr *nlh;</span></span>
-<span id="L2362"><span class="lineNum">    2362</span>                 :<span class="tlaGNC">        7848 :         struct sk_buff *skb;</span></span>
+<span id="L2360"><span class="lineNum">    2360</span>                 :<span class="tlaGNC">        7846 :         struct net *net = sock_net((const struct sock *)msk);</span></span>
+<span id="L2361"><span class="lineNum">    2361</span>                 :<span class="tlaGNC">        7846 :         struct nlmsghdr *nlh;</span></span>
+<span id="L2362"><span class="lineNum">    2362</span>                 :<span class="tlaGNC">        7846 :         struct sk_buff *skb;</span></span>
 <span id="L2363"><span class="lineNum">    2363</span>                 :             : </span>
-<span id="L2364"><span class="lineNum">    2364</span>         [<span class="tlaGBC" title="Branch 0 was taken 280 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 7568 times"> + </span>]:<span class="tlaGNC">        7848 :         if (!genl_has_listeners(&amp;mptcp_genl_family, net, MPTCP_PM_EV_GRP_OFFSET))</span></span>
+<span id="L2364"><span class="lineNum">    2364</span>         [<span class="tlaGBC" title="Branch 0 was taken 280 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 7566 times"> + </span>]:<span class="tlaGNC">        7846 :         if (!genl_has_listeners(&amp;mptcp_genl_family, net, MPTCP_PM_EV_GRP_OFFSET))</span></span>
 <span id="L2365"><span class="lineNum">    2365</span>                 :             :                 return;</span>
 <span id="L2366"><span class="lineNum">    2366</span>                 :             : </span>
 <span id="L2367"><span class="lineNum">    2367</span>                 :<span class="tlaGNC">         280 :         skb = nlmsg_new(NLMSG_DEFAULT_SIZE, gfp);</span></span>
@@ -2552,20 +2552,20 @@
 <span id="L2443"><span class="lineNum">    2443</span>                 :<span class="tlaGNC">        1041 :         return 0;</span></span>
 <span id="L2444"><span class="lineNum">    2444</span>                 :             : }</span>
 <span id="L2445"><span class="lineNum">    2445</span>                 :             : </span>
-<span id="L2446"><span class="lineNum">    2446</span>                 :<span class="tlaGNC">         878 : static void __net_exit pm_nl_exit_net(struct list_head *net_list)</span></span>
+<span id="L2446"><span class="lineNum">    2446</span>                 :<span class="tlaGNC">         885 : static void __net_exit pm_nl_exit_net(struct list_head *net_list)</span></span>
 <span id="L2447"><span class="lineNum">    2447</span>                 :             : {</span>
-<span id="L2448"><span class="lineNum">    2448</span>                 :<span class="tlaGNC">         878 :         struct net *net;</span></span>
+<span id="L2448"><span class="lineNum">    2448</span>                 :<span class="tlaGNC">         885 :         struct net *net;</span></span>
 <span id="L2449"><span class="lineNum">    2449</span>                 :             : </span>
-<span id="L2450"><span class="lineNum">    2450</span>         [<span class="tlaGBC" title="Branch 0 was taken 955 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 878 times"> + </span>]:<span class="tlaGNC">        1833 :         list_for_each_entry(net, net_list, exit_list) {</span></span>
-<span id="L2451"><span class="lineNum">    2451</span>                 :<span class="tlaGNC">         955 :                 struct pm_nl_pernet *pernet = pm_nl_get_pernet(net);</span></span>
+<span id="L2450"><span class="lineNum">    2450</span>         [<span class="tlaGBC" title="Branch 0 was taken 951 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 885 times"> + </span>]:<span class="tlaGNC">        1836 :         list_for_each_entry(net, net_list, exit_list) {</span></span>
+<span id="L2451"><span class="lineNum">    2451</span>                 :<span class="tlaGNC">         951 :                 struct pm_nl_pernet *pernet = pm_nl_get_pernet(net);</span></span>
 <span id="L2452"><span class="lineNum">    2452</span>                 :             : </span>
 <span id="L2453"><span class="lineNum">    2453</span>                 :             :                 /* net is removed from namespace list, can't race with</span>
 <span id="L2454"><span class="lineNum">    2454</span>                 :             :                  * other modifiers, also netns core already waited for a</span>
 <span id="L2455"><span class="lineNum">    2455</span>                 :             :                  * RCU grace period.</span>
 <span id="L2456"><span class="lineNum">    2456</span>                 :             :                  */</span>
-<span id="L2457"><span class="lineNum">    2457</span>                 :<span class="tlaGNC">         955 :                 __flush_addrs(&amp;pernet-&gt;local_addr_list);</span></span>
+<span id="L2457"><span class="lineNum">    2457</span>                 :<span class="tlaGNC">         951 :                 __flush_addrs(&amp;pernet-&gt;local_addr_list);</span></span>
 <span id="L2458"><span class="lineNum">    2458</span>                 :             :         }</span>
-<span id="L2459"><span class="lineNum">    2459</span>                 :<span class="tlaGNC">         878 : }</span></span>
+<span id="L2459"><span class="lineNum">    2459</span>                 :<span class="tlaGNC">         885 : }</span></span>
 <span id="L2460"><span class="lineNum">    2460</span>                 :             : </span>
 <span id="L2461"><span class="lineNum">    2461</span>                 :             : static struct pernet_operations mptcp_pm_pernet_ops = {</span>
 <span id="L2462"><span class="lineNum">    2462</span>                 :             :         .init = pm_nl_init_net,</span>
