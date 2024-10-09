@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2024-10-09 10:02:55</td>
+            <td class="headerValue">2024-10-09 16:26:25</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -86,14 +86,14 @@
 <span id="L8"><span class="lineNum">       8</span>                 :             : #include &quot;mib.h&quot;</span>
 <span id="L9"><span class="lineNum">       9</span>                 :             : #include &quot;mptcp_pm_gen.h&quot;</span>
 <span id="L10"><span class="lineNum">      10</span>                 :             : </span>
-<span id="L11"><span class="lineNum">      11</span>                 :<span class="tlaGNC tlaBgGNC">        3479 : void mptcp_free_local_addr_list(struct mptcp_sock *msk)</span></span>
+<span id="L11"><span class="lineNum">      11</span>                 :<span class="tlaGNC tlaBgGNC">        3483 : void mptcp_free_local_addr_list(struct mptcp_sock *msk)</span></span>
 <span id="L12"><span class="lineNum">      12</span>                 :             : {</span>
-<span id="L13"><span class="lineNum">      13</span>                 :<span class="tlaGNC">        3479 :         struct mptcp_pm_addr_entry *entry, *tmp;</span></span>
-<span id="L14"><span class="lineNum">      14</span>                 :<span class="tlaGNC">        3479 :         struct sock *sk = (struct sock *)msk;</span></span>
-<span id="L15"><span class="lineNum">      15</span>                 :<span class="tlaGNC">        3479 :         LIST_HEAD(free_list);</span></span>
+<span id="L13"><span class="lineNum">      13</span>                 :<span class="tlaGNC">        3483 :         struct mptcp_pm_addr_entry *entry, *tmp;</span></span>
+<span id="L14"><span class="lineNum">      14</span>                 :<span class="tlaGNC">        3483 :         struct sock *sk = (struct sock *)msk;</span></span>
+<span id="L15"><span class="lineNum">      15</span>                 :<span class="tlaGNC">        3483 :         LIST_HEAD(free_list);</span></span>
 <span id="L16"><span class="lineNum">      16</span>                 :             : </span>
-<span id="L17"><span class="lineNum">      17</span>         [<span class="tlaGBC" title="Branch 0 was taken 3415 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 64 times"> + </span>]:<span class="tlaGNC">        3479 :         if (!mptcp_pm_is_userspace(msk))</span></span>
-<span id="L18"><span class="lineNum">      18</span>                 :<span class="tlaGNC">        3415 :                 return;</span></span>
+<span id="L17"><span class="lineNum">      17</span>         [<span class="tlaGBC" title="Branch 0 was taken 3419 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 64 times"> + </span>]:<span class="tlaGNC">        3483 :         if (!mptcp_pm_is_userspace(msk))</span></span>
+<span id="L18"><span class="lineNum">      18</span>                 :<span class="tlaGNC">        3419 :                 return;</span></span>
 <span id="L19"><span class="lineNum">      19</span>                 :             : </span>
 <span id="L20"><span class="lineNum">      20</span>                 :<span class="tlaGNC">          64 :         spin_lock_bh(&amp;msk-&gt;pm.lock);</span></span>
 <span id="L21"><span class="lineNum">      21</span>         [<span class="tlaGBC" title="Branch 0 was taken 10 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 54 times"> + </span>]:<span class="tlaGNC">          64 :         list_splice_init(&amp;msk-&gt;pm.userspace_pm_local_addr_list, &amp;free_list);</span></span>
