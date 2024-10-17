@@ -133,9 +133,15 @@ function load_result_table_debug(data_raw)
   remove_loading();
 }
 
-function load_result_table_btf(data_raw)
+function load_result_table_btf_normal(data_raw)
 {
-  load_result_table(data_raw, "btf");
+  load_result_table(data_raw, "btf-normal");
+  remove_loading();
+}
+
+function load_result_table_btf_debug(data_raw)
+{
+  load_result_table(data_raw, "btf-debug");
   remove_loading();
 }
 
@@ -156,6 +162,7 @@ function do_it()
 
     $.get(path + "/normal.json", load_result_table_normal);
     $.get(path + "/debug.json", load_result_table_debug);
-    $.get(path + "/btf.json", load_result_table_btf);
+    $.get(path + "/btf-normal.json", load_result_table_btf_normal);
+    $.get(path + "/btf-debug.json", load_result_table_btf_debug);
   });
 }
