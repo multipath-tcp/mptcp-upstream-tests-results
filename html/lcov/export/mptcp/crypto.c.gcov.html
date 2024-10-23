@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2024-10-22 14:27:56</td>
+            <td class="headerValue">2024-10-23 08:59:21</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -106,55 +106,55 @@
 <span id="L28"><span class="lineNum">      28</span>                 :             : </span>
 <span id="L29"><span class="lineNum">      29</span>                 :             : #define SHA256_DIGEST_WORDS (SHA256_DIGEST_SIZE / 4)</span>
 <span id="L30"><span class="lineNum">      30</span>                 :             : </span>
-<span id="L31"><span class="lineNum">      31</span>                 :<span class="tlaGNC tlaBgGNC">        5966 : void mptcp_crypto_key_sha(u64 key, u32 *token, u64 *idsn)</span></span>
+<span id="L31"><span class="lineNum">      31</span>                 :<span class="tlaGNC tlaBgGNC">        5953 : void mptcp_crypto_key_sha(u64 key, u32 *token, u64 *idsn)</span></span>
 <span id="L32"><span class="lineNum">      32</span>                 :             : {</span>
-<span id="L33"><span class="lineNum">      33</span>                 :<span class="tlaGNC">        5966 :         __be32 mptcp_hashed_key[SHA256_DIGEST_WORDS];</span></span>
-<span id="L34"><span class="lineNum">      34</span>                 :<span class="tlaGNC">        5966 :         __be64 input = cpu_to_be64(key);</span></span>
+<span id="L33"><span class="lineNum">      33</span>                 :<span class="tlaGNC">        5953 :         __be32 mptcp_hashed_key[SHA256_DIGEST_WORDS];</span></span>
+<span id="L34"><span class="lineNum">      34</span>                 :<span class="tlaGNC">        5953 :         __be64 input = cpu_to_be64(key);</span></span>
 <span id="L35"><span class="lineNum">      35</span>                 :             : </span>
-<span id="L36"><span class="lineNum">      36</span>                 :<span class="tlaGNC">        5966 :         sha256((__force u8 *)&amp;input, sizeof(input), (u8 *)mptcp_hashed_key);</span></span>
+<span id="L36"><span class="lineNum">      36</span>                 :<span class="tlaGNC">        5953 :         sha256((__force u8 *)&amp;input, sizeof(input), (u8 *)mptcp_hashed_key);</span></span>
 <span id="L37"><span class="lineNum">      37</span>                 :             : </span>
-<span id="L38"><span class="lineNum">      38</span>         [<span class="tlaGBC" title="Branch 0 was taken 3045 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2921 times"> + </span>]:<span class="tlaGNC">        5966 :         if (token)</span></span>
-<span id="L39"><span class="lineNum">      39</span>                 :<span class="tlaGNC">        3045 :                 *token = be32_to_cpu(mptcp_hashed_key[0]);</span></span>
-<span id="L40"><span class="lineNum">      40</span>         [<span class="tlaGBC" title="Branch 0 was taken 5407 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 559 times"> + </span>]:<span class="tlaGNC">        5966 :         if (idsn)</span></span>
-<span id="L41"><span class="lineNum">      41</span>                 :<span class="tlaGNC">        5407 :                 *idsn = be64_to_cpu(*((__be64 *)&amp;mptcp_hashed_key[6]));</span></span>
-<span id="L42"><span class="lineNum">      42</span>                 :<span class="tlaGNC">        5966 : }</span></span>
+<span id="L38"><span class="lineNum">      38</span>         [<span class="tlaGBC" title="Branch 0 was taken 3047 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2906 times"> + </span>]:<span class="tlaGNC">        5953 :         if (token)</span></span>
+<span id="L39"><span class="lineNum">      39</span>                 :<span class="tlaGNC">        3047 :                 *token = be32_to_cpu(mptcp_hashed_key[0]);</span></span>
+<span id="L40"><span class="lineNum">      40</span>         [<span class="tlaGBC" title="Branch 0 was taken 5392 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 561 times"> + </span>]:<span class="tlaGNC">        5953 :         if (idsn)</span></span>
+<span id="L41"><span class="lineNum">      41</span>                 :<span class="tlaGNC">        5392 :                 *idsn = be64_to_cpu(*((__be64 *)&amp;mptcp_hashed_key[6]));</span></span>
+<span id="L42"><span class="lineNum">      42</span>                 :<span class="tlaGNC">        5953 : }</span></span>
 <span id="L43"><span class="lineNum">      43</span>                 :             : </span>
-<span id="L44"><span class="lineNum">      44</span>                 :<span class="tlaGNC">        2772 : void mptcp_crypto_hmac_sha(u64 key1, u64 key2, u8 *msg, int len, void *hmac)</span></span>
+<span id="L44"><span class="lineNum">      44</span>                 :<span class="tlaGNC">        2776 : void mptcp_crypto_hmac_sha(u64 key1, u64 key2, u8 *msg, int len, void *hmac)</span></span>
 <span id="L45"><span class="lineNum">      45</span>                 :             : {</span>
-<span id="L46"><span class="lineNum">      46</span>                 :<span class="tlaGNC">        2772 :         u8 input[SHA256_BLOCK_SIZE + SHA256_DIGEST_SIZE];</span></span>
-<span id="L47"><span class="lineNum">      47</span>                 :<span class="tlaGNC">        2772 :         u8 key1be[8];</span></span>
-<span id="L48"><span class="lineNum">      48</span>                 :<span class="tlaGNC">        2772 :         u8 key2be[8];</span></span>
-<span id="L49"><span class="lineNum">      49</span>                 :<span class="tlaGNC">        2772 :         int i;</span></span>
+<span id="L46"><span class="lineNum">      46</span>                 :<span class="tlaGNC">        2776 :         u8 input[SHA256_BLOCK_SIZE + SHA256_DIGEST_SIZE];</span></span>
+<span id="L47"><span class="lineNum">      47</span>                 :<span class="tlaGNC">        2776 :         u8 key1be[8];</span></span>
+<span id="L48"><span class="lineNum">      48</span>                 :<span class="tlaGNC">        2776 :         u8 key2be[8];</span></span>
+<span id="L49"><span class="lineNum">      49</span>                 :<span class="tlaGNC">        2776 :         int i;</span></span>
 <span id="L50"><span class="lineNum">      50</span>                 :             : </span>
-<span id="L51"><span class="lineNum">      51</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 2772 times"> + </span>]:<span class="tlaGNC">        2772 :         if (WARN_ON_ONCE(len &gt; SHA256_DIGEST_SIZE))</span></span>
+<span id="L51"><span class="lineNum">      51</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 2776 times"> + </span>]:<span class="tlaGNC">        2776 :         if (WARN_ON_ONCE(len &gt; SHA256_DIGEST_SIZE))</span></span>
 <span id="L52"><span class="lineNum">      52</span>                 :<span class="tlaUNC tlaBgUNC">           0 :                 len = SHA256_DIGEST_SIZE;</span></span>
 <span id="L53"><span class="lineNum">      53</span>                 :             : </span>
-<span id="L54"><span class="lineNum">      54</span>                 :<span class="tlaGNC tlaBgGNC">        2772 :         put_unaligned_be64(key1, key1be);</span></span>
-<span id="L55"><span class="lineNum">      55</span>                 :<span class="tlaGNC">        2772 :         put_unaligned_be64(key2, key2be);</span></span>
+<span id="L54"><span class="lineNum">      54</span>                 :<span class="tlaGNC tlaBgGNC">        2776 :         put_unaligned_be64(key1, key1be);</span></span>
+<span id="L55"><span class="lineNum">      55</span>                 :<span class="tlaGNC">        2776 :         put_unaligned_be64(key2, key2be);</span></span>
 <span id="L56"><span class="lineNum">      56</span>                 :             : </span>
 <span id="L57"><span class="lineNum">      57</span>                 :             :         /* Generate key xored with ipad */</span>
-<span id="L58"><span class="lineNum">      58</span>                 :<span class="tlaGNC">        2772 :         memset(input, 0x36, SHA256_BLOCK_SIZE);</span></span>
-<span id="L59"><span class="lineNum">      59</span>         [<span class="tlaGBC" title="Branch 0 was taken 22176 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2772 times"> + </span>]:<span class="tlaGNC">       24948 :         for (i = 0; i &lt; 8; i++)</span></span>
-<span id="L60"><span class="lineNum">      60</span>                 :<span class="tlaGNC">       22176 :                 input[i] ^= key1be[i];</span></span>
-<span id="L61"><span class="lineNum">      61</span>         [<span class="tlaGBC" title="Branch 0 was taken 22176 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2772 times"> + </span>]:<span class="tlaGNC">       24948 :         for (i = 0; i &lt; 8; i++)</span></span>
-<span id="L62"><span class="lineNum">      62</span>                 :<span class="tlaGNC">       22176 :                 input[i + 8] ^= key2be[i];</span></span>
+<span id="L58"><span class="lineNum">      58</span>                 :<span class="tlaGNC">        2776 :         memset(input, 0x36, SHA256_BLOCK_SIZE);</span></span>
+<span id="L59"><span class="lineNum">      59</span>         [<span class="tlaGBC" title="Branch 0 was taken 22208 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2776 times"> + </span>]:<span class="tlaGNC">       24984 :         for (i = 0; i &lt; 8; i++)</span></span>
+<span id="L60"><span class="lineNum">      60</span>                 :<span class="tlaGNC">       22208 :                 input[i] ^= key1be[i];</span></span>
+<span id="L61"><span class="lineNum">      61</span>         [<span class="tlaGBC" title="Branch 0 was taken 22208 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2776 times"> + </span>]:<span class="tlaGNC">       24984 :         for (i = 0; i &lt; 8; i++)</span></span>
+<span id="L62"><span class="lineNum">      62</span>                 :<span class="tlaGNC">       22208 :                 input[i + 8] ^= key2be[i];</span></span>
 <span id="L63"><span class="lineNum">      63</span>                 :             : </span>
-<span id="L64"><span class="lineNum">      64</span>                 :<span class="tlaGNC">        2772 :         memcpy(&amp;input[SHA256_BLOCK_SIZE], msg, len);</span></span>
+<span id="L64"><span class="lineNum">      64</span>                 :<span class="tlaGNC">        2776 :         memcpy(&amp;input[SHA256_BLOCK_SIZE], msg, len);</span></span>
 <span id="L65"><span class="lineNum">      65</span>                 :             : </span>
 <span id="L66"><span class="lineNum">      66</span>                 :             :         /* emit sha256(K1 || msg) on the second input block, so we can</span>
 <span id="L67"><span class="lineNum">      67</span>                 :             :          * reuse 'input' for the last hashing</span>
 <span id="L68"><span class="lineNum">      68</span>                 :             :          */</span>
-<span id="L69"><span class="lineNum">      69</span>                 :<span class="tlaGNC">        2772 :         sha256(input, SHA256_BLOCK_SIZE + len, &amp;input[SHA256_BLOCK_SIZE]);</span></span>
+<span id="L69"><span class="lineNum">      69</span>                 :<span class="tlaGNC">        2776 :         sha256(input, SHA256_BLOCK_SIZE + len, &amp;input[SHA256_BLOCK_SIZE]);</span></span>
 <span id="L70"><span class="lineNum">      70</span>                 :             : </span>
 <span id="L71"><span class="lineNum">      71</span>                 :             :         /* Prepare second part of hmac */</span>
-<span id="L72"><span class="lineNum">      72</span>                 :<span class="tlaGNC">        2772 :         memset(input, 0x5C, SHA256_BLOCK_SIZE);</span></span>
-<span id="L73"><span class="lineNum">      73</span>         [<span class="tlaGBC" title="Branch 0 was taken 22176 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2772 times"> + </span>]:<span class="tlaGNC">       24948 :         for (i = 0; i &lt; 8; i++)</span></span>
-<span id="L74"><span class="lineNum">      74</span>                 :<span class="tlaGNC">       22176 :                 input[i] ^= key1be[i];</span></span>
-<span id="L75"><span class="lineNum">      75</span>         [<span class="tlaGBC" title="Branch 0 was taken 22176 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2772 times"> + </span>]:<span class="tlaGNC">       24948 :         for (i = 0; i &lt; 8; i++)</span></span>
-<span id="L76"><span class="lineNum">      76</span>                 :<span class="tlaGNC">       22176 :                 input[i + 8] ^= key2be[i];</span></span>
+<span id="L72"><span class="lineNum">      72</span>                 :<span class="tlaGNC">        2776 :         memset(input, 0x5C, SHA256_BLOCK_SIZE);</span></span>
+<span id="L73"><span class="lineNum">      73</span>         [<span class="tlaGBC" title="Branch 0 was taken 22208 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2776 times"> + </span>]:<span class="tlaGNC">       24984 :         for (i = 0; i &lt; 8; i++)</span></span>
+<span id="L74"><span class="lineNum">      74</span>                 :<span class="tlaGNC">       22208 :                 input[i] ^= key1be[i];</span></span>
+<span id="L75"><span class="lineNum">      75</span>         [<span class="tlaGBC" title="Branch 0 was taken 22208 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2776 times"> + </span>]:<span class="tlaGNC">       24984 :         for (i = 0; i &lt; 8; i++)</span></span>
+<span id="L76"><span class="lineNum">      76</span>                 :<span class="tlaGNC">       22208 :                 input[i + 8] ^= key2be[i];</span></span>
 <span id="L77"><span class="lineNum">      77</span>                 :             : </span>
-<span id="L78"><span class="lineNum">      78</span>                 :<span class="tlaGNC">        2772 :         sha256(input, SHA256_BLOCK_SIZE + SHA256_DIGEST_SIZE, hmac);</span></span>
-<span id="L79"><span class="lineNum">      79</span>                 :<span class="tlaGNC">        2772 : }</span></span>
+<span id="L78"><span class="lineNum">      78</span>                 :<span class="tlaGNC">        2776 :         sha256(input, SHA256_BLOCK_SIZE + SHA256_DIGEST_SIZE, hmac);</span></span>
+<span id="L79"><span class="lineNum">      79</span>                 :<span class="tlaGNC">        2776 : }</span></span>
 <span id="L80"><span class="lineNum">      80</span>                 :             : </span>
 <span id="L81"><span class="lineNum">      81</span>                 :             : #if IS_MODULE(CONFIG_MPTCP_KUNIT_TEST)</span>
 <span id="L82"><span class="lineNum">      82</span>                 :             : EXPORT_SYMBOL_GPL(mptcp_crypto_hmac_sha);</span>
