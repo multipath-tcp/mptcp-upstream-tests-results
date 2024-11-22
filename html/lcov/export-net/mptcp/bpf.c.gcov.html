@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2024-11-19 09:46:23</td>
+            <td class="headerValue">2024-11-22 06:57:40</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -90,11 +90,11 @@
 <span id="L12"><span class="lineNum">      12</span>                 :             : #include &lt;linux/bpf.h&gt;</span>
 <span id="L13"><span class="lineNum">      13</span>                 :             : #include &quot;protocol.h&quot;</span>
 <span id="L14"><span class="lineNum">      14</span>                 :             : </span>
-<span id="L15"><span class="lineNum">      15</span>                 :<span class="tlaGNC tlaBgGNC">           6 : struct mptcp_sock *bpf_mptcp_sock_from_subflow(struct sock *sk)</span></span>
+<span id="L15"><span class="lineNum">      15</span>                 :<span class="tlaGNC tlaBgGNC">          18 : struct mptcp_sock *bpf_mptcp_sock_from_subflow(struct sock *sk)</span></span>
 <span id="L16"><span class="lineNum">      16</span>                 :             : {</span>
-<span id="L17"><span class="lineNum">      17</span>   [<span class="tlaGBC" title="Branch 0 was taken 6 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 3 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 3 times"> + </span> :<span class="tlaGNC">           9 :         if (sk &amp;&amp; sk_fullsock(sk) &amp;&amp; sk-&gt;sk_protocol == IPPROTO_TCP &amp;&amp; sk_is_mptcp(sk))</span></span>
-<span class="lineNum">        </span>    <span class="tlaGBC" title="Branch 4 was taken 3 times"> + </span><span class="tlaGBC" title="Branch 5 was taken 3 times"> + </span><span class="tlaGBC" title="Branch 6 was taken 3 times"> + </span><span class="tlaGBC" title="Branch 7 was taken 3 times"> + </span>]
-<span id="L18"><span class="lineNum">      18</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 6 times"> + </span>]:<span class="tlaGNC">           6 :                 return mptcp_sk(mptcp_subflow_ctx(sk)-&gt;conn);</span></span>
+<span id="L17"><span class="lineNum">      17</span>   [<span class="tlaGBC" title="Branch 0 was taken 18 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 9 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 9 times"> + </span> :<span class="tlaGNC">          27 :         if (sk &amp;&amp; sk_fullsock(sk) &amp;&amp; sk-&gt;sk_protocol == IPPROTO_TCP &amp;&amp; sk_is_mptcp(sk))</span></span>
+<span class="lineNum">        </span>    <span class="tlaGBC" title="Branch 4 was taken 9 times"> + </span><span class="tlaGBC" title="Branch 5 was taken 9 times"> + </span><span class="tlaGBC" title="Branch 6 was taken 9 times"> + </span><span class="tlaGBC" title="Branch 7 was taken 9 times"> + </span>]
+<span id="L18"><span class="lineNum">      18</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 18 times"> + </span>]:<span class="tlaGNC">          18 :                 return mptcp_sk(mptcp_subflow_ctx(sk)-&gt;conn);</span></span>
 <span id="L19"><span class="lineNum">      19</span>                 :             : </span>
 <span id="L20"><span class="lineNum">      20</span>                 :             :         return NULL;</span>
 <span id="L21"><span class="lineNum">      21</span>                 :             : }</span>
