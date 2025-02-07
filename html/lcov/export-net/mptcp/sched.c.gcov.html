@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-02-06 06:52:13</td>
+            <td class="headerValue">2025-02-07 07:00:11</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">90.9&nbsp;%</td>
@@ -94,18 +94,18 @@
 <span id="L16"><span class="lineNum">      16</span>                 :             : static DEFINE_SPINLOCK(mptcp_sched_list_lock);</span>
 <span id="L17"><span class="lineNum">      17</span>                 :             : static LIST_HEAD(mptcp_sched_list);</span>
 <span id="L18"><span class="lineNum">      18</span>                 :             : </span>
-<span id="L19"><span class="lineNum">      19</span>                 :<span class="tlaGNC tlaBgGNC">      381079 : static int mptcp_sched_default_get_subflow(struct mptcp_sock *msk,</span></span>
+<span id="L19"><span class="lineNum">      19</span>                 :<span class="tlaGNC tlaBgGNC">      400177 : static int mptcp_sched_default_get_subflow(struct mptcp_sock *msk,</span></span>
 <span id="L20"><span class="lineNum">      20</span>                 :             :                                            struct mptcp_sched_data *data)</span>
 <span id="L21"><span class="lineNum">      21</span>                 :             : {</span>
-<span id="L22"><span class="lineNum">      22</span>                 :<span class="tlaGNC">      381079 :         struct sock *ssk;</span></span>
+<span id="L22"><span class="lineNum">      22</span>                 :<span class="tlaGNC">      400177 :         struct sock *ssk;</span></span>
 <span id="L23"><span class="lineNum">      23</span>                 :             : </span>
-<span id="L24"><span class="lineNum">      24</span>   [<span class="tlaGBC" title="Branch 0 was taken 586 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 380493 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 770 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 191451 times"> + </span>]:<span class="tlaGNC">      381079 :         ssk = data-&gt;reinject ? mptcp_subflow_get_retrans(msk) :</span></span>
-<span id="L25"><span class="lineNum">      25</span>                 :<span class="tlaGNC">      379723 :                                mptcp_subflow_get_send(msk);</span></span>
-<span id="L26"><span class="lineNum">      26</span>         [<span class="tlaGBC" title="Branch 0 was taken 306627 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 74452 times"> + </span>]:<span class="tlaGNC">      381079 :         if (!ssk)</span></span>
+<span id="L24"><span class="lineNum">      24</span>   [<span class="tlaGBC" title="Branch 0 was taken 589 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 399588 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 767 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 210915 times"> + </span>]:<span class="tlaGNC">      400177 :         ssk = data-&gt;reinject ? mptcp_subflow_get_retrans(msk) :</span></span>
+<span id="L25"><span class="lineNum">      25</span>                 :<span class="tlaGNC">      398821 :                                mptcp_subflow_get_send(msk);</span></span>
+<span id="L26"><span class="lineNum">      26</span>         [<span class="tlaGBC" title="Branch 0 was taken 330703 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 69474 times"> + </span>]:<span class="tlaGNC">      400177 :         if (!ssk)</span></span>
 <span id="L27"><span class="lineNum">      27</span>                 :             :                 return -EINVAL;</span>
 <span id="L28"><span class="lineNum">      28</span>                 :             : </span>
-<span id="L29"><span class="lineNum">      29</span>                 :<span class="tlaGNC">      306627 :         mptcp_subflow_set_scheduled(mptcp_subflow_ctx(ssk), true);</span></span>
-<span id="L30"><span class="lineNum">      30</span>                 :<span class="tlaGNC">      306627 :         return 0;</span></span>
+<span id="L29"><span class="lineNum">      29</span>                 :<span class="tlaGNC">      330703 :         mptcp_subflow_set_scheduled(mptcp_subflow_ctx(ssk), true);</span></span>
+<span id="L30"><span class="lineNum">      30</span>                 :<span class="tlaGNC">      330703 :         return 0;</span></span>
 <span id="L31"><span class="lineNum">      31</span>                 :             : }</span>
 <span id="L32"><span class="lineNum">      32</span>                 :             : </span>
 <span id="L33"><span class="lineNum">      33</span>                 :             : static struct mptcp_sched_ops mptcp_sched_default = {</span>
@@ -217,59 +217,59 @@
 <span id="L135"><span class="lineNum">     135</span>                 :<span class="tlaGNC tlaBgGNC">        3488 :         bpf_module_put(sched, sched-&gt;owner);</span></span>
 <span id="L136"><span class="lineNum">     136</span>                 :             : }</span>
 <span id="L137"><span class="lineNum">     137</span>                 :             : </span>
-<span id="L138"><span class="lineNum">     138</span>                 :<span class="tlaGNC">      333746 : void mptcp_subflow_set_scheduled(struct mptcp_subflow_context *subflow,</span></span>
+<span id="L138"><span class="lineNum">     138</span>                 :<span class="tlaGNC">      356853 : void mptcp_subflow_set_scheduled(struct mptcp_subflow_context *subflow,</span></span>
 <span id="L139"><span class="lineNum">     139</span>                 :             :                                  bool scheduled)</span>
 <span id="L140"><span class="lineNum">     140</span>                 :             : {</span>
-<span id="L141"><span class="lineNum">     141</span>                 :<span class="tlaGNC">      306615 :         WRITE_ONCE(subflow-&gt;scheduled, scheduled);</span></span>
-<span id="L142"><span class="lineNum">     142</span>                 :<span class="tlaGNC">      333758 : }</span></span>
+<span id="L141"><span class="lineNum">     141</span>                 :<span class="tlaGNC">      330690 :         WRITE_ONCE(subflow-&gt;scheduled, scheduled);</span></span>
+<span id="L142"><span class="lineNum">     142</span>                 :<span class="tlaGNC">      356865 : }</span></span>
 <span id="L143"><span class="lineNum">     143</span>                 :             : </span>
-<span id="L144"><span class="lineNum">     144</span>                 :<span class="tlaGNC">      416989 : int mptcp_sched_get_send(struct mptcp_sock *msk)</span></span>
+<span id="L144"><span class="lineNum">     144</span>                 :<span class="tlaGNC">      430701 : int mptcp_sched_get_send(struct mptcp_sock *msk)</span></span>
 <span id="L145"><span class="lineNum">     145</span>                 :             : {</span>
-<span id="L146"><span class="lineNum">     146</span>                 :<span class="tlaGNC">      416989 :         struct mptcp_subflow_context *subflow;</span></span>
-<span id="L147"><span class="lineNum">     147</span>                 :<span class="tlaGNC">      416989 :         struct mptcp_sched_data data;</span></span>
+<span id="L146"><span class="lineNum">     146</span>                 :<span class="tlaGNC">      430701 :         struct mptcp_subflow_context *subflow;</span></span>
+<span id="L147"><span class="lineNum">     147</span>                 :<span class="tlaGNC">      430701 :         struct mptcp_sched_data data;</span></span>
 <span id="L148"><span class="lineNum">     148</span>                 :             : </span>
-<span id="L149"><span class="lineNum">     149</span>                 :<span class="tlaGNC">      416989 :         msk_owned_by_me(msk);</span></span>
+<span id="L149"><span class="lineNum">     149</span>                 :<span class="tlaGNC">      430701 :         msk_owned_by_me(msk);</span></span>
 <span id="L150"><span class="lineNum">     150</span>                 :             : </span>
 <span id="L151"><span class="lineNum">     151</span>                 :             :         /* the following check is moved out of mptcp_subflow_get_send */</span>
-<span id="L152"><span class="lineNum">     152</span>         [<span class="tlaGBC" title="Branch 0 was taken 36355 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 380634 times"> + </span>]:<span class="tlaGNC">      416989 :         if (__mptcp_check_fallback(msk)) {</span></span>
-<span id="L153"><span class="lineNum">     153</span>   [<span class="tlaGBC" title="Branch 0 was taken 36355 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 36355 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span>]:<span class="tlaGNC">       72710 :                 if (msk-&gt;first &amp;&amp;</span></span>
-<span id="L154"><span class="lineNum">     154</span>         [<span class="tlaGBC" title="Branch 0 was taken 27625 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 8730 times"> + </span>]:<span class="tlaGNC">       50066 :                     __tcp_can_send(msk-&gt;first) &amp;&amp;</span></span>
-<span id="L155"><span class="lineNum">     155</span>         [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span>]:<span class="tlaGNC">       36355 :                     sk_stream_memory_free(msk-&gt;first)) {</span></span>
-<span id="L156"><span class="lineNum">     156</span>                 :<span class="tlaGNC">       27625 :                         mptcp_subflow_set_scheduled(mptcp_subflow_ctx(msk-&gt;first), true);</span></span>
-<span id="L157"><span class="lineNum">     157</span>                 :<span class="tlaGNC">       27625 :                         return 0;</span></span>
+<span id="L152"><span class="lineNum">     152</span>         [<span class="tlaGBC" title="Branch 0 was taken 30404 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 400297 times"> + </span>]:<span class="tlaGNC">      430701 :         if (__mptcp_check_fallback(msk)) {</span></span>
+<span id="L153"><span class="lineNum">     153</span>   [<span class="tlaGBC" title="Branch 0 was taken 30404 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 30404 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span>]:<span class="tlaGNC">       60808 :                 if (msk-&gt;first &amp;&amp;</span></span>
+<span id="L154"><span class="lineNum">     154</span>         [<span class="tlaGBC" title="Branch 0 was taken 26589 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 3815 times"> + </span>]:<span class="tlaGNC">       46691 :                     __tcp_can_send(msk-&gt;first) &amp;&amp;</span></span>
+<span id="L155"><span class="lineNum">     155</span>         [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span>]:<span class="tlaGNC">       30404 :                     sk_stream_memory_free(msk-&gt;first)) {</span></span>
+<span id="L156"><span class="lineNum">     156</span>                 :<span class="tlaGNC">       26589 :                         mptcp_subflow_set_scheduled(mptcp_subflow_ctx(msk-&gt;first), true);</span></span>
+<span id="L157"><span class="lineNum">     157</span>                 :<span class="tlaGNC">       26589 :                         return 0;</span></span>
 <span id="L158"><span class="lineNum">     158</span>                 :             :                 }</span>
-<span id="L159"><span class="lineNum">     159</span>                 :<span class="tlaGNC">        8730 :                 return -EINVAL;</span></span>
+<span id="L159"><span class="lineNum">     159</span>                 :<span class="tlaGNC">        3815 :                 return -EINVAL;</span></span>
 <span id="L160"><span class="lineNum">     160</span>                 :             :         }</span>
 <span id="L161"><span class="lineNum">     161</span>                 :             : </span>
-<span id="L162"><span class="lineNum">     162</span>         [<span class="tlaGBC" title="Branch 0 was taken 693524 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 379723 times"> + </span>]:<span class="tlaGNC">     1073247 :         mptcp_for_each_subflow(msk, subflow) {</span></span>
-<span id="L163"><span class="lineNum">     163</span>   [<span class="tlaGBC" title="Branch 0 was taken 142 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 693382 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 769 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 383542 times"> + </span>]:<span class="tlaGNC">      693524 :                 if (READ_ONCE(subflow-&gt;scheduled))</span></span>
+<span id="L162"><span class="lineNum">     162</span>         [<span class="tlaGBC" title="Branch 0 was taken 727728 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 398821 times"> + </span>]:<span class="tlaGNC">     1126549 :         mptcp_for_each_subflow(msk, subflow) {</span></span>
+<span id="L163"><span class="lineNum">     163</span>   [<span class="tlaGBC" title="Branch 0 was taken 155 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 727573 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 1321 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 405377 times"> + </span>]:<span class="tlaGNC">      727728 :                 if (READ_ONCE(subflow-&gt;scheduled))</span></span>
 <span id="L164"><span class="lineNum">     164</span>                 :             :                         return 0;</span>
 <span id="L165"><span class="lineNum">     165</span>                 :             :         }</span>
 <span id="L166"><span class="lineNum">     166</span>                 :             : </span>
-<span id="L167"><span class="lineNum">     167</span>                 :<span class="tlaGNC">      379723 :         data.reinject = false;</span></span>
-<span id="L168"><span class="lineNum">     168</span>   [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 379723 times"> + </span><span class="tlaUNC" title="Branch 2 was not taken"> - </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span>]:<span class="tlaGNC">      379723 :         if (msk-&gt;sched == &amp;mptcp_sched_default || !msk-&gt;sched)</span></span>
-<span id="L169"><span class="lineNum">     169</span>                 :<span class="tlaGNC">      379723 :                 return mptcp_sched_default_get_subflow(msk, &amp;data);</span></span>
+<span id="L167"><span class="lineNum">     167</span>                 :<span class="tlaGNC">      398821 :         data.reinject = false;</span></span>
+<span id="L168"><span class="lineNum">     168</span>   [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 398821 times"> + </span><span class="tlaUNC" title="Branch 2 was not taken"> - </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span>]:<span class="tlaGNC">      398821 :         if (msk-&gt;sched == &amp;mptcp_sched_default || !msk-&gt;sched)</span></span>
+<span id="L169"><span class="lineNum">     169</span>                 :<span class="tlaGNC">      398821 :                 return mptcp_sched_default_get_subflow(msk, &amp;data);</span></span>
 <span id="L170"><span class="lineNum">     170</span>                 :<span class="tlaUNC tlaBgUNC">           0 :         return msk-&gt;sched-&gt;get_subflow(msk, &amp;data);</span></span>
 <span id="L171"><span class="lineNum">     171</span>                 :             : }</span>
 <span id="L172"><span class="lineNum">     172</span>                 :             : </span>
-<span id="L173"><span class="lineNum">     173</span>                 :<span class="tlaGNC tlaBgGNC">        6681 : int mptcp_sched_get_retrans(struct mptcp_sock *msk)</span></span>
+<span id="L173"><span class="lineNum">     173</span>                 :<span class="tlaGNC tlaBgGNC">        5358 : int mptcp_sched_get_retrans(struct mptcp_sock *msk)</span></span>
 <span id="L174"><span class="lineNum">     174</span>                 :             : {</span>
-<span id="L175"><span class="lineNum">     175</span>                 :<span class="tlaGNC">        6681 :         struct mptcp_subflow_context *subflow;</span></span>
-<span id="L176"><span class="lineNum">     176</span>                 :<span class="tlaGNC">        6681 :         struct mptcp_sched_data data;</span></span>
+<span id="L175"><span class="lineNum">     175</span>                 :<span class="tlaGNC">        5358 :         struct mptcp_subflow_context *subflow;</span></span>
+<span id="L176"><span class="lineNum">     176</span>                 :<span class="tlaGNC">        5358 :         struct mptcp_sched_data data;</span></span>
 <span id="L177"><span class="lineNum">     177</span>                 :             : </span>
-<span id="L178"><span class="lineNum">     178</span>                 :<span class="tlaGNC">        6681 :         msk_owned_by_me(msk);</span></span>
+<span id="L178"><span class="lineNum">     178</span>                 :<span class="tlaGNC">        5358 :         msk_owned_by_me(msk);</span></span>
 <span id="L179"><span class="lineNum">     179</span>                 :             : </span>
 <span id="L180"><span class="lineNum">     180</span>                 :             :         /* the following check is moved out of mptcp_subflow_get_retrans */</span>
-<span id="L181"><span class="lineNum">     181</span>         [<span class="tlaGBC" title="Branch 0 was taken 2270 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 4411 times"> + </span>]:<span class="tlaGNC">        6681 :         if (__mptcp_check_fallback(msk))</span></span>
+<span id="L181"><span class="lineNum">     181</span>         [<span class="tlaGBC" title="Branch 0 was taken 2269 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 3089 times"> + </span>]:<span class="tlaGNC">        5358 :         if (__mptcp_check_fallback(msk))</span></span>
 <span id="L182"><span class="lineNum">     182</span>                 :             :                 return -EINVAL;</span>
 <span id="L183"><span class="lineNum">     183</span>                 :             : </span>
-<span id="L184"><span class="lineNum">     184</span>         [<span class="tlaGBC" title="Branch 0 was taken 2714 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1356 times"> + </span>]:<span class="tlaGNC">        4070 :         mptcp_for_each_subflow(msk, subflow) {</span></span>
-<span id="L185"><span class="lineNum">     185</span>   [<span class="tlaGBC" title="Branch 0 was taken 783 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1931 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 1017 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 475 times"> + </span>]:<span class="tlaGNC">        2714 :                 if (READ_ONCE(subflow-&gt;scheduled))</span></span>
+<span id="L184"><span class="lineNum">     184</span>         [<span class="tlaGBC" title="Branch 0 was taken 2701 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1356 times"> + </span>]:<span class="tlaGNC">        4057 :         mptcp_for_each_subflow(msk, subflow) {</span></span>
+<span id="L185"><span class="lineNum">     185</span>   [<span class="tlaGBC" title="Branch 0 was taken 774 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1927 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 1014 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 473 times"> + </span>]:<span class="tlaGNC">        2701 :                 if (READ_ONCE(subflow-&gt;scheduled))</span></span>
 <span id="L186"><span class="lineNum">     186</span>                 :             :                         return 0;</span>
 <span id="L187"><span class="lineNum">     187</span>                 :             :         }</span>
 <span id="L188"><span class="lineNum">     188</span>                 :             : </span>
 <span id="L189"><span class="lineNum">     189</span>                 :<span class="tlaGNC">        1356 :         data.reinject = true;</span></span>
-<span id="L190"><span class="lineNum">     190</span>   [<span class="tlaGBC" title="Branch 0 was taken 17 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1339 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 17 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span>]:<span class="tlaGNC">        1356 :         if (msk-&gt;sched == &amp;mptcp_sched_default || !msk-&gt;sched)</span></span>
+<span id="L190"><span class="lineNum">     190</span>   [<span class="tlaGBC" title="Branch 0 was taken 16 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1340 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 16 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span>]:<span class="tlaGNC">        1356 :         if (msk-&gt;sched == &amp;mptcp_sched_default || !msk-&gt;sched)</span></span>
 <span id="L191"><span class="lineNum">     191</span>                 :<span class="tlaGNC">        1356 :                 return mptcp_sched_default_get_subflow(msk, &amp;data);</span></span>
 <span id="L192"><span class="lineNum">     192</span>                 :<span class="tlaUNC tlaBgUNC">           0 :         return msk-&gt;sched-&gt;get_subflow(msk, &amp;data);</span></span>
 <span id="L193"><span class="lineNum">     193</span>                 :             : }</span>
