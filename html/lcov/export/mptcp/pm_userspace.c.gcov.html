@@ -31,13 +31,13 @@
             <td class="headerValue">export</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryMed">80.1&nbsp;%</td>
-            <td class="headerCovTableEntry">418</td>
-            <td class="headerCovTableEntry">335</td>
+            <td class="headerCovTableEntryMed">80.2&nbsp;%</td>
+            <td class="headerCovTableEntry">419</td>
+            <td class="headerCovTableEntry">336</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-02-24 13:15:48</td>
+            <td class="headerValue">2025-02-25 06:52:09</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -90,14 +90,14 @@
 <span id="L12"><span class="lineNum">      12</span>                 :             :         list_for_each_entry(__entry,                                            \</span>
 <span id="L13"><span class="lineNum">      13</span>                 :             :                             &amp;((__msk)-&gt;pm.userspace_pm_local_addr_list), list)</span>
 <span id="L14"><span class="lineNum">      14</span>                 :             : </span>
-<span id="L15"><span class="lineNum">      15</span>                 :<span class="tlaGNC tlaBgGNC">        3698 : void mptcp_free_local_addr_list(struct mptcp_sock *msk)</span></span>
+<span id="L15"><span class="lineNum">      15</span>                 :<span class="tlaGNC tlaBgGNC">        3691 : void mptcp_free_local_addr_list(struct mptcp_sock *msk)</span></span>
 <span id="L16"><span class="lineNum">      16</span>                 :             : {</span>
-<span id="L17"><span class="lineNum">      17</span>                 :<span class="tlaGNC">        3698 :         struct mptcp_pm_addr_entry *entry, *tmp;</span></span>
-<span id="L18"><span class="lineNum">      18</span>                 :<span class="tlaGNC">        3698 :         struct sock *sk = (struct sock *)msk;</span></span>
-<span id="L19"><span class="lineNum">      19</span>                 :<span class="tlaGNC">        3698 :         LIST_HEAD(free_list);</span></span>
+<span id="L17"><span class="lineNum">      17</span>                 :<span class="tlaGNC">        3691 :         struct mptcp_pm_addr_entry *entry, *tmp;</span></span>
+<span id="L18"><span class="lineNum">      18</span>                 :<span class="tlaGNC">        3691 :         struct sock *sk = (struct sock *)msk;</span></span>
+<span id="L19"><span class="lineNum">      19</span>                 :<span class="tlaGNC">        3691 :         LIST_HEAD(free_list);</span></span>
 <span id="L20"><span class="lineNum">      20</span>                 :             : </span>
-<span id="L21"><span class="lineNum">      21</span>         [<span class="tlaGBC" title="Branch 0 was taken 3634 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 64 times"> + </span>]:<span class="tlaGNC">        3698 :         if (!mptcp_pm_is_userspace(msk))</span></span>
-<span id="L22"><span class="lineNum">      22</span>                 :<span class="tlaGNC">        3634 :                 return;</span></span>
+<span id="L21"><span class="lineNum">      21</span>         [<span class="tlaGBC" title="Branch 0 was taken 3627 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 64 times"> + </span>]:<span class="tlaGNC">        3691 :         if (!mptcp_pm_is_userspace(msk))</span></span>
+<span id="L22"><span class="lineNum">      22</span>                 :<span class="tlaGNC">        3627 :                 return;</span></span>
 <span id="L23"><span class="lineNum">      23</span>                 :             : </span>
 <span id="L24"><span class="lineNum">      24</span>                 :<span class="tlaGNC">          64 :         spin_lock_bh(&amp;msk-&gt;pm.lock);</span></span>
 <span id="L25"><span class="lineNum">      25</span>         [<span class="tlaGBC" title="Branch 0 was taken 10 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 54 times"> + </span>]:<span class="tlaGNC">          64 :         list_splice_init(&amp;msk-&gt;pm.userspace_pm_local_addr_list, &amp;free_list);</span></span>
@@ -718,63 +718,65 @@
 <span id="L637"><span class="lineNum">     637</span>                 :             : </span>
 <span id="L638"><span class="lineNum">     638</span>                 :<span class="tlaGNC">          20 :         BUILD_BUG_ON(sizeof(struct id_bitmap) &gt; sizeof(cb-&gt;ctx));</span></span>
 <span id="L639"><span class="lineNum">     639</span>                 :             : </span>
-<span id="L640"><span class="lineNum">     640</span>                 :<span class="tlaGNC">          20 :         bitmap = (struct id_bitmap *)cb-&gt;ctx;</span></span>
+<span id="L640"><span class="lineNum">     640</span>                 :<span class="tlaGNC">          20 :         BUILD_BUG_ON(sizeof(struct id_bitmap) &gt; sizeof(cb-&gt;ctx));</span></span>
 <span id="L641"><span class="lineNum">     641</span>                 :             : </span>
-<span id="L642"><span class="lineNum">     642</span>                 :<span class="tlaGNC">          20 :         msk = mptcp_userspace_pm_get_sock(info);</span></span>
-<span id="L643"><span class="lineNum">     643</span>         [<span class="tlaGBC" title="Branch 0 was taken 20 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">          20 :         if (!msk)</span></span>
-<span id="L644"><span class="lineNum">     644</span>                 :             :                 return ret;</span>
-<span id="L645"><span class="lineNum">     645</span>                 :             : </span>
-<span id="L646"><span class="lineNum">     646</span>                 :<span class="tlaGNC">          20 :         sk = (struct sock *)msk;</span></span>
+<span id="L642"><span class="lineNum">     642</span>                 :<span class="tlaGNC">          20 :         bitmap = (struct id_bitmap *)cb-&gt;ctx;</span></span>
+<span id="L643"><span class="lineNum">     643</span>                 :             : </span>
+<span id="L644"><span class="lineNum">     644</span>                 :<span class="tlaGNC">          20 :         msk = mptcp_userspace_pm_get_sock(info);</span></span>
+<span id="L645"><span class="lineNum">     645</span>         [<span class="tlaGBC" title="Branch 0 was taken 20 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">          20 :         if (!msk)</span></span>
+<span id="L646"><span class="lineNum">     646</span>                 :             :                 return ret;</span>
 <span id="L647"><span class="lineNum">     647</span>                 :             : </span>
-<span id="L648"><span class="lineNum">     648</span>                 :<span class="tlaGNC">          20 :         lock_sock(sk);</span></span>
-<span id="L649"><span class="lineNum">     649</span>                 :<span class="tlaGNC">          20 :         spin_lock_bh(&amp;msk-&gt;pm.lock);</span></span>
-<span id="L650"><span class="lineNum">     650</span>         [<span class="tlaGBC" title="Branch 0 was taken 20 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 20 times"> + </span>]:<span class="tlaGNC">          40 :         mptcp_for_each_userspace_pm_addr(msk, entry) {</span></span>
-<span id="L651"><span class="lineNum">     651</span>   [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 20 times"> + </span><span class="tlaUNC" title="Branch 2 was not taken"> - </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC">          40 :                 if (test_bit(entry-&gt;addr.id, bitmap-&gt;map))</span></span>
+<span id="L648"><span class="lineNum">     648</span>                 :<span class="tlaGNC">          20 :         sk = (struct sock *)msk;</span></span>
+<span id="L649"><span class="lineNum">     649</span>                 :             : </span>
+<span id="L650"><span class="lineNum">     650</span>                 :<span class="tlaGNC">          20 :         lock_sock(sk);</span></span>
+<span id="L651"><span class="lineNum">     651</span>                 :<span class="tlaGNC">          20 :         spin_lock_bh(&amp;msk-&gt;pm.lock);</span></span>
+<span id="L652"><span class="lineNum">     652</span>         [<span class="tlaGBC" title="Branch 0 was taken 20 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 20 times"> + </span>]:<span class="tlaGNC">          40 :         mptcp_for_each_userspace_pm_addr(msk, entry) {</span></span>
+<span id="L653"><span class="lineNum">     653</span>   [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 20 times"> + </span><span class="tlaUNC" title="Branch 2 was not taken"> - </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC">          40 :                 if (test_bit(entry-&gt;addr.id, bitmap-&gt;map))</span></span>
 <span class="lineNum">        </span> <span class="tlaUNC" title="Branch 4 was not taken"> - </span><span class="tlaUNC" title="Branch 5 was not taken"> - </span><span class="tlaUNC" title="Branch 6 was not taken"> - </span><span class="tlaUNC" title="Branch 7 was not taken"> - </span><span class="tlaGBC" title="Branch 8 was taken 5 times"> + </span> 
 <span class="lineNum">        </span>       <span class="tlaGBC" title="Branch 9 was taken 15 times"> + </span><span class="tlaGBC" title="Branch 10 was taken 5 times"> + </span><span class="tlaGBC" title="Branch 11 was taken 5 times"> + </span>]
-<span id="L652"><span class="lineNum">     652</span>                 :<span class="tlaGNC">          10 :                         continue;</span></span>
-<span id="L653"><span class="lineNum">     653</span>                 :             : </span>
-<span id="L654"><span class="lineNum">     654</span>         [<span class="tlaGBC" title="Branch 0 was taken 10 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">          10 :                 if (mptcp_pm_genl_fill_addr(msg, cb, entry) &lt; 0)</span></span>
-<span id="L655"><span class="lineNum">     655</span>                 :             :                         break;</span>
-<span id="L656"><span class="lineNum">     656</span>                 :             : </span>
-<span id="L657"><span class="lineNum">     657</span>   [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 10 times"> + </span><span class="tlaUNC" title="Branch 2 was not taken"> - </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC">          10 :                 __set_bit(entry-&gt;addr.id, bitmap-&gt;map);</span></span>
+<span id="L654"><span class="lineNum">     654</span>                 :<span class="tlaGNC">          10 :                         continue;</span></span>
+<span id="L655"><span class="lineNum">     655</span>                 :             : </span>
+<span id="L656"><span class="lineNum">     656</span>         [<span class="tlaGBC" title="Branch 0 was taken 10 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">          10 :                 if (mptcp_pm_genl_fill_addr(msg, cb, entry) &lt; 0)</span></span>
+<span id="L657"><span class="lineNum">     657</span>                 :             :                         break;</span>
+<span id="L658"><span class="lineNum">     658</span>                 :             : </span>
+<span id="L659"><span class="lineNum">     659</span>   [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 10 times"> + </span><span class="tlaUNC" title="Branch 2 was not taken"> - </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC">          10 :                 __set_bit(entry-&gt;addr.id, bitmap-&gt;map);</span></span>
 <span class="lineNum">        </span>    <span class="tlaUNC" title="Branch 4 was not taken"> - </span><span class="tlaUNC" title="Branch 5 was not taken"> - </span><span class="tlaUNC" title="Branch 6 was not taken"> - </span><span class="tlaUNC" title="Branch 7 was not taken"> - </span>]
-<span id="L658"><span class="lineNum">     658</span>                 :             :         }</span>
-<span id="L659"><span class="lineNum">     659</span>                 :<span class="tlaGNC">          20 :         spin_unlock_bh(&amp;msk-&gt;pm.lock);</span></span>
-<span id="L660"><span class="lineNum">     660</span>                 :<span class="tlaGNC">          20 :         release_sock(sk);</span></span>
-<span id="L661"><span class="lineNum">     661</span>                 :<span class="tlaGNC">          20 :         ret = msg-&gt;len;</span></span>
-<span id="L662"><span class="lineNum">     662</span>                 :             : </span>
-<span id="L663"><span class="lineNum">     663</span>                 :<span class="tlaGNC">          20 :         sock_put(sk);</span></span>
-<span id="L664"><span class="lineNum">     664</span>                 :<span class="tlaGNC">          20 :         return ret;</span></span>
-<span id="L665"><span class="lineNum">     665</span>                 :             : }</span>
-<span id="L666"><span class="lineNum">     666</span>                 :             : </span>
-<span id="L667"><span class="lineNum">     667</span>                 :<span class="tlaGNC">           6 : int mptcp_userspace_pm_get_addr(u8 id, struct mptcp_pm_addr_entry *addr,</span></span>
-<span id="L668"><span class="lineNum">     668</span>                 :             :                                 struct genl_info *info)</span>
-<span id="L669"><span class="lineNum">     669</span>                 :             : {</span>
-<span id="L670"><span class="lineNum">     670</span>                 :<span class="tlaGNC">           6 :         struct mptcp_pm_addr_entry *entry;</span></span>
-<span id="L671"><span class="lineNum">     671</span>                 :<span class="tlaGNC">           6 :         struct mptcp_sock *msk;</span></span>
-<span id="L672"><span class="lineNum">     672</span>                 :<span class="tlaGNC">           6 :         int ret = -EINVAL;</span></span>
-<span id="L673"><span class="lineNum">     673</span>                 :<span class="tlaGNC">           6 :         struct sock *sk;</span></span>
-<span id="L674"><span class="lineNum">     674</span>                 :             : </span>
-<span id="L675"><span class="lineNum">     675</span>                 :<span class="tlaGNC">           6 :         msk = mptcp_userspace_pm_get_sock(info);</span></span>
-<span id="L676"><span class="lineNum">     676</span>         [<span class="tlaGBC" title="Branch 0 was taken 6 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">           6 :         if (!msk)</span></span>
-<span id="L677"><span class="lineNum">     677</span>                 :             :                 return ret;</span>
-<span id="L678"><span class="lineNum">     678</span>                 :             : </span>
-<span id="L679"><span class="lineNum">     679</span>                 :<span class="tlaGNC">           6 :         sk = (struct sock *)msk;</span></span>
+<span id="L660"><span class="lineNum">     660</span>                 :             :         }</span>
+<span id="L661"><span class="lineNum">     661</span>                 :<span class="tlaGNC">          20 :         spin_unlock_bh(&amp;msk-&gt;pm.lock);</span></span>
+<span id="L662"><span class="lineNum">     662</span>                 :<span class="tlaGNC">          20 :         release_sock(sk);</span></span>
+<span id="L663"><span class="lineNum">     663</span>                 :<span class="tlaGNC">          20 :         ret = msg-&gt;len;</span></span>
+<span id="L664"><span class="lineNum">     664</span>                 :             : </span>
+<span id="L665"><span class="lineNum">     665</span>                 :<span class="tlaGNC">          20 :         sock_put(sk);</span></span>
+<span id="L666"><span class="lineNum">     666</span>                 :<span class="tlaGNC">          20 :         return ret;</span></span>
+<span id="L667"><span class="lineNum">     667</span>                 :             : }</span>
+<span id="L668"><span class="lineNum">     668</span>                 :             : </span>
+<span id="L669"><span class="lineNum">     669</span>                 :<span class="tlaGNC">           6 : int mptcp_userspace_pm_get_addr(u8 id, struct mptcp_pm_addr_entry *addr,</span></span>
+<span id="L670"><span class="lineNum">     670</span>                 :             :                                 struct genl_info *info)</span>
+<span id="L671"><span class="lineNum">     671</span>                 :             : {</span>
+<span id="L672"><span class="lineNum">     672</span>                 :<span class="tlaGNC">           6 :         struct mptcp_pm_addr_entry *entry;</span></span>
+<span id="L673"><span class="lineNum">     673</span>                 :<span class="tlaGNC">           6 :         struct mptcp_sock *msk;</span></span>
+<span id="L674"><span class="lineNum">     674</span>                 :<span class="tlaGNC">           6 :         int ret = -EINVAL;</span></span>
+<span id="L675"><span class="lineNum">     675</span>                 :<span class="tlaGNC">           6 :         struct sock *sk;</span></span>
+<span id="L676"><span class="lineNum">     676</span>                 :             : </span>
+<span id="L677"><span class="lineNum">     677</span>                 :<span class="tlaGNC">           6 :         msk = mptcp_userspace_pm_get_sock(info);</span></span>
+<span id="L678"><span class="lineNum">     678</span>         [<span class="tlaGBC" title="Branch 0 was taken 6 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">           6 :         if (!msk)</span></span>
+<span id="L679"><span class="lineNum">     679</span>                 :             :                 return ret;</span>
 <span id="L680"><span class="lineNum">     680</span>                 :             : </span>
-<span id="L681"><span class="lineNum">     681</span>                 :<span class="tlaGNC">           6 :         lock_sock(sk);</span></span>
-<span id="L682"><span class="lineNum">     682</span>                 :<span class="tlaGNC">           6 :         spin_lock_bh(&amp;msk-&gt;pm.lock);</span></span>
-<span id="L683"><span class="lineNum">     683</span>                 :<span class="tlaGNC">           6 :         entry = mptcp_userspace_pm_lookup_addr_by_id(msk, id);</span></span>
-<span id="L684"><span class="lineNum">     684</span>         [<span class="tlaGBC" title="Branch 0 was taken 6 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">           6 :         if (entry) {</span></span>
-<span id="L685"><span class="lineNum">     685</span>                 :<span class="tlaGNC">           6 :                 *addr = *entry;</span></span>
-<span id="L686"><span class="lineNum">     686</span>                 :<span class="tlaGNC">           6 :                 ret = 0;</span></span>
-<span id="L687"><span class="lineNum">     687</span>                 :             :         }</span>
-<span id="L688"><span class="lineNum">     688</span>                 :<span class="tlaGNC">           6 :         spin_unlock_bh(&amp;msk-&gt;pm.lock);</span></span>
-<span id="L689"><span class="lineNum">     689</span>                 :<span class="tlaGNC">           6 :         release_sock(sk);</span></span>
-<span id="L690"><span class="lineNum">     690</span>                 :             : </span>
-<span id="L691"><span class="lineNum">     691</span>                 :<span class="tlaGNC">           6 :         sock_put(sk);</span></span>
-<span id="L692"><span class="lineNum">     692</span>                 :<span class="tlaGNC">           6 :         return ret;</span></span>
-<span id="L693"><span class="lineNum">     693</span>                 :             : }</span>
+<span id="L681"><span class="lineNum">     681</span>                 :<span class="tlaGNC">           6 :         sk = (struct sock *)msk;</span></span>
+<span id="L682"><span class="lineNum">     682</span>                 :             : </span>
+<span id="L683"><span class="lineNum">     683</span>                 :<span class="tlaGNC">           6 :         lock_sock(sk);</span></span>
+<span id="L684"><span class="lineNum">     684</span>                 :<span class="tlaGNC">           6 :         spin_lock_bh(&amp;msk-&gt;pm.lock);</span></span>
+<span id="L685"><span class="lineNum">     685</span>                 :<span class="tlaGNC">           6 :         entry = mptcp_userspace_pm_lookup_addr_by_id(msk, id);</span></span>
+<span id="L686"><span class="lineNum">     686</span>         [<span class="tlaGBC" title="Branch 0 was taken 6 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">           6 :         if (entry) {</span></span>
+<span id="L687"><span class="lineNum">     687</span>                 :<span class="tlaGNC">           6 :                 *addr = *entry;</span></span>
+<span id="L688"><span class="lineNum">     688</span>                 :<span class="tlaGNC">           6 :                 ret = 0;</span></span>
+<span id="L689"><span class="lineNum">     689</span>                 :             :         }</span>
+<span id="L690"><span class="lineNum">     690</span>                 :<span class="tlaGNC">           6 :         spin_unlock_bh(&amp;msk-&gt;pm.lock);</span></span>
+<span id="L691"><span class="lineNum">     691</span>                 :<span class="tlaGNC">           6 :         release_sock(sk);</span></span>
+<span id="L692"><span class="lineNum">     692</span>                 :             : </span>
+<span id="L693"><span class="lineNum">     693</span>                 :<span class="tlaGNC">           6 :         sock_put(sk);</span></span>
+<span id="L694"><span class="lineNum">     694</span>                 :<span class="tlaGNC">           6 :         return ret;</span></span>
+<span id="L695"><span class="lineNum">     695</span>                 :             : }</span>
         </pre>
               </td>
             </tr>
