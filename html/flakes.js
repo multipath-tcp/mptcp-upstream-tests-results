@@ -92,7 +92,8 @@ function load_result_table(data_raw, table_name)
   header.insertCell(0); // name
   for (let i = 0; i < tags.length; i++) {
     let cell = header.insertCell(i + 1);
-    cell.innerHTML = "<a href=\"https://github.com/multipath-tcp/mptcp_net-next/actions/runs/" + tags[i][1] + "\" target=\"_blank\">" + tags[i][0] + "</a>";
+    color = tags_errors.has(tags[i][0]) ? " style=\"color: red\" " : ""
+    cell.innerHTML = "<a href=\"https://github.com/multipath-tcp/mptcp_net-next/actions/runs/" + tags[i][1] + "\"" + color + "target=\"_blank\">" + tags[i][0] + "</a>";
     cell.setAttribute("style", "writing-mode: tb-rl; font-size: 1em; padding: 0px;");
   }
 
