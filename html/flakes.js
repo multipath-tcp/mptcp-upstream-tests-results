@@ -53,10 +53,13 @@ function load_result_table(data_raw, table_name)
     }]
    */
   $.each(data_raw, function(i, item) {
-    if (!("results" in item)) {
+    if ("error" in item) {
       tags_errors.add(item.tag);
       return true;
     }
+
+    if (!("results" in item))
+      return true;
 
     $.each(item.results, function(file, tests) {
       $.each(tests, function(id, result) {
@@ -102,7 +105,7 @@ function load_result_table(data_raw, table_name)
 
     for (let i = 0; i < tags.length; i++) {
       let cell = row.insertCell(i + 1);
-      if (tags[i][0] in tags_errors)
+      if (tags_errors.has(tags[i][0]))
         colorify(cell, {"result": "fail", "comment": "Global error"});
       else
         colorify(cell, test_row[tn][tags[i][0]]);
