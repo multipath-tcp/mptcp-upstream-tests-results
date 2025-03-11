@@ -31,18 +31,18 @@
             <td class="headerValue">export</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryMed">80.8&nbsp;%</td>
-            <td class="headerCovTableEntry">412</td>
-            <td class="headerCovTableEntry">333</td>
+            <td class="headerCovTableEntryMed">81.1&nbsp;%</td>
+            <td class="headerCovTableEntry">418</td>
+            <td class="headerCovTableEntry">339</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-03-11 10:08:50</td>
+            <td class="headerValue">2025-03-11 23:31:52</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
-            <td class="headerCovTableEntry">17</td>
-            <td class="headerCovTableEntry">17</td>
+            <td class="headerCovTableEntry">19</td>
+            <td class="headerCovTableEntry">19</td>
           </tr>
           <tr>
             <td class="headerItem">Legend:</td>
@@ -205,8 +205,8 @@
 <span id="L126"><span class="lineNum">     126</span>                 :             :         return NULL;</span>
 <span id="L127"><span class="lineNum">     127</span>                 :             : }</span>
 <span id="L128"><span class="lineNum">     128</span>                 :             : </span>
-<span id="L129"><span class="lineNum">     129</span>                 :<span class="tlaGNC">          22 : int mptcp_userspace_pm_get_local_id(struct mptcp_sock *msk,</span></span>
-<span id="L130"><span class="lineNum">     130</span>                 :             :                                     struct mptcp_pm_addr_entry *skc)</span>
+<span id="L129"><span class="lineNum">     129</span>                 :<span class="tlaGNC">          22 : static int mptcp_pm_userspace_get_local_id(struct mptcp_sock *msk,</span></span>
+<span id="L130"><span class="lineNum">     130</span>                 :             :                                            struct mptcp_pm_addr_entry *skc)</span>
 <span id="L131"><span class="lineNum">     131</span>                 :             : {</span>
 <span id="L132"><span class="lineNum">     132</span>                 :<span class="tlaGNC">          22 :         __be16 msk_sport =  ((struct inet_sock *)</span></span>
 <span id="L133"><span class="lineNum">     133</span>                 :<span class="tlaGNC">          22 :                              inet_sk((struct sock *)msk))-&gt;inet_sport;</span></span>
@@ -224,8 +224,8 @@
 <span id="L145"><span class="lineNum">     145</span>                 :<span class="tlaUNC">           0 :         return mptcp_userspace_pm_append_new_local_addr(msk, skc, true);</span></span>
 <span id="L146"><span class="lineNum">     146</span>                 :             : }</span>
 <span id="L147"><span class="lineNum">     147</span>                 :             : </span>
-<span id="L148"><span class="lineNum">     148</span>                 :<span class="tlaGNC tlaBgGNC">          26 : bool mptcp_userspace_pm_is_backup(struct mptcp_sock *msk,</span></span>
-<span id="L149"><span class="lineNum">     149</span>                 :             :                                   struct mptcp_addr_info *skc)</span>
+<span id="L148"><span class="lineNum">     148</span>                 :<span class="tlaGNC tlaBgGNC">          26 : static bool mptcp_pm_userspace_get_priority(struct mptcp_sock *msk,</span></span>
+<span id="L149"><span class="lineNum">     149</span>                 :             :                                             struct mptcp_addr_info *skc)</span>
 <span id="L150"><span class="lineNum">     150</span>                 :             : {</span>
 <span id="L151"><span class="lineNum">     151</span>                 :<span class="tlaGNC">          26 :         struct mptcp_pm_addr_entry *entry;</span></span>
 <span id="L152"><span class="lineNum">     152</span>                 :<span class="tlaGNC">          26 :         bool backup;</span></span>
@@ -766,6 +766,24 @@
 <span id="L682"><span class="lineNum">     682</span>                 :<span class="tlaGNC">           6 :         sock_put(sk);</span></span>
 <span id="L683"><span class="lineNum">     683</span>                 :<span class="tlaGNC">           6 :         return ret;</span></span>
 <span id="L684"><span class="lineNum">     684</span>                 :             : }</span>
+<span id="L685"><span class="lineNum">     685</span>                 :             : </span>
+<span id="L686"><span class="lineNum">     686</span>                 :<span class="tlaGNC">          64 : static void mptcp_pm_userspace_release(struct mptcp_sock *msk)</span></span>
+<span id="L687"><span class="lineNum">     687</span>                 :             : {</span>
+<span id="L688"><span class="lineNum">     688</span>                 :<span class="tlaGNC">          64 :         mptcp_userspace_pm_free_local_addr_list(msk);</span></span>
+<span id="L689"><span class="lineNum">     689</span>                 :<span class="tlaGNC">          64 : }</span></span>
+<span id="L690"><span class="lineNum">     690</span>                 :             : </span>
+<span id="L691"><span class="lineNum">     691</span>                 :             : static struct mptcp_pm_ops mptcp_pm_userspace = {</span>
+<span id="L692"><span class="lineNum">     692</span>                 :             :         .get_local_id           = mptcp_pm_userspace_get_local_id,</span>
+<span id="L693"><span class="lineNum">     693</span>                 :             :         .get_priority           = mptcp_pm_userspace_get_priority,</span>
+<span id="L694"><span class="lineNum">     694</span>                 :             :         .release                = mptcp_pm_userspace_release,</span>
+<span id="L695"><span class="lineNum">     695</span>                 :             :         .name                   = &quot;userspace&quot;,</span>
+<span id="L696"><span class="lineNum">     696</span>                 :             :         .owner                  = THIS_MODULE,</span>
+<span id="L697"><span class="lineNum">     697</span>                 :             : };</span>
+<span id="L698"><span class="lineNum">     698</span>                 :             : </span>
+<span id="L699"><span class="lineNum">     699</span>                 :<span class="tlaGNC">           4 : void __init mptcp_pm_userspace_register(void)</span></span>
+<span id="L700"><span class="lineNum">     700</span>                 :             : {</span>
+<span id="L701"><span class="lineNum">     701</span>                 :<span class="tlaGNC">           4 :         mptcp_pm_register(&amp;mptcp_pm_userspace);</span></span>
+<span id="L702"><span class="lineNum">     702</span>                 :<span class="tlaGNC">           4 : }</span></span>
         </pre>
               </td>
             </tr>
