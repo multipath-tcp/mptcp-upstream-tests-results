@@ -19,7 +19,7 @@
                 <table cellpadding=1 border=0 width="100%">
           <tr>
             <td width="10%" class="headerItem">Current view:</td>
-            <td width="10%" class="headerValue"><a href="../index.html">top level</a> - mptcp/syncookies.c<span style="font-size: 80%;"> (source / <a href="syncookies.c.func-c.html">functions</a>)</span></td>
+            <td width="10%" class="headerValue"><a href="../index.html" title="Click to go to top-level">top level</a> - mptcp/syncookies.c<span style="font-size: 80%;"> (source / <a href="syncookies.c.func-c.html" title="Click to go to function table">functions</a>)</span></td>
             <td width="5%"></td>
             <td width="5%"></td>
             <td width="5%" class="headerCovTableHead">Coverage</td>
@@ -37,19 +37,19 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-08-06 19:24:33</td>
+            <td class="headerValue">2025-08-07 15:21:09</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntryHi">-</td>
-            <td class="headerCovTableEntry">0</td>
-            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntry">4</td>
           </tr>
           <tr>
             <td class="headerItem">Legend:</td>
-            <td class="headerValueLeg">            Lines:
+            <td class="headerValueLeg">            Lines:&nbsp&nbsp&nbsp&nbsp
             <span class="coverLegendCov">hit</span>
             <span class="coverLegendNoCov">not hit</span>
-            | Branches:
+            <br>Branches:
             <span class="coverLegendCov">+</span> taken
             <span class="coverLegendNoCov">-</span> not taken
             <span class="coverLegendNoCov">#</span> not executed
@@ -113,7 +113,7 @@
 <span id="L35"><span class="lineNum">      35</span>                 :             : static struct join_entry join_entries[COOKIE_JOIN_SLOTS] __cacheline_aligned_in_smp;</span>
 <span id="L36"><span class="lineNum">      36</span>                 :             : static spinlock_t join_entry_locks[COOKIE_JOIN_SLOTS] __cacheline_aligned_in_smp;</span>
 <span id="L37"><span class="lineNum">      37</span>                 :             : </span>
-<span id="L38"><span class="lineNum">      38</span>                 :<span class="tlaGNC tlaBgGNC">          40 : static u32 mptcp_join_entry_hash(struct sk_buff *skb, struct net *net)</span></span>
+<span id="L38"><span class="lineNum">      38</span>                 :<span class="tlaGNC">          40 : static u32 mptcp_join_entry_hash(struct sk_buff *skb, struct net *net)</span></span>
 <span id="L39"><span class="lineNum">      39</span>                 :             : {</span>
 <span id="L40"><span class="lineNum">      40</span>                 :<span class="tlaGNC">          40 :         static u32 mptcp_join_hash_secret __read_mostly;</span></span>
 <span id="L41"><span class="lineNum">      41</span>                 :<span class="tlaGNC">          40 :         struct tcphdr *th = tcp_hdr(skb);</span></span>
@@ -134,10 +134,10 @@
 <span id="L56"><span class="lineNum">      56</span>                 :<span class="tlaGNC">          40 :         return i % ARRAY_SIZE(join_entries);</span></span>
 <span id="L57"><span class="lineNum">      57</span>                 :             : }</span>
 <span id="L58"><span class="lineNum">      58</span>                 :             : </span>
-<span id="L59"><span class="lineNum">      59</span>                 :<span class="tlaUNC tlaBgUNC">           0 : static void mptcp_join_store_state(struct join_entry *entry,</span></span>
+<span id="L59"><span class="lineNum">      59</span>                 :<span class="tlaUNC">           0 : static void mptcp_join_store_state(struct join_entry *entry,</span></span>
 <span id="L60"><span class="lineNum">      60</span>                 :             :                                    const struct mptcp_subflow_request_sock *subflow_req)</span>
 <span id="L61"><span class="lineNum">      61</span>                 :             : {</span>
-<span id="L62"><span class="lineNum">      62</span>                 :<span class="tlaGNC tlaBgGNC">          20 :         entry-&gt;token = subflow_req-&gt;token;</span></span>
+<span id="L62"><span class="lineNum">      62</span>                 :<span class="tlaGNC">          20 :         entry-&gt;token = subflow_req-&gt;token;</span></span>
 <span id="L63"><span class="lineNum">      63</span>                 :<span class="tlaGNC">          20 :         entry-&gt;remote_nonce = subflow_req-&gt;remote_nonce;</span></span>
 <span id="L64"><span class="lineNum">      64</span>                 :<span class="tlaGNC">          20 :         entry-&gt;local_nonce = subflow_req-&gt;local_nonce;</span></span>
 <span id="L65"><span class="lineNum">      65</span>                 :<span class="tlaGNC">          20 :         entry-&gt;backup = subflow_req-&gt;backup;</span></span>
@@ -180,19 +180,19 @@
 <span id="L102"><span class="lineNum">     102</span>                 :<span class="tlaGNC">          20 :         spin_lock_bh(&amp;join_entry_locks[i]);</span></span>
 <span id="L103"><span class="lineNum">     103</span>                 :             : </span>
 <span id="L104"><span class="lineNum">     104</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 20 times"> + </span>]:<span class="tlaGNC">          20 :         if (e-&gt;valid == 0) {</span></span>
-<span id="L105"><span class="lineNum">     105</span>                 :<span class="tlaUNC tlaBgUNC">           0 :                 spin_unlock_bh(&amp;join_entry_locks[i]);</span></span>
+<span id="L105"><span class="lineNum">     105</span>                 :<span class="tlaUNC">           0 :                 spin_unlock_bh(&amp;join_entry_locks[i]);</span></span>
 <span id="L106"><span class="lineNum">     106</span>                 :<span class="tlaUNC">           0 :                 return false;</span></span>
 <span id="L107"><span class="lineNum">     107</span>                 :             :         }</span>
 <span id="L108"><span class="lineNum">     108</span>                 :             : </span>
-<span id="L109"><span class="lineNum">     109</span>                 :<span class="tlaGNC tlaBgGNC">          20 :         e-&gt;valid = 0;</span></span>
+<span id="L109"><span class="lineNum">     109</span>                 :<span class="tlaGNC">          20 :         e-&gt;valid = 0;</span></span>
 <span id="L110"><span class="lineNum">     110</span>                 :             : </span>
 <span id="L111"><span class="lineNum">     111</span>                 :<span class="tlaGNC">          20 :         msk = mptcp_token_get_sock(net, e-&gt;token);</span></span>
 <span id="L112"><span class="lineNum">     112</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 20 times"> + </span>]:<span class="tlaGNC">          20 :         if (!msk) {</span></span>
-<span id="L113"><span class="lineNum">     113</span>                 :<span class="tlaUNC tlaBgUNC">           0 :                 spin_unlock_bh(&amp;join_entry_locks[i]);</span></span>
+<span id="L113"><span class="lineNum">     113</span>                 :<span class="tlaUNC">           0 :                 spin_unlock_bh(&amp;join_entry_locks[i]);</span></span>
 <span id="L114"><span class="lineNum">     114</span>                 :<span class="tlaUNC">           0 :                 return false;</span></span>
 <span id="L115"><span class="lineNum">     115</span>                 :             :         }</span>
 <span id="L116"><span class="lineNum">     116</span>                 :             : </span>
-<span id="L117"><span class="lineNum">     117</span>                 :<span class="tlaGNC tlaBgGNC">          20 :         subflow_req-&gt;remote_nonce = e-&gt;remote_nonce;</span></span>
+<span id="L117"><span class="lineNum">     117</span>                 :<span class="tlaGNC">          20 :         subflow_req-&gt;remote_nonce = e-&gt;remote_nonce;</span></span>
 <span id="L118"><span class="lineNum">     118</span>                 :<span class="tlaGNC">          20 :         subflow_req-&gt;local_nonce = e-&gt;local_nonce;</span></span>
 <span id="L119"><span class="lineNum">     119</span>                 :<span class="tlaGNC">          20 :         subflow_req-&gt;backup = e-&gt;backup;</span></span>
 <span id="L120"><span class="lineNum">     120</span>                 :<span class="tlaGNC">          20 :         subflow_req-&gt;remote_id = e-&gt;join_id;</span></span>
@@ -217,7 +217,7 @@
 
           <table width="100%" border=0 cellspacing=0 cellpadding=0>
             <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
-            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.3.1-1</a></td></tr>
           </table>
           <br>
 
