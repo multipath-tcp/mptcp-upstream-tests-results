@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-09-11 08:46:13</td>
+            <td class="headerValue">2025-09-11 09:39:15</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -105,18 +105,18 @@
 <span id="L27"><span class="lineNum">      27</span>                 :             : </span>
 <span id="L28"><span class="lineNum">      28</span>                 :             : #define SHA256_DIGEST_WORDS (SHA256_DIGEST_SIZE / 4)</span>
 <span id="L29"><span class="lineNum">      29</span>                 :             : </span>
-<span id="L30"><span class="lineNum">      30</span>                 :<span class="tlaGNC">        7264 : void mptcp_crypto_key_sha(u64 key, u32 *token, u64 *idsn)</span></span>
+<span id="L30"><span class="lineNum">      30</span>                 :<span class="tlaGNC">        7206 : void mptcp_crypto_key_sha(u64 key, u32 *token, u64 *idsn)</span></span>
 <span id="L31"><span class="lineNum">      31</span>                 :             : {</span>
-<span id="L32"><span class="lineNum">      32</span>                 :<span class="tlaGNC">        7264 :         __be32 mptcp_hashed_key[SHA256_DIGEST_WORDS];</span></span>
-<span id="L33"><span class="lineNum">      33</span>                 :<span class="tlaGNC">        7264 :         __be64 input = cpu_to_be64(key);</span></span>
+<span id="L32"><span class="lineNum">      32</span>                 :<span class="tlaGNC">        7206 :         __be32 mptcp_hashed_key[SHA256_DIGEST_WORDS];</span></span>
+<span id="L33"><span class="lineNum">      33</span>                 :<span class="tlaGNC">        7206 :         __be64 input = cpu_to_be64(key);</span></span>
 <span id="L34"><span class="lineNum">      34</span>                 :             : </span>
-<span id="L35"><span class="lineNum">      35</span>                 :<span class="tlaGNC">        7264 :         sha256((__force u8 *)&amp;input, sizeof(input), (u8 *)mptcp_hashed_key);</span></span>
+<span id="L35"><span class="lineNum">      35</span>                 :<span class="tlaGNC">        7206 :         sha256((__force u8 *)&amp;input, sizeof(input), (u8 *)mptcp_hashed_key);</span></span>
 <span id="L36"><span class="lineNum">      36</span>                 :             : </span>
-<span id="L37"><span class="lineNum">      37</span>         [<span class="tlaGBC" title="Branch 0 was taken 3562 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 3702 times"> + </span>]:<span class="tlaGNC">        7264 :         if (token)</span></span>
-<span id="L38"><span class="lineNum">      38</span>                 :<span class="tlaGNC">        3562 :                 *token = be32_to_cpu(mptcp_hashed_key[0]);</span></span>
-<span id="L39"><span class="lineNum">      39</span>         [<span class="tlaGBC" title="Branch 0 was taken 6714 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 550 times"> + </span>]:<span class="tlaGNC">        7264 :         if (idsn)</span></span>
-<span id="L40"><span class="lineNum">      40</span>                 :<span class="tlaGNC">        6714 :                 *idsn = be64_to_cpu(*((__be64 *)&amp;mptcp_hashed_key[6]));</span></span>
-<span id="L41"><span class="lineNum">      41</span>                 :<span class="tlaGNC">        7264 : }</span></span>
+<span id="L37"><span class="lineNum">      37</span>         [<span class="tlaGBC" title="Branch 0 was taken 3560 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 3646 times"> + </span>]:<span class="tlaGNC">        7206 :         if (token)</span></span>
+<span id="L38"><span class="lineNum">      38</span>                 :<span class="tlaGNC">        3560 :                 *token = be32_to_cpu(mptcp_hashed_key[0]);</span></span>
+<span id="L39"><span class="lineNum">      39</span>         [<span class="tlaGBC" title="Branch 0 was taken 6658 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 548 times"> + </span>]:<span class="tlaGNC">        7206 :         if (idsn)</span></span>
+<span id="L40"><span class="lineNum">      40</span>                 :<span class="tlaGNC">        6658 :                 *idsn = be64_to_cpu(*((__be64 *)&amp;mptcp_hashed_key[6]));</span></span>
+<span id="L41"><span class="lineNum">      41</span>                 :<span class="tlaGNC">        7206 : }</span></span>
 <span id="L42"><span class="lineNum">      42</span>                 :             : </span>
 <span id="L43"><span class="lineNum">      43</span>                 :<span class="tlaGNC">        2760 : void mptcp_crypto_hmac_sha(u64 key1, u64 key2, u8 *msg, int len, void *hmac)</span></span>
 <span id="L44"><span class="lineNum">      44</span>                 :             : {</span>
