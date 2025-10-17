@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-10-17 18:37:57</td>
+            <td class="headerValue">2025-10-17 19:08:14</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
@@ -1259,9 +1259,9 @@
 <span id="L1116"><span class="lineNum">    1116</span>                 :<span class="tlaUNC">           0 : static inline bool mptcp_pm_is_userspace(const struct mptcp_sock *msk)</span></span>
 <span id="L1117"><span class="lineNum">    1117</span>                 :             : {</span>
 <span id="L1118"><span class="lineNum">    1118</span>   [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span><span class="tlaUNC" title="Branch 2 was not executed"> # </span><span class="tlaUNC" title="Branch 3 was not executed"> # </span> :<span class="tlaUNC">           0 :         return READ_ONCE(msk-&gt;pm.pm_type) == MPTCP_PM_TYPE_USERSPACE;</span></span>
-<span class="lineNum">        </span> <span class="tlaUNC" title="Branch 4 was not executed"> # </span><span class="tlaUNC" title="Branch 5 was not executed"> # </span><span class="tlaUNC" title="Branch 6 was not executed"> # </span><span class="tlaUNC" title="Branch 7 was not executed"> # </span><span class="tlaUNC" title="Branch 8 was not executed"> # </span> 
-<span class="lineNum">        </span>  <span class="tlaUNC" title="Branch 9 was not executed"> # </span>][<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span><span class="tlaUNC" title="Branch 2 was not executed"> # </span> 
-<span class="lineNum">        </span>       <span class="tlaUNC" title="Branch 3 was not executed"> # </span><span class="tlaUNC" title="Branch 4 was not executed"> # </span><span class="tlaUNC" title="Branch 5 was not executed"> # </span>]
+<span class="lineNum">        </span>  <span class="tlaUNC" title="Branch 4 was not executed"> # </span><span class="tlaUNC" title="Branch 5 was not executed"> # </span>][<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span> 
+<span class="lineNum">        </span> <span class="tlaUNC" title="Branch 2 was not executed"> # </span><span class="tlaUNC" title="Branch 3 was not executed"> # </span><span class="tlaUNC" title="Branch 4 was not executed"> # </span><span class="tlaUNC" title="Branch 5 was not executed"> # </span><span class="tlaUNC" title="Branch 6 was not executed"> # </span> 
+<span class="lineNum">        </span>       <span class="tlaUNC" title="Branch 7 was not executed"> # </span><span class="tlaUNC" title="Branch 8 was not executed"> # </span><span class="tlaUNC" title="Branch 9 was not executed"> # </span>]
 <span class="lineNum">        </span>         [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span>]
 <span id="L1119"><span class="lineNum">    1119</span>                 :             : }</span>
 <span id="L1120"><span class="lineNum">    1120</span>                 :             : </span>
@@ -1328,158 +1328,159 @@
 <span id="L1180"><span class="lineNum">    1180</span>                 :             : u8 mptcp_pm_get_endp_signal_max(const struct mptcp_sock *msk);</span>
 <span id="L1181"><span class="lineNum">    1181</span>                 :             : u8 mptcp_pm_get_endp_subflow_max(const struct mptcp_sock *msk);</span>
 <span id="L1182"><span class="lineNum">    1182</span>                 :             : u8 mptcp_pm_get_endp_laminar_max(const struct mptcp_sock *msk);</span>
-<span id="L1183"><span class="lineNum">    1183</span>                 :             : u8 mptcp_pm_get_limit_add_addr_accepted(const struct mptcp_sock *msk);</span>
-<span id="L1184"><span class="lineNum">    1184</span>                 :             : u8 mptcp_pm_get_limit_extra_subflows(const struct mptcp_sock *msk);</span>
-<span id="L1185"><span class="lineNum">    1185</span>                 :             : </span>
-<span id="L1186"><span class="lineNum">    1186</span>                 :             : /* called under PM lock */</span>
-<span id="L1187"><span class="lineNum">    1187</span>                 :<span class="tlaUNC">           0 : static inline void __mptcp_pm_close_subflow(struct mptcp_sock *msk)</span></span>
-<span id="L1188"><span class="lineNum">    1188</span>                 :             : {</span>
-<span id="L1189"><span class="lineNum">    1189</span>         [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span>]:<span class="tlaUNC">           0 :         if (--msk-&gt;pm.extra_subflows &lt; mptcp_pm_get_limit_extra_subflows(msk))</span></span>
-<span id="L1190"><span class="lineNum">    1190</span>                 :<span class="tlaUNC">           0 :                 WRITE_ONCE(msk-&gt;pm.accept_subflow, true);</span></span>
-<span id="L1191"><span class="lineNum">    1191</span>                 :<span class="tlaUNC">           0 : }</span></span>
-<span id="L1192"><span class="lineNum">    1192</span>                 :             : </span>
-<span id="L1193"><span class="lineNum">    1193</span>                 :<span class="tlaUNC">           0 : static inline void mptcp_pm_close_subflow(struct mptcp_sock *msk)</span></span>
-<span id="L1194"><span class="lineNum">    1194</span>                 :             : {</span>
-<span id="L1195"><span class="lineNum">    1195</span>                 :<span class="tlaUNC">           0 :         spin_lock_bh(&amp;msk-&gt;pm.lock);</span></span>
-<span id="L1196"><span class="lineNum">    1196</span>                 :<span class="tlaUNC">           0 :         __mptcp_pm_close_subflow(msk);</span></span>
-<span id="L1197"><span class="lineNum">    1197</span>                 :<span class="tlaUNC">           0 :         spin_unlock_bh(&amp;msk-&gt;pm.lock);</span></span>
-<span id="L1198"><span class="lineNum">    1198</span>                 :<span class="tlaUNC">           0 : }</span></span>
-<span id="L1199"><span class="lineNum">    1199</span>                 :             : </span>
-<span id="L1200"><span class="lineNum">    1200</span>                 :<span class="tlaUNC">           0 : static inline bool mptcp_pm_add_addr_c_flag_case(struct mptcp_sock *msk)</span></span>
-<span id="L1201"><span class="lineNum">    1201</span>                 :             : {</span>
-<span id="L1202"><span class="lineNum">    1202</span>         [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span>]:<span class="tlaUNC">           0 :         return READ_ONCE(msk-&gt;pm.remote_deny_join_id0) &amp;&amp;</span></span>
-<span id="L1203"><span class="lineNum">    1203</span>   [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span><span class="tlaUNC" title="Branch 2 was not executed"> # </span><span class="tlaUNC" title="Branch 3 was not executed"> # </span>]:<span class="tlaUNC">           0 :                msk-&gt;pm.local_addr_used == 0 &amp;&amp;</span></span>
+<span id="L1183"><span class="lineNum">    1183</span>                 :             : u8 mptcp_pm_get_endp_fullmesh_max(const struct mptcp_sock *msk);</span>
+<span id="L1184"><span class="lineNum">    1184</span>                 :             : u8 mptcp_pm_get_limit_add_addr_accepted(const struct mptcp_sock *msk);</span>
+<span id="L1185"><span class="lineNum">    1185</span>                 :             : u8 mptcp_pm_get_limit_extra_subflows(const struct mptcp_sock *msk);</span>
+<span id="L1186"><span class="lineNum">    1186</span>                 :             : </span>
+<span id="L1187"><span class="lineNum">    1187</span>                 :             : /* called under PM lock */</span>
+<span id="L1188"><span class="lineNum">    1188</span>                 :<span class="tlaUNC">           0 : static inline void __mptcp_pm_close_subflow(struct mptcp_sock *msk)</span></span>
+<span id="L1189"><span class="lineNum">    1189</span>                 :             : {</span>
+<span id="L1190"><span class="lineNum">    1190</span>         [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span>]:<span class="tlaUNC">           0 :         if (--msk-&gt;pm.extra_subflows &lt; mptcp_pm_get_limit_extra_subflows(msk))</span></span>
+<span id="L1191"><span class="lineNum">    1191</span>                 :<span class="tlaUNC">           0 :                 WRITE_ONCE(msk-&gt;pm.accept_subflow, true);</span></span>
+<span id="L1192"><span class="lineNum">    1192</span>                 :<span class="tlaUNC">           0 : }</span></span>
+<span id="L1193"><span class="lineNum">    1193</span>                 :             : </span>
+<span id="L1194"><span class="lineNum">    1194</span>                 :<span class="tlaUNC">           0 : static inline void mptcp_pm_close_subflow(struct mptcp_sock *msk)</span></span>
+<span id="L1195"><span class="lineNum">    1195</span>                 :             : {</span>
+<span id="L1196"><span class="lineNum">    1196</span>                 :<span class="tlaUNC">           0 :         spin_lock_bh(&amp;msk-&gt;pm.lock);</span></span>
+<span id="L1197"><span class="lineNum">    1197</span>                 :<span class="tlaUNC">           0 :         __mptcp_pm_close_subflow(msk);</span></span>
+<span id="L1198"><span class="lineNum">    1198</span>                 :<span class="tlaUNC">           0 :         spin_unlock_bh(&amp;msk-&gt;pm.lock);</span></span>
+<span id="L1199"><span class="lineNum">    1199</span>                 :<span class="tlaUNC">           0 : }</span></span>
+<span id="L1200"><span class="lineNum">    1200</span>                 :             : </span>
+<span id="L1201"><span class="lineNum">    1201</span>                 :<span class="tlaUNC">           0 : static inline bool mptcp_pm_add_addr_c_flag_case(struct mptcp_sock *msk)</span></span>
+<span id="L1202"><span class="lineNum">    1202</span>                 :             : {</span>
+<span id="L1203"><span class="lineNum">    1203</span>         [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span>]:<span class="tlaUNC">           0 :         return READ_ONCE(msk-&gt;pm.remote_deny_join_id0) &amp;&amp;</span></span>
+<span id="L1204"><span class="lineNum">    1204</span>   [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span><span class="tlaUNC" title="Branch 2 was not executed"> # </span><span class="tlaUNC" title="Branch 3 was not executed"> # </span>]:<span class="tlaUNC">           0 :                msk-&gt;pm.local_addr_used == 0 &amp;&amp;</span></span>
 <span class="lineNum">        </span>         [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span>]
-<span id="L1204"><span class="lineNum">    1204</span>   [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span><span class="tlaUNC" title="Branch 2 was not executed"> # </span><span class="tlaUNC" title="Branch 3 was not executed"> # </span>]:<span class="tlaUNC">           0 :                mptcp_pm_get_limit_add_addr_accepted(msk) == 0 &amp;&amp;</span></span>
-<span id="L1205"><span class="lineNum">    1205</span>         [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span>]:<span class="tlaUNC">           0 :                msk-&gt;pm.extra_subflows &lt; mptcp_pm_get_limit_extra_subflows(msk);</span></span>
-<span id="L1206"><span class="lineNum">    1206</span>                 :             : }</span>
-<span id="L1207"><span class="lineNum">    1207</span>                 :             : </span>
-<span id="L1208"><span class="lineNum">    1208</span>                 :             : void mptcp_sockopt_sync_locked(struct mptcp_sock *msk, struct sock *ssk);</span>
-<span id="L1209"><span class="lineNum">    1209</span>                 :             : </span>
-<span id="L1210"><span class="lineNum">    1210</span>                 :<span class="tlaUNC">           0 : static inline struct mptcp_ext *mptcp_get_ext(const struct sk_buff *skb)</span></span>
-<span id="L1211"><span class="lineNum">    1211</span>                 :             : {</span>
-<span id="L1212"><span class="lineNum">    1212</span>   [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span><span class="tlaUNC" title="Branch 2 was not executed"> # </span><span class="tlaUNC" title="Branch 3 was not executed"> # </span> :<span class="tlaUNC">           0 :         return (struct mptcp_ext *)skb_ext_find(skb, SKB_EXT_MPTCP);</span></span>
-<span class="lineNum">        </span>    <span class="tlaUNC" title="Branch 4 was not executed"> # </span><span class="tlaUNC" title="Branch 5 was not executed"> # </span><span class="tlaUNC" title="Branch 6 was not executed"> # </span><span class="tlaUNC" title="Branch 7 was not executed"> # </span>]
-<span class="lineNum">        </span>   [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span><span class="tlaUNC" title="Branch 2 was not executed"> # </span><span class="tlaUNC" title="Branch 3 was not executed"> # </span> 
+<span id="L1205"><span class="lineNum">    1205</span>   [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span><span class="tlaUNC" title="Branch 2 was not executed"> # </span><span class="tlaUNC" title="Branch 3 was not executed"> # </span>]:<span class="tlaUNC">           0 :                mptcp_pm_get_limit_add_addr_accepted(msk) == 0 &amp;&amp;</span></span>
+<span id="L1206"><span class="lineNum">    1206</span>         [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span>]:<span class="tlaUNC">           0 :                msk-&gt;pm.extra_subflows &lt; mptcp_pm_get_limit_extra_subflows(msk);</span></span>
+<span id="L1207"><span class="lineNum">    1207</span>                 :             : }</span>
+<span id="L1208"><span class="lineNum">    1208</span>                 :             : </span>
+<span id="L1209"><span class="lineNum">    1209</span>                 :             : void mptcp_sockopt_sync_locked(struct mptcp_sock *msk, struct sock *ssk);</span>
+<span id="L1210"><span class="lineNum">    1210</span>                 :             : </span>
+<span id="L1211"><span class="lineNum">    1211</span>                 :<span class="tlaUNC">           0 : static inline struct mptcp_ext *mptcp_get_ext(const struct sk_buff *skb)</span></span>
+<span id="L1212"><span class="lineNum">    1212</span>                 :             : {</span>
+<span id="L1213"><span class="lineNum">    1213</span>   [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span><span class="tlaUNC" title="Branch 2 was not executed"> # </span><span class="tlaUNC" title="Branch 3 was not executed"> # </span> :<span class="tlaUNC">           0 :         return (struct mptcp_ext *)skb_ext_find(skb, SKB_EXT_MPTCP);</span></span>
 <span class="lineNum">        </span> <span class="tlaUNC" title="Branch 4 was not executed"> # </span><span class="tlaUNC" title="Branch 5 was not executed"> # </span><span class="tlaUNC" title="Branch 6 was not executed"> # </span><span class="tlaUNC" title="Branch 7 was not executed"> # </span><span class="tlaUNC" title="Branch 8 was not executed"> # </span> 
-<span class="lineNum">        </span>  <span class="tlaUNC" title="Branch 9 was not executed"> # </span>][<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span><span class="tlaUNC" title="Branch 2 was not executed"> # </span> 
-<span class="lineNum">        </span> <span class="tlaUNC" title="Branch 3 was not executed"> # </span><span class="tlaUNC" title="Branch 4 was not executed"> # </span><span class="tlaUNC" title="Branch 5 was not executed"> # </span><span class="tlaUNC" title="Branch 6 was not executed"> # </span><span class="tlaUNC" title="Branch 7 was not executed"> # </span> 
-<span class="lineNum">        </span> <span class="tlaUNC" title="Branch 8 was not executed"> # </span><span class="tlaUNC" title="Branch 9 was not executed"> # </span><span class="tlaUNC" title="Branch 10 was not executed"> # </span><span class="tlaUNC" title="Branch 11 was not executed"> # </span><span class="tlaUNC" title="Branch 12 was not executed"> # </span> 
+<span class="lineNum">        </span>    <span class="tlaUNC" title="Branch 9 was not executed"> # </span><span class="tlaUNC" title="Branch 10 was not executed"> # </span><span class="tlaUNC" title="Branch 11 was not executed"> # </span><span class="tlaUNC" title="Branch 12 was not executed"> # </span> 
 <span class="lineNum">        </span>  <span class="tlaUNC" title="Branch 13 was not executed"> # </span>][<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span><span class="tlaUNC" title="Branch 2 was not executed"> # </span> 
-<span class="lineNum">        </span>       <span class="tlaUNC" title="Branch 3 was not executed"> # </span><span class="tlaUNC" title="Branch 4 was not executed"> # </span><span class="tlaUNC" title="Branch 5 was not executed"> # </span>]
+<span class="lineNum">        </span>    <span class="tlaUNC" title="Branch 3 was not executed"> # </span><span class="tlaUNC" title="Branch 4 was not executed"> # </span><span class="tlaUNC" title="Branch 5 was not executed"> # </span><span class="tlaUNC" title="Branch 6 was not executed"> # </span> 
+<span class="lineNum">        </span>  <span class="tlaUNC" title="Branch 7 was not executed"> # </span>][<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span><span class="tlaUNC" title="Branch 2 was not executed"> # </span> 
+<span class="lineNum">        </span> <span class="tlaUNC" title="Branch 3 was not executed"> # </span><span class="tlaUNC" title="Branch 4 was not executed"> # </span><span class="tlaUNC" title="Branch 5 was not executed"> # </span><span class="tlaUNC" title="Branch 6 was not executed"> # </span><span class="tlaUNC" title="Branch 7 was not executed"> # </span> 
+<span class="lineNum">        </span>  <span class="tlaUNC" title="Branch 8 was not executed"> # </span><span class="tlaUNC" title="Branch 9 was not executed"> # </span>][<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span> 
+<span class="lineNum">        </span>    <span class="tlaUNC" title="Branch 2 was not executed"> # </span><span class="tlaUNC" title="Branch 3 was not executed"> # </span><span class="tlaUNC" title="Branch 4 was not executed"> # </span><span class="tlaUNC" title="Branch 5 was not executed"> # </span>]
 <span class="lineNum">        </span>   [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span><span class="tlaUNC" title="Branch 2 was not executed"> # </span><span class="tlaUNC" title="Branch 3 was not executed"> # </span>]
-<span id="L1213"><span class="lineNum">    1213</span>                 :             : }</span>
-<span id="L1214"><span class="lineNum">    1214</span>                 :             : </span>
-<span id="L1215"><span class="lineNum">    1215</span>                 :             : void mptcp_diag_subflow_init(struct tcp_ulp_ops *ops);</span>
-<span id="L1216"><span class="lineNum">    1216</span>                 :             : </span>
-<span id="L1217"><span class="lineNum">    1217</span>                 :<span class="tlaUNC">           0 : static inline bool __mptcp_check_fallback(const struct mptcp_sock *msk)</span></span>
-<span id="L1218"><span class="lineNum">    1218</span>                 :             : {</span>
-<span id="L1219"><span class="lineNum">    1219</span>   [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span><span class="tlaUNC" title="Branch 2 was not executed"> # </span><span class="tlaUNC" title="Branch 3 was not executed"> # </span> :<span class="tlaUNC">           0 :         return test_bit(MPTCP_FALLBACK_DONE, &amp;msk-&gt;flags);</span></span>
+<span id="L1214"><span class="lineNum">    1214</span>                 :             : }</span>
+<span id="L1215"><span class="lineNum">    1215</span>                 :             : </span>
+<span id="L1216"><span class="lineNum">    1216</span>                 :             : void mptcp_diag_subflow_init(struct tcp_ulp_ops *ops);</span>
+<span id="L1217"><span class="lineNum">    1217</span>                 :             : </span>
+<span id="L1218"><span class="lineNum">    1218</span>                 :<span class="tlaUNC">           0 : static inline bool __mptcp_check_fallback(const struct mptcp_sock *msk)</span></span>
+<span id="L1219"><span class="lineNum">    1219</span>                 :             : {</span>
+<span id="L1220"><span class="lineNum">    1220</span>   [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span><span class="tlaUNC" title="Branch 2 was not executed"> # </span><span class="tlaUNC" title="Branch 3 was not executed"> # </span> :<span class="tlaUNC">           0 :         return test_bit(MPTCP_FALLBACK_DONE, &amp;msk-&gt;flags);</span></span>
 <span class="lineNum">        </span>          <span class="tlaUNC" title="Branch 4 was not executed"> # </span><span class="tlaUNC" title="Branch 5 was not executed"> # </span>]
-<span id="L1220"><span class="lineNum">    1220</span>                 :             : }</span>
-<span id="L1221"><span class="lineNum">    1221</span>                 :             : </span>
-<span id="L1222"><span class="lineNum">    1222</span>                 :<span class="tlaUNC">           0 : static inline bool mptcp_check_fallback(const struct sock *sk)</span></span>
-<span id="L1223"><span class="lineNum">    1223</span>                 :             : {</span>
-<span id="L1224"><span class="lineNum">    1224</span>                 :<span class="tlaUNC">           0 :         struct mptcp_subflow_context *subflow = mptcp_subflow_ctx(sk);</span></span>
-<span id="L1225"><span class="lineNum">    1225</span>         [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span>]:<span class="tlaUNC">           0 :         struct mptcp_sock *msk = mptcp_sk(subflow-&gt;conn);</span></span>
-<span id="L1226"><span class="lineNum">    1226</span>                 :             : </span>
-<span id="L1227"><span class="lineNum">    1227</span>                 :<span class="tlaUNC">           0 :         return __mptcp_check_fallback(msk);</span></span>
-<span id="L1228"><span class="lineNum">    1228</span>                 :             : }</span>
-<span id="L1229"><span class="lineNum">    1229</span>                 :             : </span>
-<span id="L1230"><span class="lineNum">    1230</span>                 :<span class="tlaUNC">           0 : static inline bool __mptcp_has_initial_subflow(const struct mptcp_sock *msk)</span></span>
-<span id="L1231"><span class="lineNum">    1231</span>                 :             : {</span>
-<span id="L1232"><span class="lineNum">    1232</span>                 :<span class="tlaUNC">           0 :         struct sock *ssk = READ_ONCE(msk-&gt;first);</span></span>
-<span id="L1233"><span class="lineNum">    1233</span>                 :             : </span>
-<span id="L1234"><span class="lineNum">    1234</span>   [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span><span class="tlaUNC" title="Branch 2 was not executed"> # </span><span class="tlaUNC" title="Branch 3 was not executed"> # </span> :<span class="tlaUNC">           0 :         return ssk &amp;&amp; ((1 &lt;&lt; inet_sk_state_load(ssk)) &amp;</span></span>
-<span class="lineNum">        </span>          <span class="tlaUNC" title="Branch 4 was not executed"> # </span><span class="tlaUNC" title="Branch 5 was not executed"> # </span>]
-<span class="lineNum">        </span>   [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span><span class="tlaUNC" title="Branch 2 was not executed"> # </span><span class="tlaUNC" title="Branch 3 was not executed"> # </span>]
-<span id="L1235"><span class="lineNum">    1235</span>                 :             :                        (TCPF_ESTABLISHED | TCPF_SYN_SENT |</span>
-<span id="L1236"><span class="lineNum">    1236</span>                 :             :                         TCPF_SYN_RECV | TCPF_LISTEN));</span>
-<span id="L1237"><span class="lineNum">    1237</span>                 :             : }</span>
-<span id="L1238"><span class="lineNum">    1238</span>                 :             : </span>
-<span id="L1239"><span class="lineNum">    1239</span>                 :             : bool __mptcp_try_fallback(struct mptcp_sock *msk, int fb_mib);</span>
-<span id="L1240"><span class="lineNum">    1240</span>                 :             : </span>
-<span id="L1241"><span class="lineNum">    1241</span>                 :<span class="tlaUNC">           0 : static inline bool mptcp_try_fallback(struct sock *ssk, int fb_mib)</span></span>
-<span id="L1242"><span class="lineNum">    1242</span>                 :             : {</span>
-<span id="L1243"><span class="lineNum">    1243</span>                 :<span class="tlaUNC">           0 :         struct mptcp_subflow_context *subflow = mptcp_subflow_ctx(ssk);</span></span>
-<span id="L1244"><span class="lineNum">    1244</span>                 :<span class="tlaUNC">           0 :         struct sock *sk = subflow-&gt;conn;</span></span>
-<span id="L1245"><span class="lineNum">    1245</span>                 :<span class="tlaUNC">           0 :         struct mptcp_sock *msk;</span></span>
-<span id="L1246"><span class="lineNum">    1246</span>                 :             : </span>
-<span id="L1247"><span class="lineNum">    1247</span>         [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span>]:<span class="tlaUNC">           0 :         msk = mptcp_sk(sk);</span></span>
-<span id="L1248"><span class="lineNum">    1248</span>         [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span>]:<span class="tlaUNC">           0 :         if (!__mptcp_try_fallback(msk, fb_mib))</span></span>
-<span id="L1249"><span class="lineNum">    1249</span>                 :             :                 return false;</span>
-<span id="L1250"><span class="lineNum">    1250</span>   [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span><span class="tlaUNC" title="Branch 2 was not executed"> # </span><span class="tlaUNC" title="Branch 3 was not executed"> # </span> :<span class="tlaUNC">           0 :         if (READ_ONCE(msk-&gt;snd_data_fin_enable) &amp;&amp; !(ssk-&gt;sk_shutdown &amp; SEND_SHUTDOWN)) {</span></span>
+<span id="L1221"><span class="lineNum">    1221</span>                 :             : }</span>
+<span id="L1222"><span class="lineNum">    1222</span>                 :             : </span>
+<span id="L1223"><span class="lineNum">    1223</span>                 :<span class="tlaUNC">           0 : static inline bool mptcp_check_fallback(const struct sock *sk)</span></span>
+<span id="L1224"><span class="lineNum">    1224</span>                 :             : {</span>
+<span id="L1225"><span class="lineNum">    1225</span>                 :<span class="tlaUNC">           0 :         struct mptcp_subflow_context *subflow = mptcp_subflow_ctx(sk);</span></span>
+<span id="L1226"><span class="lineNum">    1226</span>         [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span>]:<span class="tlaUNC">           0 :         struct mptcp_sock *msk = mptcp_sk(subflow-&gt;conn);</span></span>
+<span id="L1227"><span class="lineNum">    1227</span>                 :             : </span>
+<span id="L1228"><span class="lineNum">    1228</span>                 :<span class="tlaUNC">           0 :         return __mptcp_check_fallback(msk);</span></span>
+<span id="L1229"><span class="lineNum">    1229</span>                 :             : }</span>
+<span id="L1230"><span class="lineNum">    1230</span>                 :             : </span>
+<span id="L1231"><span class="lineNum">    1231</span>                 :<span class="tlaUNC">           0 : static inline bool __mptcp_has_initial_subflow(const struct mptcp_sock *msk)</span></span>
+<span id="L1232"><span class="lineNum">    1232</span>                 :             : {</span>
+<span id="L1233"><span class="lineNum">    1233</span>                 :<span class="tlaUNC">           0 :         struct sock *ssk = READ_ONCE(msk-&gt;first);</span></span>
+<span id="L1234"><span class="lineNum">    1234</span>                 :             : </span>
+<span id="L1235"><span class="lineNum">    1235</span>   [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span><span class="tlaUNC" title="Branch 2 was not executed"> # </span><span class="tlaUNC" title="Branch 3 was not executed"> # </span> :<span class="tlaUNC">           0 :         return ssk &amp;&amp; ((1 &lt;&lt; inet_sk_state_load(ssk)) &amp;</span></span>
 <span class="lineNum">        </span>          <span class="tlaUNC" title="Branch 4 was not executed"> # </span><span class="tlaUNC" title="Branch 5 was not executed"> # </span>]
 <span class="lineNum">        </span>   [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span><span class="tlaUNC" title="Branch 2 was not executed"> # </span><span class="tlaUNC" title="Branch 3 was not executed"> # </span>]
-<span id="L1251"><span class="lineNum">    1251</span>                 :<span class="tlaUNC">           0 :                 gfp_t saved_allocation = ssk-&gt;sk_allocation;</span></span>
-<span id="L1252"><span class="lineNum">    1252</span>                 :             : </span>
-<span id="L1253"><span class="lineNum">    1253</span>                 :             :                 /* we are in a atomic (BH) scope, override ssk default for data</span>
-<span id="L1254"><span class="lineNum">    1254</span>                 :             :                  * fin allocation</span>
-<span id="L1255"><span class="lineNum">    1255</span>                 :             :                  */</span>
-<span id="L1256"><span class="lineNum">    1256</span>                 :<span class="tlaUNC">           0 :                 ssk-&gt;sk_allocation = GFP_ATOMIC;</span></span>
-<span id="L1257"><span class="lineNum">    1257</span>                 :<span class="tlaUNC">           0 :                 ssk-&gt;sk_shutdown |= SEND_SHUTDOWN;</span></span>
-<span id="L1258"><span class="lineNum">    1258</span>                 :<span class="tlaUNC">           0 :                 tcp_shutdown(ssk, SEND_SHUTDOWN);</span></span>
-<span id="L1259"><span class="lineNum">    1259</span>                 :<span class="tlaUNC">           0 :                 ssk-&gt;sk_allocation = saved_allocation;</span></span>
-<span id="L1260"><span class="lineNum">    1260</span>                 :             :         }</span>
-<span id="L1261"><span class="lineNum">    1261</span>                 :             :         return true;</span>
-<span id="L1262"><span class="lineNum">    1262</span>                 :             : }</span>
-<span id="L1263"><span class="lineNum">    1263</span>                 :             : </span>
-<span id="L1264"><span class="lineNum">    1264</span>                 :<span class="tlaUNC">           0 : static inline void mptcp_early_fallback(struct mptcp_sock *msk,</span></span>
-<span id="L1265"><span class="lineNum">    1265</span>                 :             :                                         struct mptcp_subflow_context *subflow,</span>
-<span id="L1266"><span class="lineNum">    1266</span>                 :             :                                         int fb_mib)</span>
-<span id="L1267"><span class="lineNum">    1267</span>                 :             : {</span>
-<span id="L1268"><span class="lineNum">    1268</span>                 :<span class="tlaUNC">           0 :         subflow-&gt;request_mptcp = 0;</span></span>
-<span id="L1269"><span class="lineNum">    1269</span>         [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span>]:<span class="tlaUNC">           0 :         WARN_ON_ONCE(!__mptcp_try_fallback(msk, fb_mib));</span></span>
-<span id="L1270"><span class="lineNum">    1270</span>                 :<span class="tlaUNC">           0 : }</span></span>
-<span id="L1271"><span class="lineNum">    1271</span>                 :             : </span>
-<span id="L1272"><span class="lineNum">    1272</span>                 :<span class="tlaUNC">           0 : static inline bool mptcp_check_infinite_map(struct sk_buff *skb)</span></span>
-<span id="L1273"><span class="lineNum">    1273</span>                 :             : {</span>
-<span id="L1274"><span class="lineNum">    1274</span>                 :<span class="tlaUNC">           0 :         struct mptcp_ext *mpext;</span></span>
-<span id="L1275"><span class="lineNum">    1275</span>                 :             : </span>
-<span id="L1276"><span class="lineNum">    1276</span>         [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span>]:<span class="tlaUNC">           0 :         mpext = skb ? mptcp_get_ext(skb) : NULL;</span></span>
-<span id="L1277"><span class="lineNum">    1277</span>   [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span><span class="tlaUNC" title="Branch 2 was not executed"> # </span><span class="tlaUNC" title="Branch 3 was not executed"> # </span>]:<span class="tlaUNC">           0 :         if (mpext &amp;&amp; mpext-&gt;infinite_map)</span></span>
-<span id="L1278"><span class="lineNum">    1278</span>                 :<span class="tlaUNC">           0 :                 return true;</span></span>
-<span id="L1279"><span class="lineNum">    1279</span>                 :             : </span>
-<span id="L1280"><span class="lineNum">    1280</span>                 :             :         return false;</span>
-<span id="L1281"><span class="lineNum">    1281</span>                 :             : }</span>
-<span id="L1282"><span class="lineNum">    1282</span>                 :             : </span>
-<span id="L1283"><span class="lineNum">    1283</span>                 :<span class="tlaUNC">           0 : static inline bool is_active_ssk(struct mptcp_subflow_context *subflow)</span></span>
-<span id="L1284"><span class="lineNum">    1284</span>                 :             : {</span>
-<span id="L1285"><span class="lineNum">    1285</span>   [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span><span class="tlaUNC" title="Branch 2 was not executed"> # </span><span class="tlaUNC" title="Branch 3 was not executed"> # </span>]:<span class="tlaUNC">           0 :         return (subflow-&gt;request_mptcp || subflow-&gt;request_join);</span></span>
-<span id="L1286"><span class="lineNum">    1286</span>                 :             : }</span>
-<span id="L1287"><span class="lineNum">    1287</span>                 :             : </span>
-<span id="L1288"><span class="lineNum">    1288</span>                 :<span class="tlaUNC">           0 : static inline bool subflow_simultaneous_connect(struct sock *sk)</span></span>
-<span id="L1289"><span class="lineNum">    1289</span>                 :             : {</span>
-<span id="L1290"><span class="lineNum">    1290</span>                 :<span class="tlaUNC">           0 :         struct mptcp_subflow_context *subflow = mptcp_subflow_ctx(sk);</span></span>
-<span id="L1291"><span class="lineNum">    1291</span>                 :             : </span>
-<span id="L1292"><span class="lineNum">    1292</span>                 :<span class="tlaUNC">           0 :         return (1 &lt;&lt; sk-&gt;sk_state) &amp;</span></span>
-<span id="L1293"><span class="lineNum">    1293</span>                 :             :                (TCPF_ESTABLISHED | TCPF_FIN_WAIT1 | TCPF_FIN_WAIT2 | TCPF_CLOSING) &amp;&amp;</span>
-<span id="L1294"><span class="lineNum">    1294</span>   [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span><span class="tlaUNC" title="Branch 2 was not executed"> # </span><span class="tlaUNC" title="Branch 3 was not executed"> # </span>]:<span class="tlaUNC">           0 :                is_active_ssk(subflow) &amp;&amp;</span></span>
+<span id="L1236"><span class="lineNum">    1236</span>                 :             :                        (TCPF_ESTABLISHED | TCPF_SYN_SENT |</span>
+<span id="L1237"><span class="lineNum">    1237</span>                 :             :                         TCPF_SYN_RECV | TCPF_LISTEN));</span>
+<span id="L1238"><span class="lineNum">    1238</span>                 :             : }</span>
+<span id="L1239"><span class="lineNum">    1239</span>                 :             : </span>
+<span id="L1240"><span class="lineNum">    1240</span>                 :             : bool __mptcp_try_fallback(struct mptcp_sock *msk, int fb_mib);</span>
+<span id="L1241"><span class="lineNum">    1241</span>                 :             : </span>
+<span id="L1242"><span class="lineNum">    1242</span>                 :<span class="tlaUNC">           0 : static inline bool mptcp_try_fallback(struct sock *ssk, int fb_mib)</span></span>
+<span id="L1243"><span class="lineNum">    1243</span>                 :             : {</span>
+<span id="L1244"><span class="lineNum">    1244</span>                 :<span class="tlaUNC">           0 :         struct mptcp_subflow_context *subflow = mptcp_subflow_ctx(ssk);</span></span>
+<span id="L1245"><span class="lineNum">    1245</span>                 :<span class="tlaUNC">           0 :         struct sock *sk = subflow-&gt;conn;</span></span>
+<span id="L1246"><span class="lineNum">    1246</span>                 :<span class="tlaUNC">           0 :         struct mptcp_sock *msk;</span></span>
+<span id="L1247"><span class="lineNum">    1247</span>                 :             : </span>
+<span id="L1248"><span class="lineNum">    1248</span>         [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span>]:<span class="tlaUNC">           0 :         msk = mptcp_sk(sk);</span></span>
+<span id="L1249"><span class="lineNum">    1249</span>         [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span>]:<span class="tlaUNC">           0 :         if (!__mptcp_try_fallback(msk, fb_mib))</span></span>
+<span id="L1250"><span class="lineNum">    1250</span>                 :             :                 return false;</span>
+<span id="L1251"><span class="lineNum">    1251</span>   [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span><span class="tlaUNC" title="Branch 2 was not executed"> # </span><span class="tlaUNC" title="Branch 3 was not executed"> # </span> :<span class="tlaUNC">           0 :         if (READ_ONCE(msk-&gt;snd_data_fin_enable) &amp;&amp; !(ssk-&gt;sk_shutdown &amp; SEND_SHUTDOWN)) {</span></span>
+<span class="lineNum">        </span>          <span class="tlaUNC" title="Branch 4 was not executed"> # </span><span class="tlaUNC" title="Branch 5 was not executed"> # </span>]
+<span class="lineNum">        </span>   [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span><span class="tlaUNC" title="Branch 2 was not executed"> # </span><span class="tlaUNC" title="Branch 3 was not executed"> # </span>]
+<span id="L1252"><span class="lineNum">    1252</span>                 :<span class="tlaUNC">           0 :                 gfp_t saved_allocation = ssk-&gt;sk_allocation;</span></span>
+<span id="L1253"><span class="lineNum">    1253</span>                 :             : </span>
+<span id="L1254"><span class="lineNum">    1254</span>                 :             :                 /* we are in a atomic (BH) scope, override ssk default for data</span>
+<span id="L1255"><span class="lineNum">    1255</span>                 :             :                  * fin allocation</span>
+<span id="L1256"><span class="lineNum">    1256</span>                 :             :                  */</span>
+<span id="L1257"><span class="lineNum">    1257</span>                 :<span class="tlaUNC">           0 :                 ssk-&gt;sk_allocation = GFP_ATOMIC;</span></span>
+<span id="L1258"><span class="lineNum">    1258</span>                 :<span class="tlaUNC">           0 :                 ssk-&gt;sk_shutdown |= SEND_SHUTDOWN;</span></span>
+<span id="L1259"><span class="lineNum">    1259</span>                 :<span class="tlaUNC">           0 :                 tcp_shutdown(ssk, SEND_SHUTDOWN);</span></span>
+<span id="L1260"><span class="lineNum">    1260</span>                 :<span class="tlaUNC">           0 :                 ssk-&gt;sk_allocation = saved_allocation;</span></span>
+<span id="L1261"><span class="lineNum">    1261</span>                 :             :         }</span>
+<span id="L1262"><span class="lineNum">    1262</span>                 :             :         return true;</span>
+<span id="L1263"><span class="lineNum">    1263</span>                 :             : }</span>
+<span id="L1264"><span class="lineNum">    1264</span>                 :             : </span>
+<span id="L1265"><span class="lineNum">    1265</span>                 :<span class="tlaUNC">           0 : static inline void mptcp_early_fallback(struct mptcp_sock *msk,</span></span>
+<span id="L1266"><span class="lineNum">    1266</span>                 :             :                                         struct mptcp_subflow_context *subflow,</span>
+<span id="L1267"><span class="lineNum">    1267</span>                 :             :                                         int fb_mib)</span>
+<span id="L1268"><span class="lineNum">    1268</span>                 :             : {</span>
+<span id="L1269"><span class="lineNum">    1269</span>                 :<span class="tlaUNC">           0 :         subflow-&gt;request_mptcp = 0;</span></span>
+<span id="L1270"><span class="lineNum">    1270</span>         [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span>]:<span class="tlaUNC">           0 :         WARN_ON_ONCE(!__mptcp_try_fallback(msk, fb_mib));</span></span>
+<span id="L1271"><span class="lineNum">    1271</span>                 :<span class="tlaUNC">           0 : }</span></span>
+<span id="L1272"><span class="lineNum">    1272</span>                 :             : </span>
+<span id="L1273"><span class="lineNum">    1273</span>                 :<span class="tlaUNC">           0 : static inline bool mptcp_check_infinite_map(struct sk_buff *skb)</span></span>
+<span id="L1274"><span class="lineNum">    1274</span>                 :             : {</span>
+<span id="L1275"><span class="lineNum">    1275</span>                 :<span class="tlaUNC">           0 :         struct mptcp_ext *mpext;</span></span>
+<span id="L1276"><span class="lineNum">    1276</span>                 :             : </span>
+<span id="L1277"><span class="lineNum">    1277</span>         [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span>]:<span class="tlaUNC">           0 :         mpext = skb ? mptcp_get_ext(skb) : NULL;</span></span>
+<span id="L1278"><span class="lineNum">    1278</span>   [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span><span class="tlaUNC" title="Branch 2 was not executed"> # </span><span class="tlaUNC" title="Branch 3 was not executed"> # </span>]:<span class="tlaUNC">           0 :         if (mpext &amp;&amp; mpext-&gt;infinite_map)</span></span>
+<span id="L1279"><span class="lineNum">    1279</span>                 :<span class="tlaUNC">           0 :                 return true;</span></span>
+<span id="L1280"><span class="lineNum">    1280</span>                 :             : </span>
+<span id="L1281"><span class="lineNum">    1281</span>                 :             :         return false;</span>
+<span id="L1282"><span class="lineNum">    1282</span>                 :             : }</span>
+<span id="L1283"><span class="lineNum">    1283</span>                 :             : </span>
+<span id="L1284"><span class="lineNum">    1284</span>                 :<span class="tlaUNC">           0 : static inline bool is_active_ssk(struct mptcp_subflow_context *subflow)</span></span>
+<span id="L1285"><span class="lineNum">    1285</span>                 :             : {</span>
+<span id="L1286"><span class="lineNum">    1286</span>   [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span><span class="tlaUNC" title="Branch 2 was not executed"> # </span><span class="tlaUNC" title="Branch 3 was not executed"> # </span>]:<span class="tlaUNC">           0 :         return (subflow-&gt;request_mptcp || subflow-&gt;request_join);</span></span>
+<span id="L1287"><span class="lineNum">    1287</span>                 :             : }</span>
+<span id="L1288"><span class="lineNum">    1288</span>                 :             : </span>
+<span id="L1289"><span class="lineNum">    1289</span>                 :<span class="tlaUNC">           0 : static inline bool subflow_simultaneous_connect(struct sock *sk)</span></span>
+<span id="L1290"><span class="lineNum">    1290</span>                 :             : {</span>
+<span id="L1291"><span class="lineNum">    1291</span>                 :<span class="tlaUNC">           0 :         struct mptcp_subflow_context *subflow = mptcp_subflow_ctx(sk);</span></span>
+<span id="L1292"><span class="lineNum">    1292</span>                 :             : </span>
+<span id="L1293"><span class="lineNum">    1293</span>                 :<span class="tlaUNC">           0 :         return (1 &lt;&lt; sk-&gt;sk_state) &amp;</span></span>
+<span id="L1294"><span class="lineNum">    1294</span>                 :             :                (TCPF_ESTABLISHED | TCPF_FIN_WAIT1 | TCPF_FIN_WAIT2 | TCPF_CLOSING) &amp;&amp;</span>
+<span id="L1295"><span class="lineNum">    1295</span>   [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span><span class="tlaUNC" title="Branch 2 was not executed"> # </span><span class="tlaUNC" title="Branch 3 was not executed"> # </span>]:<span class="tlaUNC">           0 :                is_active_ssk(subflow) &amp;&amp;</span></span>
 <span class="lineNum">        </span>         [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span>]
-<span id="L1295"><span class="lineNum">    1295</span>         [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span>]:<span class="tlaUNC">           0 :                !subflow-&gt;conn_finished;</span></span>
-<span id="L1296"><span class="lineNum">    1296</span>                 :             : }</span>
-<span id="L1297"><span class="lineNum">    1297</span>                 :             : </span>
-<span id="L1298"><span class="lineNum">    1298</span>                 :             : #ifdef CONFIG_SYN_COOKIES</span>
-<span id="L1299"><span class="lineNum">    1299</span>                 :             : void subflow_init_req_cookie_join_save(const struct mptcp_subflow_request_sock *subflow_req,</span>
-<span id="L1300"><span class="lineNum">    1300</span>                 :             :                                        struct sk_buff *skb);</span>
-<span id="L1301"><span class="lineNum">    1301</span>                 :             : bool mptcp_token_join_cookie_init_state(struct mptcp_subflow_request_sock *subflow_req,</span>
-<span id="L1302"><span class="lineNum">    1302</span>                 :             :                                         struct sk_buff *skb);</span>
-<span id="L1303"><span class="lineNum">    1303</span>                 :             : void __init mptcp_join_cookie_init(void);</span>
-<span id="L1304"><span class="lineNum">    1304</span>                 :             : #else</span>
-<span id="L1305"><span class="lineNum">    1305</span>                 :             : static inline void</span>
-<span id="L1306"><span class="lineNum">    1306</span>                 :             : subflow_init_req_cookie_join_save(const struct mptcp_subflow_request_sock *subflow_req,</span>
-<span id="L1307"><span class="lineNum">    1307</span>                 :             :                                   struct sk_buff *skb) {}</span>
-<span id="L1308"><span class="lineNum">    1308</span>                 :             : static inline bool</span>
-<span id="L1309"><span class="lineNum">    1309</span>                 :             : mptcp_token_join_cookie_init_state(struct mptcp_subflow_request_sock *subflow_req,</span>
-<span id="L1310"><span class="lineNum">    1310</span>                 :             :                                    struct sk_buff *skb)</span>
-<span id="L1311"><span class="lineNum">    1311</span>                 :             : {</span>
-<span id="L1312"><span class="lineNum">    1312</span>                 :             :         return false;</span>
-<span id="L1313"><span class="lineNum">    1313</span>                 :             : }</span>
-<span id="L1314"><span class="lineNum">    1314</span>                 :             : </span>
-<span id="L1315"><span class="lineNum">    1315</span>                 :             : static inline void mptcp_join_cookie_init(void) {}</span>
-<span id="L1316"><span class="lineNum">    1316</span>                 :             : #endif</span>
-<span id="L1317"><span class="lineNum">    1317</span>                 :             : </span>
-<span id="L1318"><span class="lineNum">    1318</span>                 :             : #endif /* __MPTCP_PROTOCOL_H */</span>
+<span id="L1296"><span class="lineNum">    1296</span>         [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span>]:<span class="tlaUNC">           0 :                !subflow-&gt;conn_finished;</span></span>
+<span id="L1297"><span class="lineNum">    1297</span>                 :             : }</span>
+<span id="L1298"><span class="lineNum">    1298</span>                 :             : </span>
+<span id="L1299"><span class="lineNum">    1299</span>                 :             : #ifdef CONFIG_SYN_COOKIES</span>
+<span id="L1300"><span class="lineNum">    1300</span>                 :             : void subflow_init_req_cookie_join_save(const struct mptcp_subflow_request_sock *subflow_req,</span>
+<span id="L1301"><span class="lineNum">    1301</span>                 :             :                                        struct sk_buff *skb);</span>
+<span id="L1302"><span class="lineNum">    1302</span>                 :             : bool mptcp_token_join_cookie_init_state(struct mptcp_subflow_request_sock *subflow_req,</span>
+<span id="L1303"><span class="lineNum">    1303</span>                 :             :                                         struct sk_buff *skb);</span>
+<span id="L1304"><span class="lineNum">    1304</span>                 :             : void __init mptcp_join_cookie_init(void);</span>
+<span id="L1305"><span class="lineNum">    1305</span>                 :             : #else</span>
+<span id="L1306"><span class="lineNum">    1306</span>                 :             : static inline void</span>
+<span id="L1307"><span class="lineNum">    1307</span>                 :             : subflow_init_req_cookie_join_save(const struct mptcp_subflow_request_sock *subflow_req,</span>
+<span id="L1308"><span class="lineNum">    1308</span>                 :             :                                   struct sk_buff *skb) {}</span>
+<span id="L1309"><span class="lineNum">    1309</span>                 :             : static inline bool</span>
+<span id="L1310"><span class="lineNum">    1310</span>                 :             : mptcp_token_join_cookie_init_state(struct mptcp_subflow_request_sock *subflow_req,</span>
+<span id="L1311"><span class="lineNum">    1311</span>                 :             :                                    struct sk_buff *skb)</span>
+<span id="L1312"><span class="lineNum">    1312</span>                 :             : {</span>
+<span id="L1313"><span class="lineNum">    1313</span>                 :             :         return false;</span>
+<span id="L1314"><span class="lineNum">    1314</span>                 :             : }</span>
+<span id="L1315"><span class="lineNum">    1315</span>                 :             : </span>
+<span id="L1316"><span class="lineNum">    1316</span>                 :             : static inline void mptcp_join_cookie_init(void) {}</span>
+<span id="L1317"><span class="lineNum">    1317</span>                 :             : #endif</span>
+<span id="L1318"><span class="lineNum">    1318</span>                 :             : </span>
+<span id="L1319"><span class="lineNum">    1319</span>                 :             : #endif /* __MPTCP_PROTOCOL_H */</span>
         </pre>
               </td>
             </tr>
