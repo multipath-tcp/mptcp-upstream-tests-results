@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-11-25 10:28:28</td>
+            <td class="headerValue">2025-11-26 11:52:50</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -362,15 +362,15 @@
 <span id="L281"><span class="lineNum">     281</span>                 :<span class="tlaGNC">          48 :         return mptcp_pm_set_flags(info);</span></span>
 <span id="L282"><span class="lineNum">     282</span>                 :             : }</span>
 <span id="L283"><span class="lineNum">     283</span>                 :             : </span>
-<span id="L284"><span class="lineNum">     284</span>                 :<span class="tlaGNC">         445 : static void mptcp_nl_mcast_send(struct net *net, struct sk_buff *nlskb, gfp_t gfp)</span></span>
+<span id="L284"><span class="lineNum">     284</span>                 :<span class="tlaGNC">         444 : static void mptcp_nl_mcast_send(struct net *net, struct sk_buff *nlskb, gfp_t gfp)</span></span>
 <span id="L285"><span class="lineNum">     285</span>                 :             : {</span>
-<span id="L286"><span class="lineNum">     286</span>                 :<span class="tlaGNC">         445 :         genlmsg_multicast_netns(&amp;mptcp_genl_family, net,</span></span>
+<span id="L286"><span class="lineNum">     286</span>                 :<span class="tlaGNC">         444 :         genlmsg_multicast_netns(&amp;mptcp_genl_family, net,</span></span>
 <span id="L287"><span class="lineNum">     287</span>                 :             :                                 nlskb, 0, MPTCP_PM_EV_GRP_OFFSET, gfp);</span>
-<span id="L288"><span class="lineNum">     288</span>                 :<span class="tlaGNC">         445 : }</span></span>
+<span id="L288"><span class="lineNum">     288</span>                 :<span class="tlaGNC">         444 : }</span></span>
 <span id="L289"><span class="lineNum">     289</span>                 :             : </span>
-<span id="L290"><span class="lineNum">     290</span>                 :<span class="tlaGNC">          80 : bool mptcp_userspace_pm_active(const struct mptcp_sock *msk)</span></span>
+<span id="L290"><span class="lineNum">     290</span>                 :<span class="tlaGNC">          79 : bool mptcp_userspace_pm_active(const struct mptcp_sock *msk)</span></span>
 <span id="L291"><span class="lineNum">     291</span>                 :             : {</span>
-<span id="L292"><span class="lineNum">     292</span>                 :<span class="tlaGNC">          80 :         return genl_has_listeners(&amp;mptcp_genl_family,</span></span>
+<span id="L292"><span class="lineNum">     292</span>                 :<span class="tlaGNC">          79 :         return genl_has_listeners(&amp;mptcp_genl_family,</span></span>
 <span id="L293"><span class="lineNum">     293</span>                 :             :                                   sock_net((const struct sock *)msk),</span>
 <span id="L294"><span class="lineNum">     294</span>                 :             :                                   MPTCP_PM_EV_GRP_OFFSET);</span>
 <span id="L295"><span class="lineNum">     295</span>                 :             : }</span>
@@ -654,25 +654,25 @@
 <span id="L568"><span class="lineNum">     568</span>                 :<span class="tlaUNC">           0 :         nlmsg_free(skb);</span></span>
 <span id="L569"><span class="lineNum">     569</span>                 :             : }</span>
 <span id="L570"><span class="lineNum">     570</span>                 :             : </span>
-<span id="L571"><span class="lineNum">     571</span>                 :<span class="tlaGNC">        9747 : void mptcp_event(enum mptcp_event_type type, const struct mptcp_sock *msk,</span></span>
+<span id="L571"><span class="lineNum">     571</span>                 :<span class="tlaGNC">        9762 : void mptcp_event(enum mptcp_event_type type, const struct mptcp_sock *msk,</span></span>
 <span id="L572"><span class="lineNum">     572</span>                 :             :                  const struct sock *ssk, gfp_t gfp)</span>
 <span id="L573"><span class="lineNum">     573</span>                 :             : {</span>
-<span id="L574"><span class="lineNum">     574</span>                 :<span class="tlaGNC">        9747 :         struct net *net = sock_net((const struct sock *)msk);</span></span>
-<span id="L575"><span class="lineNum">     575</span>                 :<span class="tlaGNC">        9747 :         struct nlmsghdr *nlh;</span></span>
-<span id="L576"><span class="lineNum">     576</span>                 :<span class="tlaGNC">        9747 :         struct sk_buff *skb;</span></span>
+<span id="L574"><span class="lineNum">     574</span>                 :<span class="tlaGNC">        9762 :         struct net *net = sock_net((const struct sock *)msk);</span></span>
+<span id="L575"><span class="lineNum">     575</span>                 :<span class="tlaGNC">        9762 :         struct nlmsghdr *nlh;</span></span>
+<span id="L576"><span class="lineNum">     576</span>                 :<span class="tlaGNC">        9762 :         struct sk_buff *skb;</span></span>
 <span id="L577"><span class="lineNum">     577</span>                 :             : </span>
-<span id="L578"><span class="lineNum">     578</span>         [<span class="tlaGBC" title="Branch 0 was taken 285 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 9462 times"> + </span>]:<span class="tlaGNC">        9747 :         if (!genl_has_listeners(&amp;mptcp_genl_family, net, MPTCP_PM_EV_GRP_OFFSET))</span></span>
+<span id="L578"><span class="lineNum">     578</span>         [<span class="tlaGBC" title="Branch 0 was taken 284 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 9478 times"> + </span>]:<span class="tlaGNC">        9762 :         if (!genl_has_listeners(&amp;mptcp_genl_family, net, MPTCP_PM_EV_GRP_OFFSET))</span></span>
 <span id="L579"><span class="lineNum">     579</span>                 :             :                 return;</span>
 <span id="L580"><span class="lineNum">     580</span>                 :             : </span>
-<span id="L581"><span class="lineNum">     581</span>                 :<span class="tlaGNC">         285 :         skb = nlmsg_new(NLMSG_DEFAULT_SIZE, gfp);</span></span>
-<span id="L582"><span class="lineNum">     582</span>         [<span class="tlaGBC" title="Branch 0 was taken 285 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">         285 :         if (!skb)</span></span>
+<span id="L581"><span class="lineNum">     581</span>                 :<span class="tlaGNC">         284 :         skb = nlmsg_new(NLMSG_DEFAULT_SIZE, gfp);</span></span>
+<span id="L582"><span class="lineNum">     582</span>         [<span class="tlaGBC" title="Branch 0 was taken 284 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">         284 :         if (!skb)</span></span>
 <span id="L583"><span class="lineNum">     583</span>                 :             :                 return;</span>
 <span id="L584"><span class="lineNum">     584</span>                 :             : </span>
-<span id="L585"><span class="lineNum">     585</span>                 :<span class="tlaGNC">         285 :         nlh = genlmsg_put(skb, 0, 0, &amp;mptcp_genl_family, 0, type);</span></span>
-<span id="L586"><span class="lineNum">     586</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 285 times"> + </span>]:<span class="tlaGNC">         285 :         if (!nlh)</span></span>
+<span id="L585"><span class="lineNum">     585</span>                 :<span class="tlaGNC">         284 :         nlh = genlmsg_put(skb, 0, 0, &amp;mptcp_genl_family, 0, type);</span></span>
+<span id="L586"><span class="lineNum">     586</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 284 times"> + </span>]:<span class="tlaGNC">         284 :         if (!nlh)</span></span>
 <span id="L587"><span class="lineNum">     587</span>                 :<span class="tlaUNC">           0 :                 goto nla_put_failure;</span></span>
 <span id="L588"><span class="lineNum">     588</span>                 :             : </span>
-<span id="L589"><span class="lineNum">     589</span>   [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 80 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 17 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC">         285 :         switch (type) {</span></span>
+<span id="L589"><span class="lineNum">     589</span>   [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 80 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 16 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC">         284 :         switch (type) {</span></span>
 <span class="lineNum">        </span>       <span class="tlaGBC" title="Branch 4 was taken 106 times"> + </span><span class="tlaGBC" title="Branch 5 was taken 82 times"> + </span><span class="tlaUNC" title="Branch 6 was not taken"> - </span>]
 <span id="L590"><span class="lineNum">     590</span>                 :             :         case MPTCP_EVENT_UNSPEC:</span>
 <span id="L591"><span class="lineNum">     591</span>                 :<span class="tlaUNC">           0 :                 WARN_ON_ONCE(1);</span></span>
@@ -683,7 +683,7 @@
 <span id="L596"><span class="lineNum">     596</span>                 :<span class="tlaUNC">           0 :                         goto nla_put_failure;</span></span>
 <span id="L597"><span class="lineNum">     597</span>                 :             :                 break;</span>
 <span id="L598"><span class="lineNum">     598</span>                 :             :         case MPTCP_EVENT_CLOSED:</span>
-<span id="L599"><span class="lineNum">     599</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 17 times"> + </span>]:<span class="tlaGNC">          17 :                 if (nla_put_u32(skb, MPTCP_ATTR_TOKEN, READ_ONCE(msk-&gt;token)) &lt; 0)</span></span>
+<span id="L599"><span class="lineNum">     599</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 16 times"> + </span>]:<span class="tlaGNC">          16 :                 if (nla_put_u32(skb, MPTCP_ATTR_TOKEN, READ_ONCE(msk-&gt;token)) &lt; 0)</span></span>
 <span id="L600"><span class="lineNum">     600</span>                 :<span class="tlaUNC">           0 :                         goto nla_put_failure;</span></span>
 <span id="L601"><span class="lineNum">     601</span>                 :             :                 break;</span>
 <span id="L602"><span class="lineNum">     602</span>                 :             :         case MPTCP_EVENT_ANNOUNCED:</span>
@@ -705,9 +705,9 @@
 <span id="L618"><span class="lineNum">     618</span>                 :             :                 break;</span>
 <span id="L619"><span class="lineNum">     619</span>                 :             :         }</span>
 <span id="L620"><span class="lineNum">     620</span>                 :             : </span>
-<span id="L621"><span class="lineNum">     621</span>                 :<span class="tlaGNC">         285 :         genlmsg_end(skb, nlh);</span></span>
-<span id="L622"><span class="lineNum">     622</span>                 :<span class="tlaGNC">         285 :         mptcp_nl_mcast_send(net, skb, gfp);</span></span>
-<span id="L623"><span class="lineNum">     623</span>                 :<span class="tlaGNC">         285 :         return;</span></span>
+<span id="L621"><span class="lineNum">     621</span>                 :<span class="tlaGNC">         284 :         genlmsg_end(skb, nlh);</span></span>
+<span id="L622"><span class="lineNum">     622</span>                 :<span class="tlaGNC">         284 :         mptcp_nl_mcast_send(net, skb, gfp);</span></span>
+<span id="L623"><span class="lineNum">     623</span>                 :<span class="tlaGNC">         284 :         return;</span></span>
 <span id="L624"><span class="lineNum">     624</span>                 :             : </span>
 <span id="L625"><span class="lineNum">     625</span>                 :<span class="tlaUNC">           0 : nla_put_failure:</span></span>
 <span id="L626"><span class="lineNum">     626</span>                 :<span class="tlaUNC">           0 :         nlmsg_free(skb);</span></span>
