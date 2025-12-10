@@ -170,3 +170,26 @@ function do_it()
     $.get(path + "/btf-debug.json", load_result_table_btf_debug);
   });
 }
+
+function load_results_dir(data_raw)
+{
+  let branch = document.getElementById("branch");
+
+  $.each(data_raw, function(i, item) {
+    if (item == "export")
+      return;
+
+    var option = document.createElement("option");
+    option.text = item;
+    branch.add(option);
+  });
+
+  do_it();
+}
+
+function fill_branches()
+{
+  $(document).ready(function() {
+    $.get("results/dirs.json", load_results_dir);
+  });
+}
