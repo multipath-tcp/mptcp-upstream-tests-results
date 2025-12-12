@@ -154,7 +154,7 @@ let matched = false;
 function do_it()
 {
   $(document).ready(function() {
-    var matches = /branch=([a-z-]+)/.exec(window.location.search);
+    var matches = /branch=([a-z0-9.-]+)/.exec(window.location.search);
     var selector = document.getElementById("branch");
     var path;
 
