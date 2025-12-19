@@ -39,7 +39,7 @@ function load_result_table(data_raw, table_name)
   tags.reverse();
 
   var test_row = {};
-  var tags_errors = new Set();
+  var tags_errors = {};
 
   /* Format:
     [{"results":
@@ -53,10 +53,8 @@ function load_result_table(data_raw, table_name)
     }]
    */
   $.each(data_raw, function(i, item) {
-    if ("error" in item) {
-      tags_errors.add(item.tag);
-      return true;
-    }
+    if ("error" in item)
+      tags_errors[item.tag] = item.error;
 
     if (!("results" in item))
       return true;
@@ -92,7 +90,12 @@ function load_result_table(data_raw, table_name)
   header.insertCell(0); // name
   for (let i = 0; i < tags.length; i++) {
     let cell = header.insertCell(i + 1);
-    color = tags_errors.has(tags[i][0]) ? " style=\"color: red\" " : ""
+    let color = "";
+    if (tags[i][0] in tags_errors) {
+      color = " style=\"color: red\" ";
+      cell.setAttribute("title", tags_errors[tags[i][0]]);
+      cell.setAttribute("data-toggle", "tooltip");
+    }
     cell.innerHTML = "<a href=\"https://github.com/multipath-tcp/mptcp_net-next/actions/runs/" + tags[i][1] + "\"" + color + "target=\"_blank\">" + tags[i][0] + "</a>";
     cell.setAttribute("style", "writing-mode: tb-rl; font-size: 1em; padding: 0px;");
   }
@@ -106,7 +109,7 @@ function load_result_table(data_raw, table_name)
 
     for (let i = 0; i < tags.length; i++) {
       let cell = row.insertCell(i + 1);
-      if (tags_errors.has(tags[i][0]))
+      if (tags[i][0] in tags_errors)
         colorify(cell, {"result": "fail", "comment": "Global error"});
       else
         colorify(cell, test_row[tn][tags[i][0]]);
