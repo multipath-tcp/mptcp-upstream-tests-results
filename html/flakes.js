@@ -109,7 +109,7 @@ function load_result_table(data_raw, table_name)
 
     for (let i = 0; i < tags.length; i++) {
       let cell = row.insertCell(i + 1);
-      if (tags[i][0] in tags_errors)
+      if (tags[i][0] in tags_errors && tags_errors[tags[i][0]] == "all")
         colorify(cell, {"result": "fail", "comment": "Global error"});
       else
         colorify(cell, test_row[tn][tags[i][0]]);
