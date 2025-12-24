@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-12-19 17:58:51</td>
+            <td class="headerValue">2025-12-24 17:51:21</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryMed">88.4&nbsp;%</td>
@@ -236,12 +236,12 @@
 <span id="L157"><span class="lineNum">     157</span>                 :             :                 return ret;</span>
 <span id="L158"><span class="lineNum">     158</span>                 :             : </span>
 <span id="L159"><span class="lineNum">     159</span>                 :<span class="tlaGNC">           8 :         lock_sock(sk);</span></span>
-<span id="L160"><span class="lineNum">     160</span>         [<span class="tlaGBC" title="Branch 0 was taken 20 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 8 times"> + </span>]:<span class="tlaGNC">          28 :         mptcp_for_each_subflow(msk, subflow) {</span></span>
-<span id="L161"><span class="lineNum">     161</span>                 :<span class="tlaGNC">          20 :                 struct sock *ssk = mptcp_subflow_tcp_sock(subflow);</span></span>
-<span id="L162"><span class="lineNum">     162</span>                 :<span class="tlaGNC">          20 :                 bool slow = lock_sock_fast(ssk);</span></span>
+<span id="L160"><span class="lineNum">     160</span>         [<span class="tlaGBC" title="Branch 0 was taken 19 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 8 times"> + </span>]:<span class="tlaGNC">          27 :         mptcp_for_each_subflow(msk, subflow) {</span></span>
+<span id="L161"><span class="lineNum">     161</span>                 :<span class="tlaGNC">          19 :                 struct sock *ssk = mptcp_subflow_tcp_sock(subflow);</span></span>
+<span id="L162"><span class="lineNum">     162</span>                 :<span class="tlaGNC">          19 :                 bool slow = lock_sock_fast(ssk);</span></span>
 <span id="L163"><span class="lineNum">     163</span>                 :             : </span>
-<span id="L164"><span class="lineNum">     164</span>                 :<span class="tlaGNC">          20 :                 sock_set_timestamp(sk, optname, !!val);</span></span>
-<span id="L165"><span class="lineNum">     165</span>                 :<span class="tlaGNC">          20 :                 unlock_sock_fast(ssk, slow);</span></span>
+<span id="L164"><span class="lineNum">     164</span>                 :<span class="tlaGNC">          19 :                 sock_set_timestamp(sk, optname, !!val);</span></span>
+<span id="L165"><span class="lineNum">     165</span>                 :<span class="tlaGNC">          19 :                 unlock_sock_fast(ssk, slow);</span></span>
 <span id="L166"><span class="lineNum">     166</span>                 :             :         }</span>
 <span id="L167"><span class="lineNum">     167</span>                 :             : </span>
 <span id="L168"><span class="lineNum">     168</span>                 :<span class="tlaGNC">           8 :         release_sock(sk);</span></span>
@@ -1037,67 +1037,67 @@
 <span id="L953"><span class="lineNum">     953</span>                 :<span class="tlaGNC">        8910 :         return ret;</span></span>
 <span id="L954"><span class="lineNum">     954</span>                 :             : }</span>
 <span id="L955"><span class="lineNum">     955</span>                 :             : </span>
-<span id="L956"><span class="lineNum">     956</span>                 :<span class="tlaGNC">        1040 : void mptcp_diag_fill_info(struct mptcp_sock *msk, struct mptcp_info *info)</span></span>
+<span id="L956"><span class="lineNum">     956</span>                 :<span class="tlaGNC">        1038 : void mptcp_diag_fill_info(struct mptcp_sock *msk, struct mptcp_info *info)</span></span>
 <span id="L957"><span class="lineNum">     957</span>                 :             : {</span>
-<span id="L958"><span class="lineNum">     958</span>                 :<span class="tlaGNC">        1040 :         struct sock *sk = (struct sock *)msk;</span></span>
-<span id="L959"><span class="lineNum">     959</span>                 :<span class="tlaGNC">        1040 :         u32 flags = 0;</span></span>
-<span id="L960"><span class="lineNum">     960</span>                 :<span class="tlaGNC">        1040 :         bool slow;</span></span>
-<span id="L961"><span class="lineNum">     961</span>                 :<span class="tlaGNC">        1040 :         u32 now;</span></span>
+<span id="L958"><span class="lineNum">     958</span>                 :<span class="tlaGNC">        1038 :         struct sock *sk = (struct sock *)msk;</span></span>
+<span id="L959"><span class="lineNum">     959</span>                 :<span class="tlaGNC">        1038 :         u32 flags = 0;</span></span>
+<span id="L960"><span class="lineNum">     960</span>                 :<span class="tlaGNC">        1038 :         bool slow;</span></span>
+<span id="L961"><span class="lineNum">     961</span>                 :<span class="tlaGNC">        1038 :         u32 now;</span></span>
 <span id="L962"><span class="lineNum">     962</span>                 :             : </span>
-<span id="L963"><span class="lineNum">     963</span>                 :<span class="tlaGNC">        1040 :         memset(info, 0, sizeof(*info));</span></span>
+<span id="L963"><span class="lineNum">     963</span>                 :<span class="tlaGNC">        1038 :         memset(info, 0, sizeof(*info));</span></span>
 <span id="L964"><span class="lineNum">     964</span>                 :             : </span>
-<span id="L965"><span class="lineNum">     965</span>                 :<span class="tlaGNC">        1040 :         info-&gt;mptcpi_extra_subflows = READ_ONCE(msk-&gt;pm.extra_subflows);</span></span>
-<span id="L966"><span class="lineNum">     966</span>                 :<span class="tlaGNC">        1040 :         info-&gt;mptcpi_add_addr_signal = READ_ONCE(msk-&gt;pm.add_addr_signaled);</span></span>
-<span id="L967"><span class="lineNum">     967</span>                 :<span class="tlaGNC">        1040 :         info-&gt;mptcpi_add_addr_accepted = READ_ONCE(msk-&gt;pm.add_addr_accepted);</span></span>
-<span id="L968"><span class="lineNum">     968</span>                 :<span class="tlaGNC">        1040 :         info-&gt;mptcpi_local_addr_used = READ_ONCE(msk-&gt;pm.local_addr_used);</span></span>
+<span id="L965"><span class="lineNum">     965</span>                 :<span class="tlaGNC">        1038 :         info-&gt;mptcpi_extra_subflows = READ_ONCE(msk-&gt;pm.extra_subflows);</span></span>
+<span id="L966"><span class="lineNum">     966</span>                 :<span class="tlaGNC">        1038 :         info-&gt;mptcpi_add_addr_signal = READ_ONCE(msk-&gt;pm.add_addr_signaled);</span></span>
+<span id="L967"><span class="lineNum">     967</span>                 :<span class="tlaGNC">        1038 :         info-&gt;mptcpi_add_addr_accepted = READ_ONCE(msk-&gt;pm.add_addr_accepted);</span></span>
+<span id="L968"><span class="lineNum">     968</span>                 :<span class="tlaGNC">        1038 :         info-&gt;mptcpi_local_addr_used = READ_ONCE(msk-&gt;pm.local_addr_used);</span></span>
 <span id="L969"><span class="lineNum">     969</span>                 :             : </span>
-<span id="L970"><span class="lineNum">     970</span>         [<span class="tlaGBC" title="Branch 0 was taken 1040 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">        1040 :         if (inet_sk_state_load(sk) == TCP_LISTEN)</span></span>
+<span id="L970"><span class="lineNum">     970</span>         [<span class="tlaGBC" title="Branch 0 was taken 1038 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">        1038 :         if (inet_sk_state_load(sk) == TCP_LISTEN)</span></span>
 <span id="L971"><span class="lineNum">     971</span>                 :             :                 return;</span>
 <span id="L972"><span class="lineNum">     972</span>                 :             : </span>
 <span id="L973"><span class="lineNum">     973</span>                 :             :         /* The following limits only make sense for the in-kernel PM */</span>
-<span id="L974"><span class="lineNum">     974</span>         [<span class="tlaGBC" title="Branch 0 was taken 988 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 52 times"> + </span>]:<span class="tlaGNC">        1040 :         if (mptcp_pm_is_kernel(msk)) {</span></span>
-<span id="L975"><span class="lineNum">     975</span>                 :<span class="tlaGNC">        1976 :                 info-&gt;mptcpi_limit_extra_subflows =</span></span>
-<span id="L976"><span class="lineNum">     976</span>                 :<span class="tlaGNC">         988 :                         mptcp_pm_get_limit_extra_subflows(msk);</span></span>
-<span id="L977"><span class="lineNum">     977</span>                 :<span class="tlaGNC">        1976 :                 info-&gt;mptcpi_endp_signal_max =</span></span>
-<span id="L978"><span class="lineNum">     978</span>                 :<span class="tlaGNC">         988 :                         mptcp_pm_get_endp_signal_max(msk);</span></span>
-<span id="L979"><span class="lineNum">     979</span>                 :<span class="tlaGNC">        1976 :                 info-&gt;mptcpi_limit_add_addr_accepted =</span></span>
-<span id="L980"><span class="lineNum">     980</span>                 :<span class="tlaGNC">         988 :                         mptcp_pm_get_limit_add_addr_accepted(msk);</span></span>
-<span id="L981"><span class="lineNum">     981</span>                 :<span class="tlaGNC">        1976 :                 info-&gt;mptcpi_endp_subflow_max =</span></span>
-<span id="L982"><span class="lineNum">     982</span>                 :<span class="tlaGNC">         988 :                         mptcp_pm_get_endp_subflow_max(msk);</span></span>
-<span id="L983"><span class="lineNum">     983</span>                 :<span class="tlaGNC">        1976 :                 info-&gt;mptcpi_endp_laminar_max =</span></span>
-<span id="L984"><span class="lineNum">     984</span>                 :<span class="tlaGNC">         988 :                         mptcp_pm_get_endp_laminar_max(msk);</span></span>
-<span id="L985"><span class="lineNum">     985</span>                 :<span class="tlaGNC">         988 :                 info-&gt;mptcpi_endp_fullmesh_max =</span></span>
-<span id="L986"><span class="lineNum">     986</span>                 :<span class="tlaGNC">         988 :                         mptcp_pm_get_endp_fullmesh_max(msk);</span></span>
+<span id="L974"><span class="lineNum">     974</span>         [<span class="tlaGBC" title="Branch 0 was taken 986 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 52 times"> + </span>]:<span class="tlaGNC">        1038 :         if (mptcp_pm_is_kernel(msk)) {</span></span>
+<span id="L975"><span class="lineNum">     975</span>                 :<span class="tlaGNC">        1972 :                 info-&gt;mptcpi_limit_extra_subflows =</span></span>
+<span id="L976"><span class="lineNum">     976</span>                 :<span class="tlaGNC">         986 :                         mptcp_pm_get_limit_extra_subflows(msk);</span></span>
+<span id="L977"><span class="lineNum">     977</span>                 :<span class="tlaGNC">        1972 :                 info-&gt;mptcpi_endp_signal_max =</span></span>
+<span id="L978"><span class="lineNum">     978</span>                 :<span class="tlaGNC">         986 :                         mptcp_pm_get_endp_signal_max(msk);</span></span>
+<span id="L979"><span class="lineNum">     979</span>                 :<span class="tlaGNC">        1972 :                 info-&gt;mptcpi_limit_add_addr_accepted =</span></span>
+<span id="L980"><span class="lineNum">     980</span>                 :<span class="tlaGNC">         986 :                         mptcp_pm_get_limit_add_addr_accepted(msk);</span></span>
+<span id="L981"><span class="lineNum">     981</span>                 :<span class="tlaGNC">        1972 :                 info-&gt;mptcpi_endp_subflow_max =</span></span>
+<span id="L982"><span class="lineNum">     982</span>                 :<span class="tlaGNC">         986 :                         mptcp_pm_get_endp_subflow_max(msk);</span></span>
+<span id="L983"><span class="lineNum">     983</span>                 :<span class="tlaGNC">        1972 :                 info-&gt;mptcpi_endp_laminar_max =</span></span>
+<span id="L984"><span class="lineNum">     984</span>                 :<span class="tlaGNC">         986 :                         mptcp_pm_get_endp_laminar_max(msk);</span></span>
+<span id="L985"><span class="lineNum">     985</span>                 :<span class="tlaGNC">         986 :                 info-&gt;mptcpi_endp_fullmesh_max =</span></span>
+<span id="L986"><span class="lineNum">     986</span>                 :<span class="tlaGNC">         986 :                         mptcp_pm_get_endp_fullmesh_max(msk);</span></span>
 <span id="L987"><span class="lineNum">     987</span>                 :             :         }</span>
 <span id="L988"><span class="lineNum">     988</span>                 :             : </span>
-<span id="L989"><span class="lineNum">     989</span>         [<span class="tlaGBC" title="Branch 0 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1038 times"> + </span>]:<span class="tlaGNC">        1040 :         if (__mptcp_check_fallback(msk))</span></span>
+<span id="L989"><span class="lineNum">     989</span>         [<span class="tlaGBC" title="Branch 0 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1036 times"> + </span>]:<span class="tlaGNC">        1038 :         if (__mptcp_check_fallback(msk))</span></span>
 <span id="L990"><span class="lineNum">     990</span>                 :<span class="tlaGNC">           2 :                 flags |= MPTCP_INFO_FLAG_FALLBACK;</span></span>
-<span id="L991"><span class="lineNum">     991</span>   [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 522 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 521 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 1 time"> + </span>]:<span class="tlaGNC">        1040 :         if (READ_ONCE(msk-&gt;can_ack))</span></span>
-<span class="lineNum">        </span>         [<span class="tlaGBC" title="Branch 0 was taken 517 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]
-<span id="L992"><span class="lineNum">     992</span>                 :<span class="tlaGNC">        1038 :                 flags |= MPTCP_INFO_FLAG_REMOTE_KEY_RECEIVED;</span></span>
-<span id="L993"><span class="lineNum">     993</span>                 :<span class="tlaGNC">        1040 :         info-&gt;mptcpi_flags = flags;</span></span>
+<span id="L991"><span class="lineNum">     991</span>         [<span class="tlaGBC" title="Branch 0 was taken 519 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]:<span class="tlaGNC">        1038 :         if (READ_ONCE(msk-&gt;can_ack))</span></span>
+<span class="lineNum">        </span>   [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 518 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 517 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 1 time"> + </span>]
+<span id="L992"><span class="lineNum">     992</span>                 :<span class="tlaGNC">        1036 :                 flags |= MPTCP_INFO_FLAG_REMOTE_KEY_RECEIVED;</span></span>
+<span id="L993"><span class="lineNum">     993</span>                 :<span class="tlaGNC">        1038 :         info-&gt;mptcpi_flags = flags;</span></span>
 <span id="L994"><span class="lineNum">     994</span>                 :             : </span>
-<span id="L995"><span class="lineNum">     995</span>                 :<span class="tlaGNC">        1040 :         slow = lock_sock_fast(sk);</span></span>
-<span id="L996"><span class="lineNum">     996</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 522 times"> + </span>]:<span class="tlaGNC">        1040 :         info-&gt;mptcpi_csum_enabled = READ_ONCE(msk-&gt;csum_enabled);</span></span>
-<span id="L997"><span class="lineNum">     997</span>                 :<span class="tlaGNC">        1040 :         info-&gt;mptcpi_token = msk-&gt;token;</span></span>
-<span id="L998"><span class="lineNum">     998</span>                 :<span class="tlaGNC">        1040 :         info-&gt;mptcpi_write_seq = msk-&gt;write_seq;</span></span>
-<span id="L999"><span class="lineNum">     999</span>                 :<span class="tlaGNC">        1040 :         info-&gt;mptcpi_retransmits = inet_csk(sk)-&gt;icsk_retransmits;</span></span>
-<span id="L1000"><span class="lineNum">    1000</span>                 :<span class="tlaGNC">        1040 :         info-&gt;mptcpi_bytes_sent = msk-&gt;bytes_sent;</span></span>
-<span id="L1001"><span class="lineNum">    1001</span>                 :<span class="tlaGNC">        1040 :         info-&gt;mptcpi_bytes_received = msk-&gt;bytes_received;</span></span>
-<span id="L1002"><span class="lineNum">    1002</span>                 :<span class="tlaGNC">        1040 :         info-&gt;mptcpi_bytes_retrans = msk-&gt;bytes_retrans;</span></span>
-<span id="L1003"><span class="lineNum">    1003</span>                 :<span class="tlaGNC">        2080 :         info-&gt;mptcpi_subflows_total = info-&gt;mptcpi_extra_subflows +</span></span>
-<span id="L1004"><span class="lineNum">    1004</span>                 :<span class="tlaGNC">        1040 :                 __mptcp_has_initial_subflow(msk);</span></span>
-<span id="L1005"><span class="lineNum">    1005</span>                 :<span class="tlaGNC">        1040 :         now = tcp_jiffies32;</span></span>
-<span id="L1006"><span class="lineNum">    1006</span>                 :<span class="tlaGNC">        1040 :         info-&gt;mptcpi_last_data_sent = jiffies_to_msecs(now - msk-&gt;last_data_sent);</span></span>
-<span id="L1007"><span class="lineNum">    1007</span>                 :<span class="tlaGNC">        1040 :         info-&gt;mptcpi_last_data_recv = jiffies_to_msecs(now - msk-&gt;last_data_recv);</span></span>
-<span id="L1008"><span class="lineNum">    1008</span>                 :<span class="tlaGNC">        1040 :         unlock_sock_fast(sk, slow);</span></span>
+<span id="L995"><span class="lineNum">     995</span>                 :<span class="tlaGNC">        1038 :         slow = lock_sock_fast(sk);</span></span>
+<span id="L996"><span class="lineNum">     996</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 518 times"> + </span>]:<span class="tlaGNC">        1038 :         info-&gt;mptcpi_csum_enabled = READ_ONCE(msk-&gt;csum_enabled);</span></span>
+<span id="L997"><span class="lineNum">     997</span>                 :<span class="tlaGNC">        1038 :         info-&gt;mptcpi_token = msk-&gt;token;</span></span>
+<span id="L998"><span class="lineNum">     998</span>                 :<span class="tlaGNC">        1038 :         info-&gt;mptcpi_write_seq = msk-&gt;write_seq;</span></span>
+<span id="L999"><span class="lineNum">     999</span>                 :<span class="tlaGNC">        1038 :         info-&gt;mptcpi_retransmits = inet_csk(sk)-&gt;icsk_retransmits;</span></span>
+<span id="L1000"><span class="lineNum">    1000</span>                 :<span class="tlaGNC">        1038 :         info-&gt;mptcpi_bytes_sent = msk-&gt;bytes_sent;</span></span>
+<span id="L1001"><span class="lineNum">    1001</span>                 :<span class="tlaGNC">        1038 :         info-&gt;mptcpi_bytes_received = msk-&gt;bytes_received;</span></span>
+<span id="L1002"><span class="lineNum">    1002</span>                 :<span class="tlaGNC">        1038 :         info-&gt;mptcpi_bytes_retrans = msk-&gt;bytes_retrans;</span></span>
+<span id="L1003"><span class="lineNum">    1003</span>                 :<span class="tlaGNC">        2076 :         info-&gt;mptcpi_subflows_total = info-&gt;mptcpi_extra_subflows +</span></span>
+<span id="L1004"><span class="lineNum">    1004</span>                 :<span class="tlaGNC">        1038 :                 __mptcp_has_initial_subflow(msk);</span></span>
+<span id="L1005"><span class="lineNum">    1005</span>                 :<span class="tlaGNC">        1038 :         now = tcp_jiffies32;</span></span>
+<span id="L1006"><span class="lineNum">    1006</span>                 :<span class="tlaGNC">        1038 :         info-&gt;mptcpi_last_data_sent = jiffies_to_msecs(now - msk-&gt;last_data_sent);</span></span>
+<span id="L1007"><span class="lineNum">    1007</span>                 :<span class="tlaGNC">        1038 :         info-&gt;mptcpi_last_data_recv = jiffies_to_msecs(now - msk-&gt;last_data_recv);</span></span>
+<span id="L1008"><span class="lineNum">    1008</span>                 :<span class="tlaGNC">        1038 :         unlock_sock_fast(sk, slow);</span></span>
 <span id="L1009"><span class="lineNum">    1009</span>                 :             : </span>
-<span id="L1010"><span class="lineNum">    1010</span>                 :<span class="tlaGNC">        1040 :         mptcp_data_lock(sk);</span></span>
-<span id="L1011"><span class="lineNum">    1011</span>                 :<span class="tlaGNC">        1040 :         info-&gt;mptcpi_last_ack_recv = jiffies_to_msecs(now - msk-&gt;last_ack_recv);</span></span>
-<span id="L1012"><span class="lineNum">    1012</span>                 :<span class="tlaGNC">        1040 :         info-&gt;mptcpi_snd_una = msk-&gt;snd_una;</span></span>
-<span id="L1013"><span class="lineNum">    1013</span>                 :<span class="tlaGNC">        1040 :         info-&gt;mptcpi_rcv_nxt = msk-&gt;ack_seq;</span></span>
-<span id="L1014"><span class="lineNum">    1014</span>                 :<span class="tlaGNC">        1040 :         info-&gt;mptcpi_bytes_acked = msk-&gt;bytes_acked;</span></span>
-<span id="L1015"><span class="lineNum">    1015</span>                 :<span class="tlaGNC">        1040 :         mptcp_data_unlock(sk);</span></span>
+<span id="L1010"><span class="lineNum">    1010</span>                 :<span class="tlaGNC">        1038 :         mptcp_data_lock(sk);</span></span>
+<span id="L1011"><span class="lineNum">    1011</span>                 :<span class="tlaGNC">        1038 :         info-&gt;mptcpi_last_ack_recv = jiffies_to_msecs(now - msk-&gt;last_ack_recv);</span></span>
+<span id="L1012"><span class="lineNum">    1012</span>                 :<span class="tlaGNC">        1038 :         info-&gt;mptcpi_snd_una = msk-&gt;snd_una;</span></span>
+<span id="L1013"><span class="lineNum">    1013</span>                 :<span class="tlaGNC">        1038 :         info-&gt;mptcpi_rcv_nxt = msk-&gt;ack_seq;</span></span>
+<span id="L1014"><span class="lineNum">    1014</span>                 :<span class="tlaGNC">        1038 :         info-&gt;mptcpi_bytes_acked = msk-&gt;bytes_acked;</span></span>
+<span id="L1015"><span class="lineNum">    1015</span>                 :<span class="tlaGNC">        1038 :         mptcp_data_unlock(sk);</span></span>
 <span id="L1016"><span class="lineNum">    1016</span>                 :             : }</span>
 <span id="L1017"><span class="lineNum">    1017</span>                 :             : EXPORT_SYMBOL_GPL(mptcp_diag_fill_info);</span>
 <span id="L1018"><span class="lineNum">    1018</span>                 :             : </span>
