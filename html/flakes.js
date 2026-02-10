@@ -40,6 +40,7 @@ function load_result_table(data_raw, table_name)
 
   var test_row = {};
   var tags_errors = {};
+  var tags_warns = {};
 
   /* Format:
     [{"results":
@@ -55,6 +56,8 @@ function load_result_table(data_raw, table_name)
   $.each(data_raw, function(i, item) {
     if ("error" in item)
       tags_errors[item.tag] = item.error;
+    if ("warn" in item)
+      tags_warns[item.tag] = item.warn;
 
     if (!("results" in item))
       return true;
@@ -94,6 +97,10 @@ function load_result_table(data_raw, table_name)
     if (tags[i][0] in tags_errors) {
       color = " style=\"color: red\" ";
       cell.setAttribute("title", tags_errors[tags[i][0]]);
+      cell.setAttribute("data-toggle", "tooltip");
+    } else if (tags[i][0] in tags_warns) {
+      color = " style=\"color: orange\" ";
+      cell.setAttribute("title", tags_warns[tags[i][0]]);
       cell.setAttribute("data-toggle", "tooltip");
     }
     cell.innerHTML = "<a href=\"https://github.com/multipath-tcp/mptcp_net-next/actions/runs/" + tags[i][1] + "\"" + color + "target=\"_blank\">" + tags[i][0] + "</a>";
