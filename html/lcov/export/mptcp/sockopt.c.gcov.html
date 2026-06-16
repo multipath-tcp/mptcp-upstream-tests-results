@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-06-15 17:05:15</td>
+            <td class="headerValue">2026-06-16 11:28:33</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">90.7&nbsp;%</td>
@@ -242,12 +242,12 @@
 <span id="L163"><span class="lineNum">     163</span>                 :             :                 return ret;</span>
 <span id="L164"><span class="lineNum">     164</span>                 :             : </span>
 <span id="L165"><span class="lineNum">     165</span>                 :<span class="tlaGNC">           8 :         lock_sock(sk);</span></span>
-<span id="L166"><span class="lineNum">     166</span>         [<span class="tlaGBC" title="Branch 0 was taken 19 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 8 times"> + </span>]:<span class="tlaGNC">          27 :         mptcp_for_each_subflow(msk, subflow) {</span></span>
-<span id="L167"><span class="lineNum">     167</span>                 :<span class="tlaGNC">          19 :                 struct sock *ssk = mptcp_subflow_tcp_sock(subflow);</span></span>
+<span id="L166"><span class="lineNum">     166</span>         [<span class="tlaGBC" title="Branch 0 was taken 20 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 8 times"> + </span>]:<span class="tlaGNC">          28 :         mptcp_for_each_subflow(msk, subflow) {</span></span>
+<span id="L167"><span class="lineNum">     167</span>                 :<span class="tlaGNC">          20 :                 struct sock *ssk = mptcp_subflow_tcp_sock(subflow);</span></span>
 <span id="L168"><span class="lineNum">     168</span>                 :             : </span>
-<span id="L169"><span class="lineNum">     169</span>                 :<span class="tlaGNC">          19 :                 lock_sock(ssk);</span></span>
-<span id="L170"><span class="lineNum">     170</span>                 :<span class="tlaGNC">          19 :                 sock_set_timestamp(ssk, optname, !!val);</span></span>
-<span id="L171"><span class="lineNum">     171</span>                 :<span class="tlaGNC">          19 :                 release_sock(ssk);</span></span>
+<span id="L169"><span class="lineNum">     169</span>                 :<span class="tlaGNC">          20 :                 lock_sock(ssk);</span></span>
+<span id="L170"><span class="lineNum">     170</span>                 :<span class="tlaGNC">          20 :                 sock_set_timestamp(ssk, optname, !!val);</span></span>
+<span id="L171"><span class="lineNum">     171</span>                 :<span class="tlaGNC">          20 :                 release_sock(ssk);</span></span>
 <span id="L172"><span class="lineNum">     172</span>                 :             :         }</span>
 <span id="L173"><span class="lineNum">     173</span>                 :             : </span>
 <span id="L174"><span class="lineNum">     174</span>                 :<span class="tlaGNC">           8 :         release_sock(sk);</span></span>
@@ -1085,15 +1085,15 @@
 <span id="L1001"><span class="lineNum">    1001</span>                 :<span class="tlaGNC">        1021 :                         mptcp_pm_get_endp_fullmesh_max(msk);</span></span>
 <span id="L1002"><span class="lineNum">    1002</span>                 :             :         }</span>
 <span id="L1003"><span class="lineNum">    1003</span>                 :             : </span>
-<span id="L1004"><span class="lineNum">    1004</span>         [<span class="tlaGBC" title="Branch 0 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1081 times"> + </span>]:<span class="tlaGNC">        1083 :         if (__mptcp_check_fallback(msk))</span></span>
-<span id="L1005"><span class="lineNum">    1005</span>                 :<span class="tlaGNC">           2 :                 flags |= MPTCP_INFO_FLAG_FALLBACK;</span></span>
-<span id="L1006"><span class="lineNum">    1006</span>   [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 544 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 543 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 1 time"> + </span>]:<span class="tlaGNC">        1083 :         if (READ_ONCE(msk-&gt;can_ack))</span></span>
-<span class="lineNum">        </span>         [<span class="tlaGBC" title="Branch 0 was taken 538 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]
+<span id="L1004"><span class="lineNum">    1004</span>         [<span class="tlaGBC" title="Branch 0 was taken 3 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1080 times"> + </span>]:<span class="tlaGNC">        1083 :         if (__mptcp_check_fallback(msk))</span></span>
+<span id="L1005"><span class="lineNum">    1005</span>                 :<span class="tlaGNC">           3 :                 flags |= MPTCP_INFO_FLAG_FALLBACK;</span></span>
+<span id="L1006"><span class="lineNum">    1006</span>   [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 547 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 546 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 1 time"> + </span>]:<span class="tlaGNC">        1083 :         if (READ_ONCE(msk-&gt;can_ack))</span></span>
+<span class="lineNum">        </span>         [<span class="tlaGBC" title="Branch 0 was taken 535 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]
 <span id="L1007"><span class="lineNum">    1007</span>                 :<span class="tlaGNC">        1081 :                 flags |= MPTCP_INFO_FLAG_REMOTE_KEY_RECEIVED;</span></span>
 <span id="L1008"><span class="lineNum">    1008</span>                 :<span class="tlaGNC">        1083 :         info-&gt;mptcpi_flags = flags;</span></span>
 <span id="L1009"><span class="lineNum">    1009</span>                 :             : </span>
 <span id="L1010"><span class="lineNum">    1010</span>                 :<span class="tlaGNC">        1083 :         slow = lock_sock_fast(sk);</span></span>
-<span id="L1011"><span class="lineNum">    1011</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 544 times"> + </span>]:<span class="tlaGNC">        1083 :         info-&gt;mptcpi_csum_enabled = READ_ONCE(msk-&gt;csum_enabled);</span></span>
+<span id="L1011"><span class="lineNum">    1011</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 547 times"> + </span>]:<span class="tlaGNC">        1083 :         info-&gt;mptcpi_csum_enabled = READ_ONCE(msk-&gt;csum_enabled);</span></span>
 <span id="L1012"><span class="lineNum">    1012</span>                 :<span class="tlaGNC">        1083 :         info-&gt;mptcpi_token = msk-&gt;token;</span></span>
 <span id="L1013"><span class="lineNum">    1013</span>                 :<span class="tlaGNC">        1083 :         info-&gt;mptcpi_write_seq = msk-&gt;write_seq;</span></span>
 <span id="L1014"><span class="lineNum">    1014</span>                 :<span class="tlaGNC">        1083 :         info-&gt;mptcpi_retransmits = inet_csk(sk)-&gt;icsk_retransmits;</span></span>
@@ -1636,24 +1636,24 @@
 <span id="L1547"><span class="lineNum">    1547</span>                 :             :         return -EOPNOTSUPP;</span>
 <span id="L1548"><span class="lineNum">    1548</span>                 :             : }</span>
 <span id="L1549"><span class="lineNum">    1549</span>                 :             : </span>
-<span id="L1550"><span class="lineNum">    1550</span>                 :<span class="tlaGNC">          50 : static void sync_socket_options(struct mptcp_sock *msk, struct sock *ssk)</span></span>
+<span id="L1550"><span class="lineNum">    1550</span>                 :<span class="tlaGNC">          52 : static void sync_socket_options(struct mptcp_sock *msk, struct sock *ssk)</span></span>
 <span id="L1551"><span class="lineNum">    1551</span>                 :             : {</span>
-<span id="L1552"><span class="lineNum">    1552</span>                 :<span class="tlaGNC">          50 :         static const unsigned int tx_rx_locks = SOCK_RCVBUF_LOCK | SOCK_SNDBUF_LOCK;</span></span>
-<span id="L1553"><span class="lineNum">    1553</span>                 :<span class="tlaGNC">          50 :         struct sock *sk = (struct sock *)msk;</span></span>
-<span id="L1554"><span class="lineNum">    1554</span>                 :<span class="tlaGNC">          50 :         bool keep_open;</span></span>
+<span id="L1552"><span class="lineNum">    1552</span>                 :<span class="tlaGNC">          52 :         static const unsigned int tx_rx_locks = SOCK_RCVBUF_LOCK | SOCK_SNDBUF_LOCK;</span></span>
+<span id="L1553"><span class="lineNum">    1553</span>                 :<span class="tlaGNC">          52 :         struct sock *sk = (struct sock *)msk;</span></span>
+<span id="L1554"><span class="lineNum">    1554</span>                 :<span class="tlaGNC">          52 :         bool keep_open;</span></span>
 <span id="L1555"><span class="lineNum">    1555</span>                 :             : </span>
-<span id="L1556"><span class="lineNum">    1556</span>                 :<span class="tlaGNC">          50 :         keep_open = sock_flag(sk, SOCK_KEEPOPEN);</span></span>
-<span id="L1557"><span class="lineNum">    1557</span>         [<span class="tlaGBC" title="Branch 0 was taken 50 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">          50 :         if (ssk-&gt;sk_prot-&gt;keepalive)</span></span>
-<span id="L1558"><span class="lineNum">    1558</span>                 :<span class="tlaGNC">          50 :                 ssk-&gt;sk_prot-&gt;keepalive(ssk, keep_open);</span></span>
-<span id="L1559"><span class="lineNum">    1559</span>                 :<span class="tlaGNC">          50 :         sock_valbool_flag(ssk, SOCK_KEEPOPEN, keep_open);</span></span>
+<span id="L1556"><span class="lineNum">    1556</span>                 :<span class="tlaGNC">          52 :         keep_open = sock_flag(sk, SOCK_KEEPOPEN);</span></span>
+<span id="L1557"><span class="lineNum">    1557</span>         [<span class="tlaGBC" title="Branch 0 was taken 52 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">          52 :         if (ssk-&gt;sk_prot-&gt;keepalive)</span></span>
+<span id="L1558"><span class="lineNum">    1558</span>                 :<span class="tlaGNC">          52 :                 ssk-&gt;sk_prot-&gt;keepalive(ssk, keep_open);</span></span>
+<span id="L1559"><span class="lineNum">    1559</span>                 :<span class="tlaGNC">          52 :         sock_valbool_flag(ssk, SOCK_KEEPOPEN, keep_open);</span></span>
 <span id="L1560"><span class="lineNum">    1560</span>                 :             : </span>
-<span id="L1561"><span class="lineNum">    1561</span>                 :<span class="tlaGNC">          50 :         ssk-&gt;sk_priority = sk-&gt;sk_priority;</span></span>
-<span id="L1562"><span class="lineNum">    1562</span>                 :<span class="tlaGNC">          50 :         ssk-&gt;sk_bound_dev_if = sk-&gt;sk_bound_dev_if;</span></span>
-<span id="L1563"><span class="lineNum">    1563</span>                 :<span class="tlaGNC">          50 :         ssk-&gt;sk_incoming_cpu = sk-&gt;sk_incoming_cpu;</span></span>
-<span id="L1564"><span class="lineNum">    1564</span>                 :<span class="tlaGNC">          50 :         ssk-&gt;sk_ipv6only = sk-&gt;sk_ipv6only;</span></span>
-<span id="L1565"><span class="lineNum">    1565</span>                 :<span class="tlaGNC">          50 :         __ip_sock_set_tos(ssk, inet_sk(sk)-&gt;tos);</span></span>
+<span id="L1561"><span class="lineNum">    1561</span>                 :<span class="tlaGNC">          52 :         ssk-&gt;sk_priority = sk-&gt;sk_priority;</span></span>
+<span id="L1562"><span class="lineNum">    1562</span>                 :<span class="tlaGNC">          52 :         ssk-&gt;sk_bound_dev_if = sk-&gt;sk_bound_dev_if;</span></span>
+<span id="L1563"><span class="lineNum">    1563</span>                 :<span class="tlaGNC">          52 :         ssk-&gt;sk_incoming_cpu = sk-&gt;sk_incoming_cpu;</span></span>
+<span id="L1564"><span class="lineNum">    1564</span>                 :<span class="tlaGNC">          52 :         ssk-&gt;sk_ipv6only = sk-&gt;sk_ipv6only;</span></span>
+<span id="L1565"><span class="lineNum">    1565</span>                 :<span class="tlaGNC">          52 :         __ip_sock_set_tos(ssk, inet_sk(sk)-&gt;tos);</span></span>
 <span id="L1566"><span class="lineNum">    1566</span>                 :             : </span>
-<span id="L1567"><span class="lineNum">    1567</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 50 times"> + </span>]:<span class="tlaGNC">          50 :         if (sk-&gt;sk_userlocks &amp; tx_rx_locks) {</span></span>
+<span id="L1567"><span class="lineNum">    1567</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 52 times"> + </span>]:<span class="tlaGNC">          52 :         if (sk-&gt;sk_userlocks &amp; tx_rx_locks) {</span></span>
 <span id="L1568"><span class="lineNum">    1568</span>                 :<span class="tlaUNC">           0 :                 ssk-&gt;sk_userlocks |= sk-&gt;sk_userlocks &amp; tx_rx_locks;</span></span>
 <span id="L1569"><span class="lineNum">    1569</span>         [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span>]:<span class="tlaUNC">           0 :                 if (sk-&gt;sk_userlocks &amp; SOCK_SNDBUF_LOCK) {</span></span>
 <span id="L1570"><span class="lineNum">    1570</span>                 :<span class="tlaUNC">           0 :                         WRITE_ONCE(ssk-&gt;sk_sndbuf, sk-&gt;sk_sndbuf);</span></span>
@@ -1663,55 +1663,55 @@
 <span id="L1574"><span class="lineNum">    1574</span>                 :<span class="tlaUNC">           0 :                         __mptcp_subflow_set_rcvbuf(ssk, sk-&gt;sk_rcvbuf);</span></span>
 <span id="L1575"><span class="lineNum">    1575</span>                 :             :         }</span>
 <span id="L1576"><span class="lineNum">    1576</span>                 :             : </span>
-<span id="L1577"><span class="lineNum">    1577</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 50 times"> + </span>]:<span class="tlaGNC">          50 :         if (sock_flag(sk, SOCK_LINGER)) {</span></span>
+<span id="L1577"><span class="lineNum">    1577</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 52 times"> + </span>]:<span class="tlaGNC">          52 :         if (sock_flag(sk, SOCK_LINGER)) {</span></span>
 <span id="L1578"><span class="lineNum">    1578</span>                 :<span class="tlaUNC">           0 :                 ssk-&gt;sk_lingertime = sk-&gt;sk_lingertime;</span></span>
 <span id="L1579"><span class="lineNum">    1579</span>                 :<span class="tlaUNC">           0 :                 sock_set_flag(ssk, SOCK_LINGER);</span></span>
 <span id="L1580"><span class="lineNum">    1580</span>                 :             :         } else {</span>
-<span id="L1581"><span class="lineNum">    1581</span>                 :<span class="tlaGNC">          50 :                 sock_reset_flag(ssk, SOCK_LINGER);</span></span>
+<span id="L1581"><span class="lineNum">    1581</span>                 :<span class="tlaGNC">          52 :                 sock_reset_flag(ssk, SOCK_LINGER);</span></span>
 <span id="L1582"><span class="lineNum">    1582</span>                 :             :         }</span>
 <span id="L1583"><span class="lineNum">    1583</span>                 :             : </span>
-<span id="L1584"><span class="lineNum">    1584</span>         [<span class="tlaGBC" title="Branch 0 was taken 28 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 22 times"> + </span>]:<span class="tlaGNC">          50 :         if (sk-&gt;sk_mark != ssk-&gt;sk_mark) {</span></span>
-<span id="L1585"><span class="lineNum">    1585</span>                 :<span class="tlaGNC">          28 :                 ssk-&gt;sk_mark = sk-&gt;sk_mark;</span></span>
-<span id="L1586"><span class="lineNum">    1586</span>                 :<span class="tlaGNC">          28 :                 sk_dst_reset(ssk);</span></span>
+<span id="L1584"><span class="lineNum">    1584</span>         [<span class="tlaGBC" title="Branch 0 was taken 30 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 22 times"> + </span>]:<span class="tlaGNC">          52 :         if (sk-&gt;sk_mark != ssk-&gt;sk_mark) {</span></span>
+<span id="L1585"><span class="lineNum">    1585</span>                 :<span class="tlaGNC">          30 :                 ssk-&gt;sk_mark = sk-&gt;sk_mark;</span></span>
+<span id="L1586"><span class="lineNum">    1586</span>                 :<span class="tlaGNC">          30 :                 sk_dst_reset(ssk);</span></span>
 <span id="L1587"><span class="lineNum">    1587</span>                 :             :         }</span>
 <span id="L1588"><span class="lineNum">    1588</span>                 :             : </span>
-<span id="L1589"><span class="lineNum">    1589</span>                 :<span class="tlaGNC">          50 :         sock_valbool_flag(ssk, SOCK_DBG, sock_flag(sk, SOCK_DBG));</span></span>
+<span id="L1589"><span class="lineNum">    1589</span>                 :<span class="tlaGNC">          52 :         sock_valbool_flag(ssk, SOCK_DBG, sock_flag(sk, SOCK_DBG));</span></span>
 <span id="L1590"><span class="lineNum">    1590</span>                 :             : </span>
-<span id="L1591"><span class="lineNum">    1591</span>         [<span class="tlaGBC" title="Branch 0 was taken 50 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">          50 :         if (inet_csk(sk)-&gt;icsk_ca_ops != inet_csk(ssk)-&gt;icsk_ca_ops)</span></span>
-<span id="L1592"><span class="lineNum">    1592</span>                 :<span class="tlaGNC">          50 :                 tcp_set_congestion_control(ssk, msk-&gt;ca_name, false, true);</span></span>
-<span id="L1593"><span class="lineNum">    1593</span>                 :<span class="tlaGNC">          50 :         __tcp_sock_set_cork(ssk, !!msk-&gt;cork);</span></span>
-<span id="L1594"><span class="lineNum">    1594</span>                 :<span class="tlaGNC">          50 :         __tcp_sock_set_nodelay(ssk, !!msk-&gt;nodelay);</span></span>
-<span id="L1595"><span class="lineNum">    1595</span>                 :<span class="tlaGNC">          50 :         tcp_sock_set_keepidle_locked(ssk, msk-&gt;keepalive_idle);</span></span>
-<span id="L1596"><span class="lineNum">    1596</span>                 :<span class="tlaGNC">          50 :         tcp_sock_set_keepintvl(ssk, msk-&gt;keepalive_intvl);</span></span>
-<span id="L1597"><span class="lineNum">    1597</span>                 :<span class="tlaGNC">          50 :         tcp_sock_set_keepcnt(ssk, msk-&gt;keepalive_cnt);</span></span>
-<span id="L1598"><span class="lineNum">    1598</span>                 :<span class="tlaGNC">          50 :         tcp_sock_set_maxseg(ssk, msk-&gt;maxseg);</span></span>
+<span id="L1591"><span class="lineNum">    1591</span>         [<span class="tlaGBC" title="Branch 0 was taken 52 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">          52 :         if (inet_csk(sk)-&gt;icsk_ca_ops != inet_csk(ssk)-&gt;icsk_ca_ops)</span></span>
+<span id="L1592"><span class="lineNum">    1592</span>                 :<span class="tlaGNC">          52 :                 tcp_set_congestion_control(ssk, msk-&gt;ca_name, false, true);</span></span>
+<span id="L1593"><span class="lineNum">    1593</span>                 :<span class="tlaGNC">          52 :         __tcp_sock_set_cork(ssk, !!msk-&gt;cork);</span></span>
+<span id="L1594"><span class="lineNum">    1594</span>                 :<span class="tlaGNC">          52 :         __tcp_sock_set_nodelay(ssk, !!msk-&gt;nodelay);</span></span>
+<span id="L1595"><span class="lineNum">    1595</span>                 :<span class="tlaGNC">          52 :         tcp_sock_set_keepidle_locked(ssk, msk-&gt;keepalive_idle);</span></span>
+<span id="L1596"><span class="lineNum">    1596</span>                 :<span class="tlaGNC">          52 :         tcp_sock_set_keepintvl(ssk, msk-&gt;keepalive_intvl);</span></span>
+<span id="L1597"><span class="lineNum">    1597</span>                 :<span class="tlaGNC">          52 :         tcp_sock_set_keepcnt(ssk, msk-&gt;keepalive_cnt);</span></span>
+<span id="L1598"><span class="lineNum">    1598</span>                 :<span class="tlaGNC">          52 :         tcp_sock_set_maxseg(ssk, msk-&gt;maxseg);</span></span>
 <span id="L1599"><span class="lineNum">    1599</span>                 :             : </span>
-<span id="L1600"><span class="lineNum">    1600</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 50 times"> + </span>]:<span class="tlaGNC">          50 :         inet_assign_bit(TRANSPARENT, ssk, inet_test_bit(TRANSPARENT, sk));</span></span>
-<span id="L1601"><span class="lineNum">    1601</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 50 times"> + </span>]:<span class="tlaGNC">          50 :         inet_assign_bit(FREEBIND, ssk, inet_test_bit(FREEBIND, sk));</span></span>
-<span id="L1602"><span class="lineNum">    1602</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 50 times"> + </span>]:<span class="tlaGNC">          50 :         inet_assign_bit(BIND_ADDRESS_NO_PORT, ssk, inet_test_bit(BIND_ADDRESS_NO_PORT, sk));</span></span>
-<span id="L1603"><span class="lineNum">    1603</span>                 :<span class="tlaGNC">          50 :         WRITE_ONCE(inet_sk(ssk)-&gt;local_port_range, READ_ONCE(inet_sk(sk)-&gt;local_port_range));</span></span>
-<span id="L1604"><span class="lineNum">    1604</span>                 :<span class="tlaGNC">          50 : }</span></span>
+<span id="L1600"><span class="lineNum">    1600</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 52 times"> + </span>]:<span class="tlaGNC">          52 :         inet_assign_bit(TRANSPARENT, ssk, inet_test_bit(TRANSPARENT, sk));</span></span>
+<span id="L1601"><span class="lineNum">    1601</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 52 times"> + </span>]:<span class="tlaGNC">          52 :         inet_assign_bit(FREEBIND, ssk, inet_test_bit(FREEBIND, sk));</span></span>
+<span id="L1602"><span class="lineNum">    1602</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 52 times"> + </span>]:<span class="tlaGNC">          52 :         inet_assign_bit(BIND_ADDRESS_NO_PORT, ssk, inet_test_bit(BIND_ADDRESS_NO_PORT, sk));</span></span>
+<span id="L1603"><span class="lineNum">    1603</span>                 :<span class="tlaGNC">          52 :         WRITE_ONCE(inet_sk(ssk)-&gt;local_port_range, READ_ONCE(inet_sk(sk)-&gt;local_port_range));</span></span>
+<span id="L1604"><span class="lineNum">    1604</span>                 :<span class="tlaGNC">          52 : }</span></span>
 <span id="L1605"><span class="lineNum">    1605</span>                 :             : </span>
-<span id="L1606"><span class="lineNum">    1606</span>                 :<span class="tlaGNC">        4855 : void mptcp_sockopt_sync_locked(struct mptcp_sock *msk, struct sock *ssk)</span></span>
+<span id="L1606"><span class="lineNum">    1606</span>                 :<span class="tlaGNC">        4857 : void mptcp_sockopt_sync_locked(struct mptcp_sock *msk, struct sock *ssk)</span></span>
 <span id="L1607"><span class="lineNum">    1607</span>                 :             : {</span>
-<span id="L1608"><span class="lineNum">    1608</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 2427 times"> + </span>]:<span class="tlaGNC">        4855 :         struct mptcp_subflow_context *subflow = mptcp_subflow_ctx(ssk);</span></span>
+<span id="L1608"><span class="lineNum">    1608</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 2429 times"> + </span>]:<span class="tlaGNC">        4857 :         struct mptcp_subflow_context *subflow = mptcp_subflow_ctx(ssk);</span></span>
 <span id="L1609"><span class="lineNum">    1609</span>                 :             : </span>
-<span id="L1610"><span class="lineNum">    1610</span>                 :<span class="tlaGNC">        4855 :         msk_owned_by_me(msk);</span></span>
+<span id="L1610"><span class="lineNum">    1610</span>                 :<span class="tlaGNC">        4857 :         msk_owned_by_me(msk);</span></span>
 <span id="L1611"><span class="lineNum">    1611</span>                 :             : </span>
-<span id="L1612"><span class="lineNum">    1612</span>                 :<span class="tlaGNC">        4855 :         ssk-&gt;sk_rcvlowat = 0;</span></span>
+<span id="L1612"><span class="lineNum">    1612</span>                 :<span class="tlaGNC">        4857 :         ssk-&gt;sk_rcvlowat = 0;</span></span>
 <span id="L1613"><span class="lineNum">    1613</span>                 :             : </span>
 <span id="L1614"><span class="lineNum">    1614</span>                 :             :         /* subflows must ignore any latency-related settings: will not affect</span>
 <span id="L1615"><span class="lineNum">    1615</span>                 :             :          * the user-space - only the msk is relevant - but will foul the</span>
 <span id="L1616"><span class="lineNum">    1616</span>                 :             :          * mptcp scheduler</span>
 <span id="L1617"><span class="lineNum">    1617</span>                 :             :          */</span>
-<span id="L1618"><span class="lineNum">    1618</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 4855 times"> + </span>]:<span class="tlaGNC">        4855 :         tcp_sk(ssk)-&gt;notsent_lowat = UINT_MAX;</span></span>
+<span id="L1618"><span class="lineNum">    1618</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 4857 times"> + </span>]:<span class="tlaGNC">        4857 :         tcp_sk(ssk)-&gt;notsent_lowat = UINT_MAX;</span></span>
 <span id="L1619"><span class="lineNum">    1619</span>                 :             : </span>
-<span id="L1620"><span class="lineNum">    1620</span>         [<span class="tlaGBC" title="Branch 0 was taken 50 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 4805 times"> + </span>]:<span class="tlaGNC">        4855 :         if (READ_ONCE(subflow-&gt;setsockopt_seq) != msk-&gt;setsockopt_seq) {</span></span>
-<span id="L1621"><span class="lineNum">    1621</span>                 :<span class="tlaGNC">          50 :                 sync_socket_options(msk, ssk);</span></span>
+<span id="L1620"><span class="lineNum">    1620</span>         [<span class="tlaGBC" title="Branch 0 was taken 52 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 4805 times"> + </span>]:<span class="tlaGNC">        4857 :         if (READ_ONCE(subflow-&gt;setsockopt_seq) != msk-&gt;setsockopt_seq) {</span></span>
+<span id="L1621"><span class="lineNum">    1621</span>                 :<span class="tlaGNC">          52 :                 sync_socket_options(msk, ssk);</span></span>
 <span id="L1622"><span class="lineNum">    1622</span>                 :             : </span>
-<span id="L1623"><span class="lineNum">    1623</span>                 :<span class="tlaGNC">          50 :                 subflow-&gt;setsockopt_seq = msk-&gt;setsockopt_seq;</span></span>
+<span id="L1623"><span class="lineNum">    1623</span>                 :<span class="tlaGNC">          52 :                 subflow-&gt;setsockopt_seq = msk-&gt;setsockopt_seq;</span></span>
 <span id="L1624"><span class="lineNum">    1624</span>                 :             :         }</span>
-<span id="L1625"><span class="lineNum">    1625</span>                 :<span class="tlaGNC">        4855 : }</span></span>
+<span id="L1625"><span class="lineNum">    1625</span>                 :<span class="tlaGNC">        4857 : }</span></span>
 <span id="L1626"><span class="lineNum">    1626</span>                 :             : </span>
 <span id="L1627"><span class="lineNum">    1627</span>                 :             : /* unfortunately this is different enough from the tcp version so</span>
 <span id="L1628"><span class="lineNum">    1628</span>                 :             :  * that we can't factor it out</span>
