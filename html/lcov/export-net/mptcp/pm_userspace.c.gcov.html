@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-06-17 11:52:27</td>
+            <td class="headerValue">2026-06-18 10:58:45</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -307,7 +307,7 @@
 <span id="L228"><span class="lineNum">     228</span>                 :<span class="tlaGNC">          34 :         lock_sock(sk);</span></span>
 <span id="L229"><span class="lineNum">     229</span>                 :<span class="tlaGNC">          34 :         spin_lock_bh(&amp;msk-&gt;pm.lock);</span></span>
 <span id="L230"><span class="lineNum">     230</span>                 :             : </span>
-<span id="L231"><span class="lineNum">     231</span>         [<span class="tlaGBC" title="Branch 0 was taken 34 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">          34 :         if (mptcp_pm_alloc_anno_list(msk, &amp;addr_val.addr)) {</span></span>
+<span id="L231"><span class="lineNum">     231</span>         [<span class="tlaGBC" title="Branch 0 was taken 34 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">          34 :         if (mptcp_pm_announced_alloc(msk, &amp;addr_val.addr)) {</span></span>
 <span id="L232"><span class="lineNum">     232</span>                 :<span class="tlaGNC">          34 :                 msk-&gt;pm.add_addr_signaled++;</span></span>
 <span id="L233"><span class="lineNum">     233</span>                 :<span class="tlaGNC">          34 :                 mptcp_pm_announce_addr(msk, &amp;addr_val.addr, false);</span></span>
 <span id="L234"><span class="lineNum">     234</span>                 :<span class="tlaGNC">          34 :                 mptcp_pm_addr_send_ack(msk);</span></span>
@@ -360,9 +360,9 @@
 <span id="L281"><span class="lineNum">     281</span>                 :<span class="tlaGNC">          28 :         int anno_nr = 0;</span></span>
 <span id="L282"><span class="lineNum">     282</span>                 :             : </span>
 <span id="L283"><span class="lineNum">     283</span>                 :             :         /* only delete if either announced or matching a subflow */</span>
-<span id="L284"><span class="lineNum">     284</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 28 times"> + </span>]:<span class="tlaGNC">          28 :         if (mptcp_remove_anno_list_by_saddr(msk, &amp;entry-&gt;addr))</span></span>
+<span id="L284"><span class="lineNum">     284</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 28 times"> + </span>]:<span class="tlaGNC">          28 :         if (mptcp_pm_announced_remove(msk, &amp;entry-&gt;addr))</span></span>
 <span id="L285"><span class="lineNum">     285</span>                 :             :                 anno_nr++;</span>
-<span id="L286"><span class="lineNum">     286</span>         [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span>]:<span class="tlaUNC">           0 :         else if (!mptcp_lookup_subflow_by_saddr(&amp;msk-&gt;conn_list, &amp;entry-&gt;addr))</span></span>
+<span id="L286"><span class="lineNum">     286</span>         [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span>]:<span class="tlaUNC">           0 :         else if (!mptcp_pm_has_subflow_saddr(msk, &amp;entry-&gt;addr))</span></span>
 <span id="L287"><span class="lineNum">     287</span>                 :<span class="tlaUNC">           0 :                 return;</span></span>
 <span id="L288"><span class="lineNum">     288</span>                 :             : </span>
 <span id="L289"><span class="lineNum">     289</span>                 :<span class="tlaGNC">          28 :         alist.ids[alist.nr++] = entry-&gt;addr.id;</span></span>
