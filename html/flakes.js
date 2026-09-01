@@ -124,7 +124,7 @@ function load_result_table(data_raw, table_name)
   }
 }
 
-let xfr_todo = 3;
+let xfr_todo = 4;
 
 function remove_loading()
 {
@@ -159,6 +159,12 @@ function load_result_table_btf_debug(data_raw)
   remove_loading();
 }
 
+function load_result_table_perf(data_raw)
+{
+  load_result_table(data_raw, "perf");
+  remove_loading();
+}
+
 let matched = false;
 
 function do_it()
@@ -176,6 +182,7 @@ function do_it()
 
     $.get(path + "/normal.json", load_result_table_normal);
     $.get(path + "/debug.json", load_result_table_debug);
+    $.get(path + "/perf.json", load_result_table_perf);
     $.get(path + "/btf-normal.json", load_result_table_btf_normal);
     $.get(path + "/btf-debug.json", load_result_table_btf_debug);
   });
