@@ -12,7 +12,7 @@ function colorify(cell, result)
     cmt = result.comment;
   }
 
-  if (ret == "") { // We only track failed tests: assumed they were OK
+  if (ret == "" || ret == "pass") { // We only track failed tests: assumed they were OK
     style = "background-color:green";
   } else if (ret == "skip") {
     style = "background-color:blue";
