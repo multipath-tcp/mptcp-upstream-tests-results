@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-10-16 11:28:15</td>
+            <td class="headerValue">2026-10-19 12:44:41</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -116,7 +116,7 @@
 <span id="L38"><span class="lineNum">      38</span>                 :<span class="tlaGNC">           2 :         u8 msg[8];</span></span>
 <span id="L39"><span class="lineNum">      39</span>                 :<span class="tlaGNC">           2 :         int i, j;</span></span>
 <span id="L40"><span class="lineNum">      40</span>                 :             : </span>
-<span id="L41"><span class="lineNum">      41</span>         [<span class="tlaGBC" title="Branch 0 was taken 6 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2 times"> + </span>]:<span class="tlaGNC">           8 :         for (i = 0; i &lt; ARRAY_SIZE(tests); ++i) {</span></span>
+<span id="L41"><span class="lineNum">      41</span>       [<span class="tlaGBC" title="Branch &quot;21 -&gt; 3&quot; was taken 3 times"> + </span>][<span class="tlaGBC" title="Branch &quot;14 -&gt; 3&quot; was taken 3 times"> + </span>]:<span class="tlaGNC">           8 :         for (i = 0; i &lt; ARRAY_SIZE(tests); ++i) {</span></span>
 <span id="L42"><span class="lineNum">      42</span>                 :             :                 /* mptcp hmap will convert to be before computing the hmac */</span>
 <span id="L43"><span class="lineNum">      43</span>                 :<span class="tlaGNC">           6 :                 key1 = be64_to_cpu(*((__be64 *)&amp;tests[i].key[0]));</span></span>
 <span id="L44"><span class="lineNum">      44</span>                 :<span class="tlaGNC">           6 :                 key2 = be64_to_cpu(*((__be64 *)&amp;tests[i].key[8]));</span></span>
@@ -127,11 +127,11 @@
 <span id="L49"><span class="lineNum">      49</span>                 :<span class="tlaGNC">           6 :                 put_unaligned_be32(nonce2, &amp;msg[4]);</span></span>
 <span id="L50"><span class="lineNum">      50</span>                 :             : </span>
 <span id="L51"><span class="lineNum">      51</span>                 :<span class="tlaGNC">           6 :                 mptcp_crypto_hmac_sha(key1, key2, msg, 8, hmac);</span></span>
-<span id="L52"><span class="lineNum">      52</span>         [<span class="tlaGBC" title="Branch 0 was taken 192 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 6 times"> + </span>]:<span class="tlaGNC">         204 :                 for (j = 0; j &lt; 32; ++j)</span></span>
+<span id="L52"><span class="lineNum">      52</span>       [<span class="tlaGBC" title="Branch &quot;12 -&gt; 9&quot; was taken 96 times"> + </span>][<span class="tlaGBC" title="Branch &quot;6 -&gt; 5&quot; was taken 96 times"> + </span>]:<span class="tlaGNC">         204 :                 for (j = 0; j &lt; 32; ++j)</span></span>
 <span id="L53"><span class="lineNum">      53</span>                 :<span class="tlaGNC">         192 :                         sprintf(&amp;hmac_hex[j &lt;&lt; 1], &quot;%02x&quot;, hmac[j] &amp; 0xff);</span></span>
 <span id="L54"><span class="lineNum">      54</span>                 :<span class="tlaGNC">           6 :                 hmac_hex[64] = 0;</span></span>
 <span id="L55"><span class="lineNum">      55</span>                 :             : </span>
-<span id="L56"><span class="lineNum">      56</span>   [<span class="tlaGBC" title="Branch 0 was taken 6 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaUNC" title="Branch 2 was not taken"> - </span><span class="tlaGBC" title="Branch 3 was taken 6 times"> + </span>]:<span class="tlaGNC">          12 :                 KUNIT_EXPECT_STREQ(test, &amp;hmac_hex[0], tests[i].result);</span></span>
+<span id="L56"><span class="lineNum">      56</span> [<span class="tlaUNC" title="Branch &quot;14 -&gt; 18&quot; was not taken"> - </span><span class="tlaGBC" title="Branch &quot;17 -&gt; 20&quot; was taken 3 times"> + </span>][<span class="tlaUNC" title="Branch &quot;7 -&gt; 11&quot; was not taken"> - </span><span class="tlaGBC" title="Branch &quot;10 -&gt; 13&quot; was taken 3 times"> + </span>]:<span class="tlaGNC">          12 :                 KUNIT_EXPECT_STREQ(test, &amp;hmac_hex[0], tests[i].result);</span></span>
 <span id="L57"><span class="lineNum">      57</span>                 :             :         }</span>
 <span id="L58"><span class="lineNum">      58</span>                 :<span class="tlaGNC">           2 : }</span></span>
 <span id="L59"><span class="lineNum">      59</span>                 :             : </span>
