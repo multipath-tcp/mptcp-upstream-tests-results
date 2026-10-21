@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-10-20 11:33:10</td>
+            <td class="headerValue">2026-10-21 16:16:11</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -125,39 +125,39 @@
 <span id="L47"><span class="lineNum">      47</span>                 :             : </span>
 <span id="L48"><span class="lineNum">      48</span>                 :<span class="tlaUNC">           0 : static struct token_bucket *token_bucket(u32 token)</span></span>
 <span id="L49"><span class="lineNum">      49</span>                 :             : {</span>
-<span id="L50"><span class="lineNum">      50</span>                 :<span class="tlaGNC">        7097 :         return &amp;token_hash[token &amp; token_mask];</span></span>
+<span id="L50"><span class="lineNum">      50</span>                 :<span class="tlaGNC">        7103 :         return &amp;token_hash[token &amp; token_mask];</span></span>
 <span id="L51"><span class="lineNum">      51</span>                 :             : }</span>
 <span id="L52"><span class="lineNum">      52</span>                 :             : </span>
 <span id="L53"><span class="lineNum">      53</span>                 :             : /* called with bucket lock held */</span>
 <span id="L54"><span class="lineNum">      54</span>                 :             : static struct mptcp_subflow_request_sock *</span>
 <span id="L55"><span class="lineNum">      55</span>                 :<span class="tlaUNC">           0 : __token_lookup_req(struct token_bucket *t, u32 token)</span></span>
 <span id="L56"><span class="lineNum">      56</span>                 :             : {</span>
-<span id="L57"><span class="lineNum">      57</span>                 :<span class="tlaGNC">        4140 :         struct mptcp_subflow_request_sock *req;</span></span>
-<span id="L58"><span class="lineNum">      58</span>                 :<span class="tlaGNC">        4140 :         struct hlist_nulls_node *pos;</span></span>
+<span id="L57"><span class="lineNum">      57</span>                 :<span class="tlaGNC">        4138 :         struct mptcp_subflow_request_sock *req;</span></span>
+<span id="L58"><span class="lineNum">      58</span>                 :<span class="tlaGNC">        4138 :         struct hlist_nulls_node *pos;</span></span>
 <span id="L59"><span class="lineNum">      59</span>                 :             : </span>
-<span id="L60"><span class="lineNum">      60</span>   [<span class="tlaUNC" title="Branch &quot;9 -&gt; 11&quot; was not taken"> - </span><span class="tlaUNC" title="Branch &quot;9 -&gt; 11&quot; was not taken"> - </span><span class="tlaUNC" title="Branch &quot;10 -&gt; 12&quot; was not taken"> - </span><span class="tlaGBC" title="Branch &quot;8 -&gt; 10&quot; was taken 3484 times"> + </span>]:<span class="tlaGNC">        5204 :         hlist_nulls_for_each_entry_rcu(req, pos, &amp;t-&gt;req_chain, token_node)</span></span>
-<span id="L61"><span class="lineNum">      61</span>   [<span class="tlaUNC" title="Branch &quot;10 -&gt; 8&quot; was not taken"> - </span><span class="tlaUNC" title="Branch &quot;10 -&gt; 8&quot; was not taken"> - </span><span class="tlaUNC" title="Branch &quot;11 -&gt; 9&quot; was not taken"> - </span><span class="tlaUNC" title="Branch &quot;9 -&gt; 7&quot; was not taken"> - </span>]:<span class="tlaGNC">        1720 :                 if (req-&gt;token == token)</span></span>
+<span id="L60"><span class="lineNum">      60</span>   [<span class="tlaUNC" title="Branch &quot;9 -&gt; 11&quot; was not taken"> - </span><span class="tlaUNC" title="Branch &quot;9 -&gt; 11&quot; was not taken"> - </span><span class="tlaUNC" title="Branch &quot;10 -&gt; 12&quot; was not taken"> - </span><span class="tlaGBC" title="Branch &quot;8 -&gt; 10&quot; was taken 3483 times"> + </span>]:<span class="tlaGNC">        5202 :         hlist_nulls_for_each_entry_rcu(req, pos, &amp;t-&gt;req_chain, token_node)</span></span>
+<span id="L61"><span class="lineNum">      61</span>   [<span class="tlaUNC" title="Branch &quot;10 -&gt; 8&quot; was not taken"> - </span><span class="tlaUNC" title="Branch &quot;10 -&gt; 8&quot; was not taken"> - </span><span class="tlaUNC" title="Branch &quot;11 -&gt; 9&quot; was not taken"> - </span><span class="tlaUNC" title="Branch &quot;9 -&gt; 7&quot; was not taken"> - </span>]:<span class="tlaGNC">        1719 :                 if (req-&gt;token == token)</span></span>
 <span id="L62"><span class="lineNum">      62</span>                 :             :                         return req;</span>
 <span id="L63"><span class="lineNum">      63</span>                 :             :         return NULL;</span>
 <span id="L64"><span class="lineNum">      64</span>                 :             : }</span>
 <span id="L65"><span class="lineNum">      65</span>                 :             : </span>
 <span id="L66"><span class="lineNum">      66</span>                 :             : /* called with bucket lock held */</span>
 <span id="L67"><span class="lineNum">      67</span>                 :             : static struct mptcp_sock *</span>
-<span id="L68"><span class="lineNum">      68</span>                 :<span class="tlaGNC">        6869 : __token_lookup_msk(struct token_bucket *t, u32 token)</span></span>
+<span id="L68"><span class="lineNum">      68</span>                 :<span class="tlaGNC">        6876 : __token_lookup_msk(struct token_bucket *t, u32 token)</span></span>
 <span id="L69"><span class="lineNum">      69</span>                 :             : {</span>
-<span id="L70"><span class="lineNum">      70</span>                 :<span class="tlaGNC">        6869 :         struct hlist_nulls_node *pos;</span></span>
-<span id="L71"><span class="lineNum">      71</span>                 :<span class="tlaGNC">        6869 :         struct sock *sk;</span></span>
+<span id="L70"><span class="lineNum">      70</span>                 :<span class="tlaGNC">        6876 :         struct hlist_nulls_node *pos;</span></span>
+<span id="L71"><span class="lineNum">      71</span>                 :<span class="tlaGNC">        6876 :         struct sock *sk;</span></span>
 <span id="L72"><span class="lineNum">      72</span>                 :             : </span>
-<span id="L73"><span class="lineNum">      73</span>            [<span class="tlaGBC" title="Branch &quot;13 -&gt; 15&quot; was taken 3484 times"> + </span>]:<span class="tlaGNC">        6886 :         sk_nulls_for_each_rcu(sk, pos, &amp;t-&gt;msk_chain)</span></span>
-<span id="L74"><span class="lineNum">      74</span>      [<span class="tlaGBC" title="Branch &quot;7 -&gt; 12&quot; was taken 17 times"> + </span><span class="tlaUNC" title="Branch &quot;14 -&gt; 4&quot; was not taken"> - </span><span class="tlaGBC" title="Branch &quot;14 -&gt; 7&quot; was taken 3402 times"> + </span>]:<span class="tlaGNC">        3402 :                 if (mptcp_sk(sk)-&gt;token == token)</span></span>
-<span id="L75"><span class="lineNum">      75</span>            [<span class="tlaGBC" title="Branch &quot;8 -&gt; 15&quot; was taken 3385 times"> + </span>]:<span class="tlaGNC">        3385 :                         return mptcp_sk(sk);</span></span>
+<span id="L73"><span class="lineNum">      73</span>            [<span class="tlaGBC" title="Branch &quot;13 -&gt; 15&quot; was taken 3483 times"> + </span>]:<span class="tlaGNC">        6894 :         sk_nulls_for_each_rcu(sk, pos, &amp;t-&gt;msk_chain)</span></span>
+<span id="L74"><span class="lineNum">      74</span>      [<span class="tlaGBC" title="Branch &quot;7 -&gt; 12&quot; was taken 18 times"> + </span><span class="tlaUNC" title="Branch &quot;14 -&gt; 4&quot; was not taken"> - </span><span class="tlaGBC" title="Branch &quot;14 -&gt; 7&quot; was taken 3411 times"> + </span>]:<span class="tlaGNC">        3411 :                 if (mptcp_sk(sk)-&gt;token == token)</span></span>
+<span id="L75"><span class="lineNum">      75</span>            [<span class="tlaGBC" title="Branch &quot;8 -&gt; 15&quot; was taken 3393 times"> + </span>]:<span class="tlaGNC">        3393 :                         return mptcp_sk(sk);</span></span>
 <span id="L76"><span class="lineNum">      76</span>                 :             :         return NULL;</span>
 <span id="L77"><span class="lineNum">      77</span>                 :             : }</span>
 <span id="L78"><span class="lineNum">      78</span>                 :             : </span>
-<span id="L79"><span class="lineNum">      79</span>                 :<span class="tlaGNC">        3484 : static bool __token_bucket_busy(struct token_bucket *t, u32 token)</span></span>
+<span id="L79"><span class="lineNum">      79</span>                 :<span class="tlaGNC">        3483 : static bool __token_bucket_busy(struct token_bucket *t, u32 token)</span></span>
 <span id="L80"><span class="lineNum">      80</span>                 :             : {</span>
-<span id="L81"><span class="lineNum">      81</span>    [<span class="tlaGBC" title="Branch &quot;3 -&gt; 5&quot; was taken 3346 times"> + </span><span class="tlaUNC" title="Branch &quot;10 -&gt; 4&quot; was not taken"> - </span>][<span class="tlaGBC" title="Branch &quot;3 -&gt; 5&quot; was taken 138 times"> + </span>]:<span class="tlaGNC">        6830 :         return !token || t-&gt;chain_len &gt;= TOKEN_MAX_CHAIN_LEN ||</span></span>
-<span id="L82"><span class="lineNum">      82</span>         [<span class="tlaUNC" title="Branch &quot;2 -&gt; 4&quot; was not taken"> - </span><span class="tlaUNC" title="Branch &quot;12 -&gt; 4&quot; was not taken"> - </span>]:<span class="tlaGNC">        6968 :                __token_lookup_req(t, token) || __token_lookup_msk(t, token);</span></span>
+<span id="L81"><span class="lineNum">      81</span>    [<span class="tlaGBC" title="Branch &quot;3 -&gt; 5&quot; was taken 3345 times"> + </span><span class="tlaUNC" title="Branch &quot;10 -&gt; 4&quot; was not taken"> - </span>][<span class="tlaGBC" title="Branch &quot;3 -&gt; 5&quot; was taken 138 times"> + </span>]:<span class="tlaGNC">        6828 :         return !token || t-&gt;chain_len &gt;= TOKEN_MAX_CHAIN_LEN ||</span></span>
+<span id="L82"><span class="lineNum">      82</span>         [<span class="tlaUNC" title="Branch &quot;2 -&gt; 4&quot; was not taken"> - </span><span class="tlaUNC" title="Branch &quot;12 -&gt; 4&quot; was not taken"> - </span>]:<span class="tlaGNC">        6966 :                __token_lookup_req(t, token) || __token_lookup_msk(t, token);</span></span>
 <span class="lineNum">        </span>      [<span class="tlaUNC" title="Branch &quot;2 -&gt; 4&quot; was not taken"> - </span><span class="tlaUNC" title="Branch &quot;10 -&gt; 4&quot; was not taken"> - </span><span class="tlaUNC" title="Branch &quot;12 -&gt; 4&quot; was not taken"> - </span>]
 <span id="L83"><span class="lineNum">      83</span>                 :             : }</span>
 <span id="L84"><span class="lineNum">      84</span>                 :             : </span>
@@ -184,31 +184,31 @@
 <span id="L105"><span class="lineNum">     105</span>                 :             :  *</span>
 <span id="L106"><span class="lineNum">     106</span>                 :             :  * Return: 0 on success.</span>
 <span id="L107"><span class="lineNum">     107</span>                 :             :  */</span>
-<span id="L108"><span class="lineNum">     108</span>                 :<span class="tlaGNC">        1714 : int mptcp_token_new_request(struct request_sock *req)</span></span>
+<span id="L108"><span class="lineNum">     108</span>                 :<span class="tlaGNC">        1713 : int mptcp_token_new_request(struct request_sock *req)</span></span>
 <span id="L109"><span class="lineNum">     109</span>                 :             : {</span>
-<span id="L110"><span class="lineNum">     110</span>                 :<span class="tlaGNC">        1714 :         struct mptcp_subflow_request_sock *subflow_req = mptcp_subflow_rsk(req);</span></span>
-<span id="L111"><span class="lineNum">     111</span>                 :<span class="tlaGNC">        1714 :         struct token_bucket *bucket;</span></span>
-<span id="L112"><span class="lineNum">     112</span>                 :<span class="tlaGNC">        1714 :         u32 token;</span></span>
+<span id="L110"><span class="lineNum">     110</span>                 :<span class="tlaGNC">        1713 :         struct mptcp_subflow_request_sock *subflow_req = mptcp_subflow_rsk(req);</span></span>
+<span id="L111"><span class="lineNum">     111</span>                 :<span class="tlaGNC">        1713 :         struct token_bucket *bucket;</span></span>
+<span id="L112"><span class="lineNum">     112</span>                 :<span class="tlaGNC">        1713 :         u32 token;</span></span>
 <span id="L113"><span class="lineNum">     113</span>                 :             : </span>
-<span id="L114"><span class="lineNum">     114</span>                 :<span class="tlaGNC">        1714 :         mptcp_crypto_key_sha(subflow_req-&gt;local_key,</span></span>
+<span id="L114"><span class="lineNum">     114</span>                 :<span class="tlaGNC">        1713 :         mptcp_crypto_key_sha(subflow_req-&gt;local_key,</span></span>
 <span id="L115"><span class="lineNum">     115</span>                 :             :                              &amp;subflow_req-&gt;token,</span>
 <span id="L116"><span class="lineNum">     116</span>                 :             :                              &amp;subflow_req-&gt;idsn);</span>
-<span id="L117"><span class="lineNum">     117</span>         [<span class="tlaUNC" title="Branch &quot;3 -&gt; 4&quot; was not taken"> - </span><span class="tlaUNC" title="Branch &quot;5 -&gt; 7&quot; was not taken"> - </span>]:<span class="tlaGNC">        1714 :         pr_debug(&quot;req=%p local_key=%llu, token=%u, idsn=%llu\n&quot;,</span></span>
+<span id="L117"><span class="lineNum">     117</span>         [<span class="tlaUNC" title="Branch &quot;3 -&gt; 4&quot; was not taken"> - </span><span class="tlaUNC" title="Branch &quot;5 -&gt; 7&quot; was not taken"> - </span>]:<span class="tlaGNC">        1713 :         pr_debug(&quot;req=%p local_key=%llu, token=%u, idsn=%llu\n&quot;,</span></span>
 <span id="L118"><span class="lineNum">     118</span>                 :             :                  req, subflow_req-&gt;local_key, subflow_req-&gt;token,</span>
 <span id="L119"><span class="lineNum">     119</span>                 :             :                  subflow_req-&gt;idsn);</span>
 <span id="L120"><span class="lineNum">     120</span>                 :             : </span>
-<span id="L121"><span class="lineNum">     121</span>                 :<span class="tlaGNC">        1714 :         token = subflow_req-&gt;token;</span></span>
-<span id="L122"><span class="lineNum">     122</span>                 :<span class="tlaGNC">        1714 :         bucket = token_bucket(token);</span></span>
-<span id="L123"><span class="lineNum">     123</span>                 :<span class="tlaGNC">        1714 :         spin_lock_bh(&amp;bucket-&gt;lock);</span></span>
-<span id="L124"><span class="lineNum">     124</span>            [<span class="tlaGBC" title="Branch &quot;9 -&gt; 12&quot; was taken 1714 times"> + </span>]:<span class="tlaGNC">        1714 :         if (__token_bucket_busy(bucket, token)) {</span></span>
+<span id="L121"><span class="lineNum">     121</span>                 :<span class="tlaGNC">        1713 :         token = subflow_req-&gt;token;</span></span>
+<span id="L122"><span class="lineNum">     122</span>                 :<span class="tlaGNC">        1713 :         bucket = token_bucket(token);</span></span>
+<span id="L123"><span class="lineNum">     123</span>                 :<span class="tlaGNC">        1713 :         spin_lock_bh(&amp;bucket-&gt;lock);</span></span>
+<span id="L124"><span class="lineNum">     124</span>            [<span class="tlaGBC" title="Branch &quot;9 -&gt; 12&quot; was taken 1713 times"> + </span>]:<span class="tlaGNC">        1713 :         if (__token_bucket_busy(bucket, token)) {</span></span>
 <span id="L125"><span class="lineNum">     125</span>                 :<span class="tlaUNC">           0 :                 spin_unlock_bh(&amp;bucket-&gt;lock);</span></span>
 <span id="L126"><span class="lineNum">     126</span>                 :<span class="tlaUNC">           0 :                 return -EBUSY;</span></span>
 <span id="L127"><span class="lineNum">     127</span>                 :             :         }</span>
 <span id="L128"><span class="lineNum">     128</span>                 :             : </span>
-<span id="L129"><span class="lineNum">     129</span>                 :<span class="tlaGNC">        1714 :         hlist_nulls_add_head_rcu(&amp;subflow_req-&gt;token_node, &amp;bucket-&gt;req_chain);</span></span>
-<span id="L130"><span class="lineNum">     130</span>                 :<span class="tlaGNC">        1714 :         bucket-&gt;chain_len++;</span></span>
-<span id="L131"><span class="lineNum">     131</span>                 :<span class="tlaGNC">        1714 :         spin_unlock_bh(&amp;bucket-&gt;lock);</span></span>
-<span id="L132"><span class="lineNum">     132</span>                 :<span class="tlaGNC">        1714 :         return 0;</span></span>
+<span id="L129"><span class="lineNum">     129</span>                 :<span class="tlaGNC">        1713 :         hlist_nulls_add_head_rcu(&amp;subflow_req-&gt;token_node, &amp;bucket-&gt;req_chain);</span></span>
+<span id="L130"><span class="lineNum">     130</span>                 :<span class="tlaGNC">        1713 :         bucket-&gt;chain_len++;</span></span>
+<span id="L131"><span class="lineNum">     131</span>                 :<span class="tlaGNC">        1713 :         spin_unlock_bh(&amp;bucket-&gt;lock);</span></span>
+<span id="L132"><span class="lineNum">     132</span>                 :<span class="tlaGNC">        1713 :         return 0;</span></span>
 <span id="L133"><span class="lineNum">     133</span>                 :             : }</span>
 <span id="L134"><span class="lineNum">     134</span>                 :             : </span>
 <span id="L135"><span class="lineNum">     135</span>                 :             : /**</span>
@@ -306,33 +306,33 @@
 <span id="L227"><span class="lineNum">     227</span>                 :             :  *</span>
 <span id="L228"><span class="lineNum">     228</span>                 :             :  * Return: true on success.</span>
 <span id="L229"><span class="lineNum">     229</span>                 :             :  */</span>
-<span id="L230"><span class="lineNum">     230</span>                 :<span class="tlaGNC">        1682 : bool mptcp_token_accept(struct mptcp_subflow_request_sock *req,</span></span>
+<span id="L230"><span class="lineNum">     230</span>                 :<span class="tlaGNC">        1681 : bool mptcp_token_accept(struct mptcp_subflow_request_sock *req,</span></span>
 <span id="L231"><span class="lineNum">     231</span>                 :             :                         struct mptcp_sock *msk)</span>
 <span id="L232"><span class="lineNum">     232</span>                 :             : {</span>
-<span id="L233"><span class="lineNum">     233</span>                 :<span class="tlaGNC">        1682 :         struct mptcp_subflow_request_sock *pos;</span></span>
-<span id="L234"><span class="lineNum">     234</span>                 :<span class="tlaGNC">        1682 :         struct sock *sk = (struct sock *)msk;</span></span>
-<span id="L235"><span class="lineNum">     235</span>                 :<span class="tlaGNC">        1682 :         struct token_bucket *bucket;</span></span>
-<span id="L236"><span class="lineNum">     236</span>                 :<span class="tlaGNC">        1682 :         bool ret = false;</span></span>
+<span id="L233"><span class="lineNum">     233</span>                 :<span class="tlaGNC">        1681 :         struct mptcp_subflow_request_sock *pos;</span></span>
+<span id="L234"><span class="lineNum">     234</span>                 :<span class="tlaGNC">        1681 :         struct sock *sk = (struct sock *)msk;</span></span>
+<span id="L235"><span class="lineNum">     235</span>                 :<span class="tlaGNC">        1681 :         struct token_bucket *bucket;</span></span>
+<span id="L236"><span class="lineNum">     236</span>                 :<span class="tlaGNC">        1681 :         bool ret = false;</span></span>
 <span id="L237"><span class="lineNum">     237</span>                 :             : </span>
-<span id="L238"><span class="lineNum">     238</span>                 :<span class="tlaGNC">        1682 :         bucket = token_bucket(req-&gt;token);</span></span>
-<span id="L239"><span class="lineNum">     239</span>                 :<span class="tlaGNC">        1682 :         spin_lock_bh(&amp;bucket-&gt;lock);</span></span>
-<span id="L240"><span class="lineNum">     240</span>            [<span class="tlaGBC" title="Branch &quot;3 -&gt; 6&quot; was taken 1682 times"> + </span>]:<span class="tlaGNC">        1682 :         if (hlist_nulls_unhashed(&amp;req-&gt;token_node))</span></span>
+<span id="L238"><span class="lineNum">     238</span>                 :<span class="tlaGNC">        1681 :         bucket = token_bucket(req-&gt;token);</span></span>
+<span id="L239"><span class="lineNum">     239</span>                 :<span class="tlaGNC">        1681 :         spin_lock_bh(&amp;bucket-&gt;lock);</span></span>
+<span id="L240"><span class="lineNum">     240</span>            [<span class="tlaGBC" title="Branch &quot;3 -&gt; 6&quot; was taken 1681 times"> + </span>]:<span class="tlaGNC">        1681 :         if (hlist_nulls_unhashed(&amp;req-&gt;token_node))</span></span>
 <span id="L241"><span class="lineNum">     241</span>                 :<span class="tlaUNC">           0 :                 goto unlock;</span></span>
 <span id="L242"><span class="lineNum">     242</span>                 :             : </span>
-<span id="L243"><span class="lineNum">     243</span>                 :<span class="tlaGNC">        1682 :         pos = __token_lookup_req(bucket, req-&gt;token);</span></span>
-<span id="L244"><span class="lineNum">     244</span>            [<span class="tlaGBC" title="Branch &quot;11 -&gt; 13&quot; was taken 1682 times"> + </span>]:<span class="tlaGNC">        1682 :         if (pos != req)</span></span>
+<span id="L243"><span class="lineNum">     243</span>                 :<span class="tlaGNC">        1681 :         pos = __token_lookup_req(bucket, req-&gt;token);</span></span>
+<span id="L244"><span class="lineNum">     244</span>            [<span class="tlaGBC" title="Branch &quot;11 -&gt; 13&quot; was taken 1681 times"> + </span>]:<span class="tlaGNC">        1681 :         if (pos != req)</span></span>
 <span id="L245"><span class="lineNum">     245</span>                 :<span class="tlaUNC">           0 :                 goto unlock;</span></span>
 <span id="L246"><span class="lineNum">     246</span>                 :             : </span>
-<span id="L247"><span class="lineNum">     247</span>                 :<span class="tlaGNC">        1682 :         hlist_nulls_del_init_rcu(&amp;req-&gt;token_node);</span></span>
-<span id="L248"><span class="lineNum">     248</span>                 :<span class="tlaGNC">        1682 :         __sk_nulls_add_node_rcu((struct sock *)msk, &amp;bucket-&gt;msk_chain);</span></span>
+<span id="L247"><span class="lineNum">     247</span>                 :<span class="tlaGNC">        1681 :         hlist_nulls_del_init_rcu(&amp;req-&gt;token_node);</span></span>
+<span id="L248"><span class="lineNum">     248</span>                 :<span class="tlaGNC">        1681 :         __sk_nulls_add_node_rcu((struct sock *)msk, &amp;bucket-&gt;msk_chain);</span></span>
 <span id="L249"><span class="lineNum">     249</span>                 :             :         ret = true;</span>
 <span id="L250"><span class="lineNum">     250</span>                 :             : </span>
-<span id="L251"><span class="lineNum">     251</span>                 :<span class="tlaGNC">        1682 : unlock:</span></span>
-<span id="L252"><span class="lineNum">     252</span>                 :<span class="tlaGNC">        1682 :         spin_unlock_bh(&amp;bucket-&gt;lock);</span></span>
-<span id="L253"><span class="lineNum">     253</span>       [<span class="tlaUNC" title="Branch &quot;19 -&gt; 24&quot; was not taken"> - </span>][<span class="tlaUNC" title="Branch &quot;19 -&gt; 22&quot; was not taken"> - </span>]:<span class="tlaGNC">        1682 :         if (ret)</span></span>
-<span id="L254"><span class="lineNum">     254</span>                 :<span class="tlaGNC">        1682 :                 sock_prot_inuse_add(sock_net(sk), sk-&gt;sk_prot, 1);</span></span>
+<span id="L251"><span class="lineNum">     251</span>                 :<span class="tlaGNC">        1681 : unlock:</span></span>
+<span id="L252"><span class="lineNum">     252</span>                 :<span class="tlaGNC">        1681 :         spin_unlock_bh(&amp;bucket-&gt;lock);</span></span>
+<span id="L253"><span class="lineNum">     253</span>       [<span class="tlaUNC" title="Branch &quot;19 -&gt; 24&quot; was not taken"> - </span>][<span class="tlaUNC" title="Branch &quot;19 -&gt; 22&quot; was not taken"> - </span>]:<span class="tlaGNC">        1681 :         if (ret)</span></span>
+<span id="L254"><span class="lineNum">     254</span>                 :<span class="tlaGNC">        1681 :                 sock_prot_inuse_add(sock_net(sk), sk-&gt;sk_prot, 1);</span></span>
 <span id="L255"><span class="lineNum">     255</span>                 :             : </span>
-<span id="L256"><span class="lineNum">     256</span>                 :<span class="tlaGNC">        1682 :         return ret;</span></span>
+<span id="L256"><span class="lineNum">     256</span>                 :<span class="tlaGNC">        1681 :         return ret;</span></span>
 <span id="L257"><span class="lineNum">     257</span>                 :             : }</span>
 <span id="L258"><span class="lineNum">     258</span>                 :             : </span>
 <span id="L259"><span class="lineNum">     259</span>                 :<span class="tlaGNC">          52 : bool mptcp_token_exists(u32 token)</span></span>
@@ -426,50 +426,50 @@
 <span id="L345"><span class="lineNum">     345</span>                 :             :  *   The first mptcp connection structure found inside the token container</span>
 <span id="L346"><span class="lineNum">     346</span>                 :             :  *   starting from the specified position, or NULL.</span>
 <span id="L347"><span class="lineNum">     347</span>                 :             :  */</span>
-<span id="L348"><span class="lineNum">     348</span>                 :<span class="tlaGNC">        6006 : struct mptcp_sock *mptcp_token_iter_next(const struct net *net, long *s_slot,</span></span>
+<span id="L348"><span class="lineNum">     348</span>                 :<span class="tlaGNC">        5984 : struct mptcp_sock *mptcp_token_iter_next(const struct net *net, long *s_slot,</span></span>
 <span id="L349"><span class="lineNum">     349</span>                 :             :                                          long *s_num)</span>
 <span id="L350"><span class="lineNum">     350</span>                 :             : {</span>
-<span id="L351"><span class="lineNum">     351</span>                 :<span class="tlaGNC">        6006 :         struct mptcp_sock *ret = NULL;</span></span>
-<span id="L352"><span class="lineNum">     352</span>                 :<span class="tlaGNC">        6006 :         struct hlist_nulls_node *pos;</span></span>
-<span id="L353"><span class="lineNum">     353</span>                 :<span class="tlaGNC">        6006 :         int slot, num = 0;</span></span>
+<span id="L351"><span class="lineNum">     351</span>                 :<span class="tlaGNC">        5984 :         struct mptcp_sock *ret = NULL;</span></span>
+<span id="L352"><span class="lineNum">     352</span>                 :<span class="tlaGNC">        5984 :         struct hlist_nulls_node *pos;</span></span>
+<span id="L353"><span class="lineNum">     353</span>                 :<span class="tlaGNC">        5984 :         int slot, num = 0;</span></span>
 <span id="L354"><span class="lineNum">     354</span>                 :             : </span>
-<span id="L355"><span class="lineNum">     355</span>       [<span class="tlaGBC" title="Branch &quot;41 -&gt; 3&quot; was taken 9586313 times"> + </span>][<span class="tlaGBC" title="Branch &quot;29 -&gt; 3&quot; was taken 9619079 times"> + </span>]:<span class="tlaGNC">    19208054 :         for (slot = *s_slot; slot &lt;= token_mask; *s_num = 0, slot++) {</span></span>
-<span id="L356"><span class="lineNum">     356</span>                 :<span class="tlaGNC">    19205392 :                 struct token_bucket *bucket = &amp;token_hash[slot];</span></span>
-<span id="L357"><span class="lineNum">     357</span>                 :<span class="tlaGNC">    19205392 :                 struct sock *sk;</span></span>
+<span id="L355"><span class="lineNum">     355</span>       [<span class="tlaGBC" title="Branch &quot;41 -&gt; 3&quot; was taken 9553533 times"> + </span>][<span class="tlaGBC" title="Branch &quot;29 -&gt; 3&quot; was taken 9619073 times"> + </span>]:<span class="tlaGNC">    19175264 :         for (slot = *s_slot; slot &lt;= token_mask; *s_num = 0, slot++) {</span></span>
+<span id="L356"><span class="lineNum">     356</span>                 :<span class="tlaGNC">    19172606 :                 struct token_bucket *bucket = &amp;token_hash[slot];</span></span>
+<span id="L357"><span class="lineNum">     357</span>                 :<span class="tlaGNC">    19172606 :                 struct sock *sk;</span></span>
 <span id="L358"><span class="lineNum">     358</span>                 :             : </span>
-<span id="L359"><span class="lineNum">     359</span>                 :<span class="tlaGNC">    19205392 :                 num = 0;</span></span>
+<span id="L359"><span class="lineNum">     359</span>                 :<span class="tlaGNC">    19172606 :                 num = 0;</span></span>
 <span id="L360"><span class="lineNum">     360</span>                 :             : </span>
-<span id="L361"><span class="lineNum">     361</span>            [<span class="tlaGBC" title="Branch &quot;3 -&gt; 5&quot; was taken 11100 times"> + </span>]:<span class="tlaGNC">    19205392 :                 if (hlist_nulls_empty(&amp;bucket-&gt;msk_chain))</span></span>
-<span id="L362"><span class="lineNum">     362</span>                 :<span class="tlaGNC">    19194292 :                         continue;</span></span>
+<span id="L361"><span class="lineNum">     361</span>            [<span class="tlaGBC" title="Branch &quot;3 -&gt; 5&quot; was taken 10928 times"> + </span>]:<span class="tlaGNC">    19172606 :                 if (hlist_nulls_empty(&amp;bucket-&gt;msk_chain))</span></span>
+<span id="L362"><span class="lineNum">     362</span>                 :<span class="tlaGNC">    19161678 :                         continue;</span></span>
 <span id="L363"><span class="lineNum">     363</span>                 :             : </span>
-<span id="L364"><span class="lineNum">     364</span>                 :<span class="tlaGNC">       11100 :                 rcu_read_lock();</span></span>
-<span id="L365"><span class="lineNum">     365</span>       [<span class="tlaGBC" title="Branch &quot;36 -&gt; 39&quot; was taken 3129 times"> + </span>][<span class="tlaGBC" title="Branch &quot;24 -&gt; 26&quot; was taken 4627 times"> + </span>]:<span class="tlaGNC">       18896 :                 sk_nulls_for_each_rcu(sk, pos, &amp;bucket-&gt;msk_chain) {</span></span>
-<span id="L366"><span class="lineNum">     366</span>                 :<span class="tlaGNC">       11140 :                         ++num;</span></span>
-<span id="L367"><span class="lineNum">     367</span> [<span class="tlaGBC" title="Branch &quot;38 -&gt; 19&quot; was taken 1466 times"> + </span><span class="tlaGBC" title="Branch &quot;38 -&gt; 20&quot; was taken 3344 times"> + </span>][<span class="tlaGBC" title="Branch &quot;25 -&gt; 8&quot; was taken 2978 times"> + </span><span class="tlaGBC" title="Branch &quot;25 -&gt; 9&quot; was taken 3352 times"> + </span>]:<span class="tlaGNC">       11140 :                         if (!net_eq(sock_net(sk), net))</span></span>
-<span id="L368"><span class="lineNum">     368</span>                 :<span class="tlaGNC">        4444 :                                 continue;</span></span>
+<span id="L364"><span class="lineNum">     364</span>                 :<span class="tlaGNC">       10928 :                 rcu_read_lock();</span></span>
+<span id="L365"><span class="lineNum">     365</span>       [<span class="tlaGBC" title="Branch &quot;36 -&gt; 39&quot; was taken 3084 times"> + </span>][<span class="tlaGBC" title="Branch &quot;24 -&gt; 26&quot; was taken 4518 times"> + </span>]:<span class="tlaGNC">       18634 :                 sk_nulls_for_each_rcu(sk, pos, &amp;bucket-&gt;msk_chain) {</span></span>
+<span id="L366"><span class="lineNum">     366</span>                 :<span class="tlaGNC">       11032 :                         ++num;</span></span>
+<span id="L367"><span class="lineNum">     367</span> [<span class="tlaGBC" title="Branch &quot;38 -&gt; 19&quot; was taken 1457 times"> + </span><span class="tlaGBC" title="Branch &quot;38 -&gt; 20&quot; was taken 3344 times"> + </span>][<span class="tlaGBC" title="Branch &quot;25 -&gt; 8&quot; was taken 2883 times"> + </span><span class="tlaGBC" title="Branch &quot;25 -&gt; 9&quot; was taken 3348 times"> + </span>]:<span class="tlaGNC">       11032 :                         if (!net_eq(sock_net(sk), net))</span></span>
+<span id="L368"><span class="lineNum">     368</span>                 :<span class="tlaGNC">        4340 :                                 continue;</span></span>
 <span id="L369"><span class="lineNum">     369</span>                 :             : </span>
-<span id="L370"><span class="lineNum">     370</span>       [<span class="tlaGBC" title="Branch &quot;20 -&gt; 22&quot; was taken 1673 times"> + </span>][<span class="tlaGBC" title="Branch &quot;9 -&gt; 11&quot; was taken 1671 times"> + </span>]:<span class="tlaGNC">        6696 :                         if (num &lt;= *s_num)</span></span>
-<span id="L371"><span class="lineNum">     371</span>                 :<span class="tlaGNC">        3352 :                                 continue;</span></span>
+<span id="L370"><span class="lineNum">     370</span>       [<span class="tlaGBC" title="Branch &quot;20 -&gt; 22&quot; was taken 1661 times"> + </span>][<span class="tlaGBC" title="Branch &quot;9 -&gt; 11&quot; was taken 1665 times"> + </span>]:<span class="tlaGNC">        6692 :                         if (num &lt;= *s_num)</span></span>
+<span id="L371"><span class="lineNum">     371</span>                 :<span class="tlaGNC">        3366 :                                 continue;</span></span>
 <span id="L372"><span class="lineNum">     372</span>                 :             : </span>
-<span id="L373"><span class="lineNum">     373</span>       [<span class="tlaGBC" title="Branch &quot;23 -&gt; 25&quot; was taken 1673 times"> + </span>][<span class="tlaGBC" title="Branch &quot;12 -&gt; 14&quot; was taken 1671 times"> + </span>]:<span class="tlaGNC">        3344 :                         if (!refcount_inc_not_zero(&amp;sk-&gt;sk_refcnt))</span></span>
+<span id="L373"><span class="lineNum">     373</span>       [<span class="tlaGBC" title="Branch &quot;23 -&gt; 25&quot; was taken 1661 times"> + </span>][<span class="tlaGBC" title="Branch &quot;12 -&gt; 14&quot; was taken 1665 times"> + </span>]:<span class="tlaGNC">        3326 :                         if (!refcount_inc_not_zero(&amp;sk-&gt;sk_refcnt))</span></span>
 <span id="L374"><span class="lineNum">     374</span>                 :<span class="tlaUNC">           0 :                                 continue;</span></span>
 <span id="L375"><span class="lineNum">     375</span>                 :             : </span>
-<span id="L376"><span class="lineNum">     376</span>       [<span class="tlaGBC" title="Branch &quot;26 -&gt; 29&quot; was taken 1673 times"> + </span>][<span class="tlaGBC" title="Branch &quot;14 -&gt; 17&quot; was taken 1671 times"> + </span>]:<span class="tlaGNC">        3344 :                         if (!net_eq(sock_net(sk), net)) {</span></span>
+<span id="L376"><span class="lineNum">     376</span>       [<span class="tlaGBC" title="Branch &quot;26 -&gt; 29&quot; was taken 1661 times"> + </span>][<span class="tlaGBC" title="Branch &quot;14 -&gt; 17&quot; was taken 1665 times"> + </span>]:<span class="tlaGNC">        3326 :                         if (!net_eq(sock_net(sk), net)) {</span></span>
 <span id="L377"><span class="lineNum">     377</span>                 :<span class="tlaUNC">           0 :                                 sock_put(sk);</span></span>
 <span id="L378"><span class="lineNum">     378</span>                 :<span class="tlaUNC">           0 :                                 continue;</span></span>
 <span id="L379"><span class="lineNum">     379</span>                 :             :                         }</span>
 <span id="L380"><span class="lineNum">     380</span>                 :             : </span>
-<span id="L381"><span class="lineNum">     381</span>       [<span class="tlaGBC" title="Branch &quot;29 -&gt; 33&quot; was taken 1673 times"> + </span>][<span class="tlaGBC" title="Branch &quot;17 -&gt; 21&quot; was taken 1671 times"> + </span>]:<span class="tlaGNC">        3344 :                         ret = mptcp_sk(sk);</span></span>
-<span id="L382"><span class="lineNum">     382</span>                 :<span class="tlaGNC">        3344 :                         rcu_read_unlock();</span></span>
-<span id="L383"><span class="lineNum">     383</span>                 :<span class="tlaGNC">        3344 :                         goto out;</span></span>
+<span id="L381"><span class="lineNum">     381</span>       [<span class="tlaGBC" title="Branch &quot;29 -&gt; 33&quot; was taken 1661 times"> + </span>][<span class="tlaGBC" title="Branch &quot;17 -&gt; 21&quot; was taken 1665 times"> + </span>]:<span class="tlaGNC">        3326 :                         ret = mptcp_sk(sk);</span></span>
+<span id="L382"><span class="lineNum">     382</span>                 :<span class="tlaGNC">        3326 :                         rcu_read_unlock();</span></span>
+<span id="L383"><span class="lineNum">     383</span>                 :<span class="tlaGNC">        3326 :                         goto out;</span></span>
 <span id="L384"><span class="lineNum">     384</span>                 :             :                 }</span>
-<span id="L385"><span class="lineNum">     385</span>                 :<span class="tlaGNC">        7756 :                 rcu_read_unlock();</span></span>
+<span id="L385"><span class="lineNum">     385</span>                 :<span class="tlaGNC">        7602 :                 rcu_read_unlock();</span></span>
 <span id="L386"><span class="lineNum">     386</span>                 :             :         }</span>
 <span id="L387"><span class="lineNum">     387</span>                 :             : </span>
-<span id="L388"><span class="lineNum">     388</span>                 :<span class="tlaGNC">        2662 : out:</span></span>
-<span id="L389"><span class="lineNum">     389</span>                 :<span class="tlaGNC">        6006 :         *s_slot = slot;</span></span>
-<span id="L390"><span class="lineNum">     390</span>                 :<span class="tlaGNC">        6006 :         *s_num = num;</span></span>
-<span id="L391"><span class="lineNum">     391</span>                 :<span class="tlaGNC">        6006 :         return ret;</span></span>
+<span id="L388"><span class="lineNum">     388</span>                 :<span class="tlaGNC">        2658 : out:</span></span>
+<span id="L389"><span class="lineNum">     389</span>                 :<span class="tlaGNC">        5984 :         *s_slot = slot;</span></span>
+<span id="L390"><span class="lineNum">     390</span>                 :<span class="tlaGNC">        5984 :         *s_num = num;</span></span>
+<span id="L391"><span class="lineNum">     391</span>                 :<span class="tlaGNC">        5984 :         return ret;</span></span>
 <span id="L392"><span class="lineNum">     392</span>                 :             : }</span>
 <span id="L393"><span class="lineNum">     393</span>                 :             : EXPORT_SYMBOL_GPL(mptcp_token_iter_next);</span>
 <span id="L394"><span class="lineNum">     394</span>                 :             : </span>
@@ -479,13 +479,13 @@
 <span id="L398"><span class="lineNum">     398</span>                 :             :  *</span>
 <span id="L399"><span class="lineNum">     399</span>                 :             :  * Remove the token associated to @req.</span>
 <span id="L400"><span class="lineNum">     400</span>                 :             :  */</span>
-<span id="L401"><span class="lineNum">     401</span>                 :<span class="tlaGNC">        2628 : void mptcp_token_destroy_request(struct request_sock *req)</span></span>
+<span id="L401"><span class="lineNum">     401</span>                 :<span class="tlaGNC">        2627 : void mptcp_token_destroy_request(struct request_sock *req)</span></span>
 <span id="L402"><span class="lineNum">     402</span>                 :             : {</span>
-<span id="L403"><span class="lineNum">     403</span>                 :<span class="tlaGNC">        2628 :         struct mptcp_subflow_request_sock *subflow_req = mptcp_subflow_rsk(req);</span></span>
-<span id="L404"><span class="lineNum">     404</span>                 :<span class="tlaGNC">        2628 :         struct mptcp_subflow_request_sock *pos;</span></span>
-<span id="L405"><span class="lineNum">     405</span>                 :<span class="tlaGNC">        2628 :         struct token_bucket *bucket;</span></span>
+<span id="L403"><span class="lineNum">     403</span>                 :<span class="tlaGNC">        2627 :         struct mptcp_subflow_request_sock *subflow_req = mptcp_subflow_rsk(req);</span></span>
+<span id="L404"><span class="lineNum">     404</span>                 :<span class="tlaGNC">        2627 :         struct mptcp_subflow_request_sock *pos;</span></span>
+<span id="L405"><span class="lineNum">     405</span>                 :<span class="tlaGNC">        2627 :         struct token_bucket *bucket;</span></span>
 <span id="L406"><span class="lineNum">     406</span>                 :             : </span>
-<span id="L407"><span class="lineNum">     407</span>            [<span class="tlaGBC" title="Branch &quot;2 -&gt; 17&quot; was taken 2596 times"> + </span>]:<span class="tlaGNC">        2628 :         if (hlist_nulls_unhashed_lockless(&amp;subflow_req-&gt;token_node))</span></span>
+<span id="L407"><span class="lineNum">     407</span>            [<span class="tlaGBC" title="Branch &quot;2 -&gt; 17&quot; was taken 2595 times"> + </span>]:<span class="tlaGNC">        2627 :         if (hlist_nulls_unhashed_lockless(&amp;subflow_req-&gt;token_node))</span></span>
 <span id="L408"><span class="lineNum">     408</span>                 :             :                 return;</span>
 <span id="L409"><span class="lineNum">     409</span>                 :             : </span>
 <span id="L410"><span class="lineNum">     410</span>                 :<span class="tlaGNC">          32 :         bucket = token_bucket(subflow_req-&gt;token);</span></span>
@@ -509,25 +509,25 @@
 <span id="L428"><span class="lineNum">     428</span>                 :             :  *</span>
 <span id="L429"><span class="lineNum">     429</span>                 :             :  * Remove the token associated to @msk</span>
 <span id="L430"><span class="lineNum">     430</span>                 :             :  */</span>
-<span id="L431"><span class="lineNum">     431</span>                 :<span class="tlaGNC">        5529 : void mptcp_token_destroy(struct mptcp_sock *msk)</span></span>
+<span id="L431"><span class="lineNum">     431</span>                 :<span class="tlaGNC">        5530 : void mptcp_token_destroy(struct mptcp_sock *msk)</span></span>
 <span id="L432"><span class="lineNum">     432</span>                 :             : {</span>
-<span id="L433"><span class="lineNum">     433</span>                 :<span class="tlaGNC">        5529 :         struct sock *sk = (struct sock *)msk;</span></span>
-<span id="L434"><span class="lineNum">     434</span>                 :<span class="tlaGNC">        5529 :         struct token_bucket *bucket;</span></span>
-<span id="L435"><span class="lineNum">     435</span>                 :<span class="tlaGNC">        5529 :         struct mptcp_sock *pos;</span></span>
+<span id="L433"><span class="lineNum">     433</span>                 :<span class="tlaGNC">        5530 :         struct sock *sk = (struct sock *)msk;</span></span>
+<span id="L434"><span class="lineNum">     434</span>                 :<span class="tlaGNC">        5530 :         struct token_bucket *bucket;</span></span>
+<span id="L435"><span class="lineNum">     435</span>                 :<span class="tlaGNC">        5530 :         struct mptcp_sock *pos;</span></span>
 <span id="L436"><span class="lineNum">     436</span>                 :             : </span>
-<span id="L437"><span class="lineNum">     437</span>       [<span class="tlaGBC" title="Branch &quot;2 -&gt; 19&quot; was taken 1072 times"> + </span>][<span class="tlaGBC" title="Branch &quot;2 -&gt; 17&quot; was taken 1072 times"> + </span>]:<span class="tlaGNC">        5529 :         if (sk_unhashed((struct sock *)msk))</span></span>
+<span id="L437"><span class="lineNum">     437</span>       [<span class="tlaGBC" title="Branch &quot;2 -&gt; 19&quot; was taken 1076 times"> + </span>][<span class="tlaGBC" title="Branch &quot;2 -&gt; 17&quot; was taken 1061 times"> + </span>]:<span class="tlaGNC">        5530 :         if (sk_unhashed((struct sock *)msk))</span></span>
 <span id="L438"><span class="lineNum">     438</span>                 :             :                 return;</span>
 <span id="L439"><span class="lineNum">     439</span>                 :             : </span>
-<span id="L440"><span class="lineNum">     440</span>                 :<span class="tlaGNC">        3385 :         sock_prot_inuse_add(sock_net(sk), sk-&gt;sk_prot, -1);</span></span>
-<span id="L441"><span class="lineNum">     441</span>                 :<span class="tlaGNC">        3385 :         bucket = token_bucket(msk-&gt;token);</span></span>
-<span id="L442"><span class="lineNum">     442</span>                 :<span class="tlaGNC">        3385 :         spin_lock_bh(&amp;bucket-&gt;lock);</span></span>
-<span id="L443"><span class="lineNum">     443</span>                 :<span class="tlaGNC">        3385 :         pos = __token_lookup_msk(bucket, msk-&gt;token);</span></span>
-<span id="L444"><span class="lineNum">     444</span> [<span class="tlaGBC" title="Branch &quot;8 -&gt; 12&quot; was taken 1711 times"> + </span><span class="tlaUNC" title="Branch &quot;12 -&gt; 17&quot; was not taken"> - </span>][<span class="tlaGBC" title="Branch &quot;6 -&gt; 10&quot; was taken 1674 times"> + </span><span class="tlaUNC" title="Branch &quot;10 -&gt; 15&quot; was not taken"> - </span>]:<span class="tlaGNC">        3385 :         if (!WARN_ON_ONCE(pos != msk)) {</span></span>
-<span id="L445"><span class="lineNum">     445</span>       [<span class="tlaUNC" title="Branch &quot;13 -&gt; 16&quot; was not taken"> - </span>][<span class="tlaUNC" title="Branch &quot;11 -&gt; 14&quot; was not taken"> - </span>]:<span class="tlaGNC">        3385 :                 __sk_nulls_del_node_init_rcu((struct sock *)pos);</span></span>
-<span id="L446"><span class="lineNum">     446</span>                 :<span class="tlaGNC">        3385 :                 bucket-&gt;chain_len--;</span></span>
+<span id="L440"><span class="lineNum">     440</span>                 :<span class="tlaGNC">        3393 :         sock_prot_inuse_add(sock_net(sk), sk-&gt;sk_prot, -1);</span></span>
+<span id="L441"><span class="lineNum">     441</span>                 :<span class="tlaGNC">        3393 :         bucket = token_bucket(msk-&gt;token);</span></span>
+<span id="L442"><span class="lineNum">     442</span>                 :<span class="tlaGNC">        3393 :         spin_lock_bh(&amp;bucket-&gt;lock);</span></span>
+<span id="L443"><span class="lineNum">     443</span>                 :<span class="tlaGNC">        3393 :         pos = __token_lookup_msk(bucket, msk-&gt;token);</span></span>
+<span id="L444"><span class="lineNum">     444</span> [<span class="tlaGBC" title="Branch &quot;8 -&gt; 12&quot; was taken 1710 times"> + </span><span class="tlaUNC" title="Branch &quot;12 -&gt; 17&quot; was not taken"> - </span>][<span class="tlaGBC" title="Branch &quot;6 -&gt; 10&quot; was taken 1683 times"> + </span><span class="tlaUNC" title="Branch &quot;10 -&gt; 15&quot; was not taken"> - </span>]:<span class="tlaGNC">        3393 :         if (!WARN_ON_ONCE(pos != msk)) {</span></span>
+<span id="L445"><span class="lineNum">     445</span>       [<span class="tlaUNC" title="Branch &quot;13 -&gt; 16&quot; was not taken"> - </span>][<span class="tlaUNC" title="Branch &quot;11 -&gt; 14&quot; was not taken"> - </span>]:<span class="tlaGNC">        3393 :                 __sk_nulls_del_node_init_rcu((struct sock *)pos);</span></span>
+<span id="L446"><span class="lineNum">     446</span>                 :<span class="tlaGNC">        3393 :                 bucket-&gt;chain_len--;</span></span>
 <span id="L447"><span class="lineNum">     447</span>                 :             :         }</span>
-<span id="L448"><span class="lineNum">     448</span>                 :<span class="tlaGNC">        3385 :         spin_unlock_bh(&amp;bucket-&gt;lock);</span></span>
-<span id="L449"><span class="lineNum">     449</span>                 :<span class="tlaGNC">        3385 :         WRITE_ONCE(msk-&gt;token, 0);</span></span>
+<span id="L448"><span class="lineNum">     448</span>                 :<span class="tlaGNC">        3393 :         spin_unlock_bh(&amp;bucket-&gt;lock);</span></span>
+<span id="L449"><span class="lineNum">     449</span>                 :<span class="tlaGNC">        3393 :         WRITE_ONCE(msk-&gt;token, 0);</span></span>
 <span id="L450"><span class="lineNum">     450</span>                 :             : }</span>
 <span id="L451"><span class="lineNum">     451</span>                 :             : </span>
 <span id="L452"><span class="lineNum">     452</span>                 :<span class="tlaGNC">           6 : void __init mptcp_token_init(void)</span></span>
