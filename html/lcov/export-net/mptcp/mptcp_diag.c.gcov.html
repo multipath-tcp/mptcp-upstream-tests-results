@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-10-26 12:24:08</td>
+            <td class="headerValue">2026-10-27 12:02:41</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryMed">85.7&nbsp;%</td>
@@ -90,15 +90,15 @@
 <span id="L12"><span class="lineNum">      12</span>                 :             : #include &lt;net/netlink.h&gt;</span>
 <span id="L13"><span class="lineNum">      13</span>                 :             : #include &quot;protocol.h&quot;</span>
 <span id="L14"><span class="lineNum">      14</span>                 :             : </span>
-<span id="L15"><span class="lineNum">      15</span>                 :<span class="tlaGNC">        1319 : static int sk_diag_dump(struct sock *sk, struct sk_buff *skb,</span></span>
+<span id="L15"><span class="lineNum">      15</span>                 :<span class="tlaGNC">        1370 : static int sk_diag_dump(struct sock *sk, struct sk_buff *skb,</span></span>
 <span id="L16"><span class="lineNum">      16</span>                 :             :                         struct netlink_callback *cb,</span>
 <span id="L17"><span class="lineNum">      17</span>                 :             :                         const struct inet_diag_req_v2 *req,</span>
 <span id="L18"><span class="lineNum">      18</span>                 :             :                         bool net_admin)</span>
 <span id="L19"><span class="lineNum">      19</span>                 :             : {</span>
-<span id="L20"><span class="lineNum">      20</span>            [<span class="tlaGBC" title="Branch &quot;3 -&gt; 5&quot; was taken 18 times"> + </span>]:<span class="tlaGNC">        1319 :         if (!inet_diag_bc_sk(cb-&gt;data, sk))</span></span>
+<span id="L20"><span class="lineNum">      20</span>            [<span class="tlaGBC" title="Branch &quot;3 -&gt; 5&quot; was taken 18 times"> + </span>]:<span class="tlaGNC">        1370 :         if (!inet_diag_bc_sk(cb-&gt;data, sk))</span></span>
 <span id="L21"><span class="lineNum">      21</span>                 :             :                 return 0;</span>
 <span id="L22"><span class="lineNum">      22</span>                 :             : </span>
-<span id="L23"><span class="lineNum">      23</span>                 :<span class="tlaGNC">        1301 :         return inet_sk_diag_fill(sk, inet_csk(sk), skb, cb, req, NLM_F_MULTI,</span></span>
+<span id="L23"><span class="lineNum">      23</span>                 :<span class="tlaGNC">        1352 :         return inet_sk_diag_fill(sk, inet_csk(sk), skb, cb, req, NLM_F_MULTI,</span></span>
 <span id="L24"><span class="lineNum">      24</span>                 :             :                                  net_admin);</span>
 <span id="L25"><span class="lineNum">      25</span>                 :             : }</span>
 <span id="L26"><span class="lineNum">      26</span>                 :             : </span>
@@ -224,60 +224,60 @@
 <span id="L146"><span class="lineNum">     146</span>                 :<span class="tlaGNC">          61 :         diag_ctx-&gt;l_slot = i;</span></span>
 <span id="L147"><span class="lineNum">     147</span>                 :             : }</span>
 <span id="L148"><span class="lineNum">     148</span>                 :             : </span>
-<span id="L149"><span class="lineNum">     149</span>                 :<span class="tlaGNC">        1279 : static void mptcp_diag_dump(struct sk_buff *skb, struct netlink_callback *cb,</span></span>
+<span id="L149"><span class="lineNum">     149</span>                 :<span class="tlaGNC">        1277 : static void mptcp_diag_dump(struct sk_buff *skb, struct netlink_callback *cb,</span></span>
 <span id="L150"><span class="lineNum">     150</span>                 :             :                             const struct inet_diag_req_v2 *r)</span>
 <span id="L151"><span class="lineNum">     151</span>                 :             : {</span>
-<span id="L152"><span class="lineNum">     152</span>                 :<span class="tlaGNC">        1279 :         bool net_admin = netlink_net_capable(cb-&gt;skb, CAP_NET_ADMIN);</span></span>
-<span id="L153"><span class="lineNum">     153</span>                 :<span class="tlaGNC">        1279 :         struct mptcp_diag_ctx *diag_ctx = (void *)cb-&gt;ctx;</span></span>
-<span id="L154"><span class="lineNum">     154</span>                 :<span class="tlaGNC">        1279 :         struct net *net = sock_net(skb-&gt;sk);</span></span>
-<span id="L155"><span class="lineNum">     155</span>                 :<span class="tlaGNC">        1279 :         struct mptcp_sock *msk;</span></span>
+<span id="L152"><span class="lineNum">     152</span>                 :<span class="tlaGNC">        1277 :         bool net_admin = netlink_net_capable(cb-&gt;skb, CAP_NET_ADMIN);</span></span>
+<span id="L153"><span class="lineNum">     153</span>                 :<span class="tlaGNC">        1277 :         struct mptcp_diag_ctx *diag_ctx = (void *)cb-&gt;ctx;</span></span>
+<span id="L154"><span class="lineNum">     154</span>                 :<span class="tlaGNC">        1277 :         struct net *net = sock_net(skb-&gt;sk);</span></span>
+<span id="L155"><span class="lineNum">     155</span>                 :<span class="tlaGNC">        1277 :         struct mptcp_sock *msk;</span></span>
 <span id="L156"><span class="lineNum">     156</span>                 :             : </span>
-<span id="L157"><span class="lineNum">     157</span>                 :<span class="tlaGNC">        1279 :         BUILD_BUG_ON(sizeof(cb-&gt;ctx) &lt; sizeof(*diag_ctx));</span></span>
+<span id="L157"><span class="lineNum">     157</span>                 :<span class="tlaGNC">        1277 :         BUILD_BUG_ON(sizeof(cb-&gt;ctx) &lt; sizeof(*diag_ctx));</span></span>
 <span id="L158"><span class="lineNum">     158</span>                 :             : </span>
-<span id="L159"><span class="lineNum">     159</span>                 :<span class="tlaGNC">        1279 :         while ((msk = mptcp_token_iter_next(net, &amp;diag_ctx-&gt;s_slot,</span></span>
-<span id="L160"><span class="lineNum">     160</span>       [<span class="tlaGBC" title="Branch &quot;24 -&gt; 5&quot; was taken 1600 times"> + </span>][<span class="tlaGBC" title="Branch &quot;21 -&gt; 4&quot; was taken 1423 times"> + </span>]:<span class="tlaGNC">        4291 :                                             &amp;diag_ctx-&gt;s_num)) != NULL) {</span></span>
-<span id="L161"><span class="lineNum">     161</span>                 :<span class="tlaGNC">        3023 :                 struct inet_sock *inet = (struct inet_sock *)msk;</span></span>
-<span id="L162"><span class="lineNum">     162</span>                 :<span class="tlaGNC">        3023 :                 struct sock *sk = (struct sock *)msk;</span></span>
-<span id="L163"><span class="lineNum">     163</span>                 :<span class="tlaGNC">        3023 :                 int ret = 0;</span></span>
+<span id="L159"><span class="lineNum">     159</span>                 :<span class="tlaGNC">        1277 :         while ((msk = mptcp_token_iter_next(net, &amp;diag_ctx-&gt;s_slot,</span></span>
+<span id="L160"><span class="lineNum">     160</span>       [<span class="tlaGBC" title="Branch &quot;24 -&gt; 5&quot; was taken 1584 times"> + </span>][<span class="tlaGBC" title="Branch &quot;21 -&gt; 4&quot; was taken 1548 times"> + </span>]:<span class="tlaGNC">        4397 :                                             &amp;diag_ctx-&gt;s_num)) != NULL) {</span></span>
+<span id="L161"><span class="lineNum">     161</span>                 :<span class="tlaGNC">        3132 :                 struct inet_sock *inet = (struct inet_sock *)msk;</span></span>
+<span id="L162"><span class="lineNum">     162</span>                 :<span class="tlaGNC">        3132 :                 struct sock *sk = (struct sock *)msk;</span></span>
+<span id="L163"><span class="lineNum">     163</span>                 :<span class="tlaGNC">        3132 :                 int ret = 0;</span></span>
 <span id="L164"><span class="lineNum">     164</span>                 :             : </span>
-<span id="L165"><span class="lineNum">     165</span>    [<span class="tlaGBC" title="Branch &quot;5 -&gt; 7&quot; was taken 1600 times"> + </span><span class="tlaGBC" title="Branch &quot;7 -&gt; 9&quot; was taken 1090 times"> + </span>][<span class="tlaGBC" title="Branch &quot;4 -&gt; 6&quot; was taken 913 times"> + </span>]:<span class="tlaGNC">        3023 :                 if (!(r-&gt;idiag_states &amp; (1 &lt;&lt; sk-&gt;sk_state)))</span></span>
+<span id="L165"><span class="lineNum">     165</span>    [<span class="tlaGBC" title="Branch &quot;5 -&gt; 7&quot; was taken 1584 times"> + </span><span class="tlaGBC" title="Branch &quot;7 -&gt; 9&quot; was taken 1074 times"> + </span>][<span class="tlaGBC" title="Branch &quot;4 -&gt; 6&quot; was taken 1038 times"> + </span>]:<span class="tlaGNC">        3132 :                 if (!(r-&gt;idiag_states &amp; (1 &lt;&lt; sk-&gt;sk_state)))</span></span>
 <span id="L166"><span class="lineNum">     166</span>                 :<span class="tlaGNC">        1020 :                         goto next;</span></span>
-<span id="L167"><span class="lineNum">     167</span>       [<span class="tlaUNC" title="Branch &quot;9 -&gt; 12&quot; was not taken"> - </span>][<span class="tlaUNC" title="Branch &quot;6 -&gt; 9&quot; was not taken"> - </span>]:<span class="tlaGNC">        2003 :                 if (r-&gt;sdiag_family != AF_UNSPEC &amp;&amp;</span></span>
-<span id="L168"><span class="lineNum">     168</span>       [<span class="tlaGBC" title="Branch &quot;10 -&gt; 12&quot; was taken 548 times"> + </span>][<span class="tlaGBC" title="Branch &quot;7 -&gt; 9&quot; was taken 459 times"> + </span>]:<span class="tlaGNC">        2003 :                     sk-&gt;sk_family != r-&gt;sdiag_family)</span></span>
-<span id="L169"><span class="lineNum">     169</span>                 :<span class="tlaGNC">         996 :                         goto next;</span></span>
-<span id="L170"><span class="lineNum">     170</span> [<span class="tlaUNC" title="Branch &quot;12 -&gt; 15&quot; was not taken"> - </span><span class="tlaGBC" title="Branch &quot;13 -&gt; 15&quot; was taken 548 times"> + </span>][<span class="tlaUNC" title="Branch &quot;9 -&gt; 12&quot; was not taken"> - </span><span class="tlaGBC" title="Branch &quot;10 -&gt; 12&quot; was taken 459 times"> + </span>]:<span class="tlaGNC">        1007 :                 if (r-&gt;id.idiag_sport != inet-&gt;inet_sport &amp;&amp;</span></span>
+<span id="L167"><span class="lineNum">     167</span>       [<span class="tlaUNC" title="Branch &quot;9 -&gt; 12&quot; was not taken"> - </span>][<span class="tlaUNC" title="Branch &quot;6 -&gt; 9&quot; was not taken"> - </span>]:<span class="tlaGNC">        2112 :                 if (r-&gt;sdiag_family != AF_UNSPEC &amp;&amp;</span></span>
+<span id="L168"><span class="lineNum">     168</span>       [<span class="tlaGBC" title="Branch &quot;10 -&gt; 12&quot; was taken 540 times"> + </span>][<span class="tlaGBC" title="Branch &quot;7 -&gt; 9&quot; was taken 518 times"> + </span>]:<span class="tlaGNC">        2112 :                     sk-&gt;sk_family != r-&gt;sdiag_family)</span></span>
+<span id="L169"><span class="lineNum">     169</span>                 :<span class="tlaGNC">        1054 :                         goto next;</span></span>
+<span id="L170"><span class="lineNum">     170</span> [<span class="tlaUNC" title="Branch &quot;12 -&gt; 15&quot; was not taken"> - </span><span class="tlaGBC" title="Branch &quot;13 -&gt; 15&quot; was taken 540 times"> + </span>][<span class="tlaUNC" title="Branch &quot;9 -&gt; 12&quot; was not taken"> - </span><span class="tlaGBC" title="Branch &quot;10 -&gt; 12&quot; was taken 518 times"> + </span>]:<span class="tlaGNC">        1058 :                 if (r-&gt;id.idiag_sport != inet-&gt;inet_sport &amp;&amp;</span></span>
 <span id="L171"><span class="lineNum">     171</span>                 :             :                     r-&gt;id.idiag_sport)</span>
 <span id="L172"><span class="lineNum">     172</span>                 :<span class="tlaUNC">           0 :                         goto next;</span></span>
-<span id="L173"><span class="lineNum">     173</span> [<span class="tlaUNC" title="Branch &quot;15 -&gt; 18&quot; was not taken"> - </span><span class="tlaGBC" title="Branch &quot;16 -&gt; 18&quot; was taken 548 times"> + </span>][<span class="tlaUNC" title="Branch &quot;12 -&gt; 15&quot; was not taken"> - </span><span class="tlaGBC" title="Branch &quot;13 -&gt; 15&quot; was taken 459 times"> + </span>]:<span class="tlaGNC">        1007 :                 if (r-&gt;id.idiag_dport != inet-&gt;inet_dport &amp;&amp;</span></span>
+<span id="L173"><span class="lineNum">     173</span> [<span class="tlaUNC" title="Branch &quot;15 -&gt; 18&quot; was not taken"> - </span><span class="tlaGBC" title="Branch &quot;16 -&gt; 18&quot; was taken 540 times"> + </span>][<span class="tlaUNC" title="Branch &quot;12 -&gt; 15&quot; was not taken"> - </span><span class="tlaGBC" title="Branch &quot;13 -&gt; 15&quot; was taken 518 times"> + </span>]:<span class="tlaGNC">        1058 :                 if (r-&gt;id.idiag_dport != inet-&gt;inet_dport &amp;&amp;</span></span>
 <span id="L174"><span class="lineNum">     174</span>                 :             :                     r-&gt;id.idiag_dport)</span>
 <span id="L175"><span class="lineNum">     175</span>                 :<span class="tlaUNC">           0 :                         goto next;</span></span>
 <span id="L176"><span class="lineNum">     176</span>                 :             : </span>
-<span id="L177"><span class="lineNum">     177</span>                 :<span class="tlaGNC">        1007 :                 ret = sk_diag_dump(sk, skb, cb, r, net_admin);</span></span>
-<span id="L178"><span class="lineNum">     178</span>                 :<span class="tlaGNC">        3023 : next:</span></span>
-<span id="L179"><span class="lineNum">     179</span>                 :<span class="tlaGNC">        3023 :                 sock_put(sk);</span></span>
-<span id="L180"><span class="lineNum">     180</span>       [<span class="tlaGBC" title="Branch &quot;20 -&gt; 22&quot; was taken 1594 times"> + </span>][<span class="tlaGBC" title="Branch &quot;17 -&gt; 19&quot; was taken 1418 times"> + </span>]:<span class="tlaGNC">        3023 :                 if (ret &lt; 0) {</span></span>
+<span id="L177"><span class="lineNum">     177</span>                 :<span class="tlaGNC">        1058 :                 ret = sk_diag_dump(sk, skb, cb, r, net_admin);</span></span>
+<span id="L178"><span class="lineNum">     178</span>                 :<span class="tlaGNC">        3132 : next:</span></span>
+<span id="L179"><span class="lineNum">     179</span>                 :<span class="tlaGNC">        3132 :                 sock_put(sk);</span></span>
+<span id="L180"><span class="lineNum">     180</span>       [<span class="tlaGBC" title="Branch &quot;20 -&gt; 22&quot; was taken 1578 times"> + </span>][<span class="tlaGBC" title="Branch &quot;17 -&gt; 19&quot; was taken 1542 times"> + </span>]:<span class="tlaGNC">        3132 :                 if (ret &lt; 0) {</span></span>
 <span id="L181"><span class="lineNum">     181</span>                 :             :                         /* will retry on the same position */</span>
-<span id="L182"><span class="lineNum">     182</span>                 :<span class="tlaGNC">          11 :                         diag_ctx-&gt;s_num--;</span></span>
-<span id="L183"><span class="lineNum">     183</span>                 :<span class="tlaGNC">          11 :                         break;</span></span>
+<span id="L182"><span class="lineNum">     182</span>                 :<span class="tlaGNC">          12 :                         diag_ctx-&gt;s_num--;</span></span>
+<span id="L183"><span class="lineNum">     183</span>                 :<span class="tlaGNC">          12 :                         break;</span></span>
 <span id="L184"><span class="lineNum">     184</span>                 :             :                 }</span>
-<span id="L185"><span class="lineNum">     185</span>                 :<span class="tlaGNC">        1594 :                 cond_resched();</span></span>
+<span id="L185"><span class="lineNum">     185</span>                 :<span class="tlaGNC">        1578 :                 cond_resched();</span></span>
 <span id="L186"><span class="lineNum">     186</span>                 :             :         }</span>
 <span id="L187"><span class="lineNum">     187</span>                 :             : </span>
-<span id="L188"><span class="lineNum">     188</span> [<span class="tlaGBC" title="Branch &quot;25 -&gt; 28&quot; was taken 602 times"> + </span><span class="tlaUNC" title="Branch &quot;26 -&gt; 28&quot; was not taken"> - </span>][<span class="tlaGBC" title="Branch &quot;22 -&gt; 25&quot; was taken 610 times"> + </span><span class="tlaUNC" title="Branch &quot;23 -&gt; 25&quot; was not taken"> - </span>]:<span class="tlaGNC">        1279 :         if ((r-&gt;idiag_states &amp; TCPF_LISTEN) &amp;&amp; r-&gt;id.idiag_dport == 0)</span></span>
+<span id="L188"><span class="lineNum">     188</span> [<span class="tlaGBC" title="Branch &quot;25 -&gt; 28&quot; was taken 602 times"> + </span><span class="tlaUNC" title="Branch &quot;26 -&gt; 28&quot; was not taken"> - </span>][<span class="tlaGBC" title="Branch &quot;22 -&gt; 25&quot; was taken 608 times"> + </span><span class="tlaUNC" title="Branch &quot;23 -&gt; 25&quot; was not taken"> - </span>]:<span class="tlaGNC">        1277 :         if ((r-&gt;idiag_states &amp; TCPF_LISTEN) &amp;&amp; r-&gt;id.idiag_dport == 0)</span></span>
 <span id="L189"><span class="lineNum">     189</span>                 :<span class="tlaGNC">          67 :                 mptcp_diag_dump_listeners(skb, cb, r, net_admin);</span></span>
-<span id="L190"><span class="lineNum">     190</span>                 :<span class="tlaGNC">        1279 : }</span></span>
+<span id="L190"><span class="lineNum">     190</span>                 :<span class="tlaGNC">        1277 : }</span></span>
 <span id="L191"><span class="lineNum">     191</span>                 :             : </span>
-<span id="L192"><span class="lineNum">     192</span>                 :<span class="tlaGNC">        1286 : static void mptcp_diag_get_info(struct sock *sk, struct inet_diag_msg *r,</span></span>
+<span id="L192"><span class="lineNum">     192</span>                 :<span class="tlaGNC">        1336 : static void mptcp_diag_get_info(struct sock *sk, struct inet_diag_msg *r,</span></span>
 <span id="L193"><span class="lineNum">     193</span>                 :             :                                 void *_info)</span>
 <span id="L194"><span class="lineNum">     194</span>                 :             : {</span>
-<span id="L195"><span class="lineNum">     195</span>            [<span class="tlaGBC" title="Branch &quot;2 -&gt; 6&quot; was taken 1286 times"> + </span>]:<span class="tlaGNC">        1286 :         struct mptcp_sock *msk = mptcp_sk(sk);</span></span>
-<span id="L196"><span class="lineNum">     196</span>                 :<span class="tlaGNC">        1286 :         struct mptcp_info *info = _info;</span></span>
+<span id="L195"><span class="lineNum">     195</span>            [<span class="tlaGBC" title="Branch &quot;2 -&gt; 6&quot; was taken 1336 times"> + </span>]:<span class="tlaGNC">        1336 :         struct mptcp_sock *msk = mptcp_sk(sk);</span></span>
+<span id="L196"><span class="lineNum">     196</span>                 :<span class="tlaGNC">        1336 :         struct mptcp_info *info = _info;</span></span>
 <span id="L197"><span class="lineNum">     197</span>                 :             : </span>
-<span id="L198"><span class="lineNum">     198</span>            [<span class="tlaGBC" title="Branch &quot;6 -&gt; 10&quot; was taken 597 times"> + </span>]:<span class="tlaGNC">        1286 :         r-&gt;idiag_rqueue = sk_rmem_alloc_get(sk) +</span></span>
-<span id="L199"><span class="lineNum">     199</span>       [<span class="tlaGBC" title="Branch &quot;7 -&gt; 11&quot; was taken 689 times"> + </span>][<span class="tlaGBC" title="Branch &quot;6 -&gt; 10&quot; was taken 597 times"> + </span>]:<span class="tlaGNC">        1286 :                           READ_ONCE(mptcp_sk(sk)-&gt;backlog_len);</span></span>
-<span id="L200"><span class="lineNum">     200</span>                 :<span class="tlaGNC">        1286 :         r-&gt;idiag_wqueue = sk_wmem_alloc_get(sk);</span></span>
+<span id="L198"><span class="lineNum">     198</span>            [<span class="tlaGBC" title="Branch &quot;6 -&gt; 10&quot; was taken 655 times"> + </span>]:<span class="tlaGNC">        1336 :         r-&gt;idiag_rqueue = sk_rmem_alloc_get(sk) +</span></span>
+<span id="L199"><span class="lineNum">     199</span>       [<span class="tlaGBC" title="Branch &quot;7 -&gt; 11&quot; was taken 681 times"> + </span>][<span class="tlaGBC" title="Branch &quot;6 -&gt; 10&quot; was taken 655 times"> + </span>]:<span class="tlaGNC">        1336 :                           READ_ONCE(mptcp_sk(sk)-&gt;backlog_len);</span></span>
+<span id="L200"><span class="lineNum">     200</span>                 :<span class="tlaGNC">        1336 :         r-&gt;idiag_wqueue = sk_wmem_alloc_get(sk);</span></span>
 <span id="L201"><span class="lineNum">     201</span>                 :             : </span>
-<span id="L202"><span class="lineNum">     202</span>       [<span class="tlaGBC" title="Branch &quot;13 -&gt; 16&quot; was taken 535 times"> + </span>][<span class="tlaGBC" title="Branch &quot;11 -&gt; 14&quot; was taken 447 times"> + </span>]:<span class="tlaGNC">        1286 :         if (inet_sk_state_load(sk) == TCP_LISTEN) {</span></span>
+<span id="L202"><span class="lineNum">     202</span>       [<span class="tlaGBC" title="Branch &quot;13 -&gt; 16&quot; was taken 527 times"> + </span>][<span class="tlaGBC" title="Branch &quot;11 -&gt; 14&quot; was taken 505 times"> + </span>]:<span class="tlaGNC">        1336 :         if (inet_sk_state_load(sk) == TCP_LISTEN) {</span></span>
 <span id="L203"><span class="lineNum">     203</span>                 :<span class="tlaGNC">         304 :                 struct sock *lsk = READ_ONCE(msk-&gt;first);</span></span>
 <span id="L204"><span class="lineNum">     204</span>                 :             : </span>
 <span id="L205"><span class="lineNum">     205</span>       [<span class="tlaUNC" title="Branch &quot;14 -&gt; 16&quot; was not taken"> - </span>][<span class="tlaUNC" title="Branch &quot;12 -&gt; 14&quot; was not taken"> - </span>]:<span class="tlaGNC">         304 :                 if (lsk) {</span></span>
@@ -289,10 +289,10 @@
 <span id="L211"><span class="lineNum">     211</span>                 :             :                 }</span>
 <span id="L212"><span class="lineNum">     212</span>                 :             :         }</span>
 <span id="L213"><span class="lineNum">     213</span>                 :             : </span>
-<span id="L214"><span class="lineNum">     214</span>       [<span class="tlaGBC" title="Branch &quot;16 -&gt; 18&quot; was taken 163 times"> + </span>][<span class="tlaGBC" title="Branch &quot;14 -&gt; 16&quot; was taken 165 times"> + </span>]:<span class="tlaGNC">        1286 :         if (!info)</span></span>
+<span id="L214"><span class="lineNum">     214</span>       [<span class="tlaGBC" title="Branch &quot;16 -&gt; 18&quot; was taken 163 times"> + </span>][<span class="tlaGBC" title="Branch &quot;14 -&gt; 16&quot; was taken 163 times"> + </span>]:<span class="tlaGNC">        1336 :         if (!info)</span></span>
 <span id="L215"><span class="lineNum">     215</span>                 :             :                 return;</span>
 <span id="L216"><span class="lineNum">     216</span>                 :             : </span>
-<span id="L217"><span class="lineNum">     217</span>                 :<span class="tlaGNC">         958 :         mptcp_diag_fill_info(msk, info);</span></span>
+<span id="L217"><span class="lineNum">     217</span>                 :<span class="tlaGNC">        1010 :         mptcp_diag_fill_info(msk, info);</span></span>
 <span id="L218"><span class="lineNum">     218</span>                 :             : }</span>
 <span id="L219"><span class="lineNum">     219</span>                 :             : </span>
 <span id="L220"><span class="lineNum">     220</span>                 :             : static const struct inet_diag_handler mptcp_diag_handler = {</span>
