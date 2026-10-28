@@ -18,6 +18,10 @@ function colorify(cell, result)
     style = "background-color:blue";
   } else if (ret == "flaky") {
     style = "background-color:orange";
+  } else if (cmt != null && cmt.startsWith("validation: ")) { // perf
+    style = "background-color:orange";
+  } else if (cmt != null && cmt.startsWith("regres: ")) { // perf
+    style = "background-color:yellow";
   } else {
     style = "background-color:red";
   }
