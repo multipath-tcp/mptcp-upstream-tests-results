@@ -656,5 +656,25 @@
   },
   "run_id": "40747169075",
   "tag": "export-net/20261028T183656"
+ },
+ {
+  "results": {
+   "06-sched-mem-pressure": {
+    "3": {
+     "result": "fail",
+     "name": "sched-mem-pressure: bloated_slow_secondary receiver_tcp_mem parallel=99",
+     "comment": "error: client: 'iperf3 -c 10.0.0.3 --mptcp -Z --json -t 60 -R -P 99 > \"${RESULTS_DIR}/artifacts/iperf_cli.json\"': timeout: '{'timeout': 120}'"
+    }
+   },
+   "09-sched-weak-secondary": {
+    "2": {
+     "result": "fail",
+     "name": "sched-weak-secondary: bad_secondary",
+     "comment": "validation: transfer: 'set -x ; [ -s artifacts/iperf_cli.json ] ; cd stats ; [ \"$(jq -r '.host.time.diff' dstat.json || echo 0)\" -ge 18 ] ; [ \"$(jq -r '.host.time.diff' dstat.json || echo 0)\" -le 35 ] ; [ \"$(jq -r '.client[\"net/total:recv\"].mean | round' dstat.json || echo 0)\" -ge 20000000 ]': failed (1)"
+    }
+   }
+  },
+  "run_id": "40929703453",
+  "tag": "export-net/20261029T172526"
  }
 ]
