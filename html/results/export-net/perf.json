@@ -696,5 +696,25 @@
   },
   "run_id": "40949502251",
   "tag": "export-net/20261029T202643"
+ },
+ {
+  "results": {
+   "06-sched-mem-pressure": {
+    "3": {
+     "result": "fail",
+     "name": "sched-mem-pressure: bloated_slow_secondary receiver_tcp_mem parallel=99",
+     "comment": "error: client: 'iperf3 -c 10.0.0.3 --mptcp -Z --json -t 60 -R -P 99 > \"${RESULTS_DIR}/artifacts/iperf_cli.json\"': timeout: '{'timeout': 120}'"
+    }
+   },
+   "08-sched-serverlim": {
+    "21": {
+     "result": "fail",
+     "name": "sched-serverlim: slow_primary bw=50 burst=250",
+     "comment": "validation: transfer: 'set -x ; [ -s artifacts/iperf_cli.json ] ; cd stats ; [ \"$(jq -r '.host.time.diff' dstat.json || echo 0)\" -ge 18 ] ; [ \"$(jq -r '.host.time.diff' dstat.json || echo 0)\" -le 35 ] ; [ \"$(jq -r '.client[\"net/total:recv\"].mean | round' dstat.json || echo 0)\" -ge 25000000 ] ; [ \"$(jq -r '.client[\"net/eth1:recv\"].mean | round' dstat.json || echo 0)\" -ge 100000 ]': failed (1)"
+    }
+   }
+  },
+  "run_id": "41050913749",
+  "tag": "export-net/20261030T114949"
  }
 ]
