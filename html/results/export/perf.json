@@ -894,5 +894,37 @@
   "results": {},
   "run_id": "44109739495",
   "tag": "export"
+ },
+ {
+  "results": {
+   "04-sched-bidir": {
+    "6": {
+     "result": "fail",
+     "name": "sched-bidir: bloated_secondary bidir bbr",
+     "comment": "validation: transfer: 'set -x ; cd stats ; [ \"$(jq -r '.host.time.diff' dstat.json || echo 0)\" -ge 18 ] ; [ \"$(jq -r '.host.time.diff' dstat.json || echo 0)\" -le 35 ] ; [ \"$(jq -r '.client[\"net/total:recv\"].mean | round' dstat.json || echo 0)\" -ge 14500000 ] ; [ \"$(jq -r '.server[\"net/total:recv\"].mean | round' dstat.json || echo 0)\" -ge 14500000 ] ; [ \"$(jq -r '.client[\"net/eth1:recv\"].mean | round' dstat.json || echo 0)\" -ge 100000 ] ; [ \"$(jq -r '.server[\"net/eth1:recv\"].mean | round' dstat.json || echo 0)\" -ge 100000 ]': failed (1)"
+    }
+   },
+   "08-sched-loss": {
+    "3": {
+     "result": "fail",
+     "name": "sched-loss: slow_far_secondary loss=5",
+     "comment": "validation: transfer: 'set -x ; [ -s artifacts/iperf_cli.json ] ; cd stats ; [ \"$(jq -r '.host.time.diff' dstat.json || echo 0)\" -ge 18 ] ; [ \"$(jq -r '.host.time.diff' dstat.json || echo 0)\" -le 35 ] ; [ \"$(jq -r '.client[\"net/total:recv\"].mean | round' dstat.json || echo 0)\" -ge 25000000 ]': failed (1)"
+    },
+    "6": {
+     "result": "fail",
+     "name": "sched-loss: slow_far_primary loss=5",
+     "comment": "validation: transfer: 'set -x ; [ -s artifacts/iperf_cli.json ] ; cd stats ; [ \"$(jq -r '.host.time.diff' dstat.json || echo 0)\" -ge 18 ] ; [ \"$(jq -r '.host.time.diff' dstat.json || echo 0)\" -le 35 ] ; [ \"$(jq -r '.client[\"net/total:recv\"].mean | round' dstat.json || echo 0)\" -ge 25000000 ] ; [ \"$(jq -r '.client[\"net/eth1:recv\"].mean | round' dstat.json || echo 0)\" -ge 100000 ]': failed (1)"
+    }
+   },
+   "09-sched-mem-pressure": {
+    "3": {
+     "result": "fail",
+     "name": "sched-mem-pressure: bloated_slow_secondary receiver_tcp_mem parallel=99",
+     "comment": "error: client: 'iperf3 -c 10.0.0.3 --mptcp -Z --json -t 60 -R -P 99 > \"${RESULTS_DIR}/artifacts/iperf_cli.json\"': rc: '1'"
+    }
+   }
+  },
+  "run_id": "44327958701",
+  "tag": "export/20261118T144617"
  }
 ]
