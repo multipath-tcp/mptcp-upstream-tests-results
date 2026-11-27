@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-27 17:49:37</td>
+            <td class="headerValue">2026-11-27 20:43:35</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -90,20 +90,20 @@
 <span id="L12"><span class="lineNum">      12</span>                 :             :         list_for_each_entry(__entry,                                            \</span>
 <span id="L13"><span class="lineNum">      13</span>                 :             :                             &amp;((__msk)-&gt;pm.userspace_pm_local_addr_list), list)</span>
 <span id="L14"><span class="lineNum">      14</span>                 :             : </span>
-<span id="L15"><span class="lineNum">      15</span>                 :<span class="tlaGNC">        5349 : void mptcp_userspace_pm_free_local_addr_list(struct mptcp_sock *msk)</span></span>
+<span id="L15"><span class="lineNum">      15</span>                 :<span class="tlaGNC">        5363 : void mptcp_userspace_pm_free_local_addr_list(struct mptcp_sock *msk)</span></span>
 <span id="L16"><span class="lineNum">      16</span>                 :             : {</span>
-<span id="L17"><span class="lineNum">      17</span>                 :<span class="tlaGNC">        5349 :         struct mptcp_pm_addr_entry *entry, *tmp;</span></span>
-<span id="L18"><span class="lineNum">      18</span>                 :<span class="tlaGNC">        5349 :         struct sock *sk = (struct sock *)msk;</span></span>
-<span id="L19"><span class="lineNum">      19</span>                 :<span class="tlaGNC">        5349 :         LIST_HEAD(free_list);</span></span>
+<span id="L17"><span class="lineNum">      17</span>                 :<span class="tlaGNC">        5363 :         struct mptcp_pm_addr_entry *entry, *tmp;</span></span>
+<span id="L18"><span class="lineNum">      18</span>                 :<span class="tlaGNC">        5363 :         struct sock *sk = (struct sock *)msk;</span></span>
+<span id="L19"><span class="lineNum">      19</span>                 :<span class="tlaGNC">        5363 :         LIST_HEAD(free_list);</span></span>
 <span id="L20"><span class="lineNum">      20</span>                 :             : </span>
-<span id="L21"><span class="lineNum">      21</span>                 :<span class="tlaGNC">        5349 :         spin_lock_bh(&amp;msk-&gt;pm.lock);</span></span>
-<span id="L22"><span class="lineNum">      22</span>            [<span class="tlaGBC" title="Branch &quot;3 -&gt; 5&quot; was taken 5337 times"> + </span>]:<span class="tlaGNC">        5349 :         list_splice_init(&amp;msk-&gt;pm.userspace_pm_local_addr_list, &amp;free_list);</span></span>
-<span id="L23"><span class="lineNum">      23</span>                 :<span class="tlaGNC">        5349 :         spin_unlock_bh(&amp;msk-&gt;pm.lock);</span></span>
+<span id="L21"><span class="lineNum">      21</span>                 :<span class="tlaGNC">        5363 :         spin_lock_bh(&amp;msk-&gt;pm.lock);</span></span>
+<span id="L22"><span class="lineNum">      22</span>            [<span class="tlaGBC" title="Branch &quot;3 -&gt; 5&quot; was taken 5351 times"> + </span>]:<span class="tlaGNC">        5363 :         list_splice_init(&amp;msk-&gt;pm.userspace_pm_local_addr_list, &amp;free_list);</span></span>
+<span id="L23"><span class="lineNum">      23</span>                 :<span class="tlaGNC">        5363 :         spin_unlock_bh(&amp;msk-&gt;pm.lock);</span></span>
 <span id="L24"><span class="lineNum">      24</span>                 :             : </span>
-<span id="L25"><span class="lineNum">      25</span>            [<span class="tlaGBC" title="Branch &quot;9 -&gt; 7&quot; was taken 14 times"> + </span>]:<span class="tlaGNC">        5363 :         list_for_each_entry_safe(entry, tmp, &amp;free_list, list) {</span></span>
+<span id="L25"><span class="lineNum">      25</span>            [<span class="tlaGBC" title="Branch &quot;9 -&gt; 7&quot; was taken 14 times"> + </span>]:<span class="tlaGNC">        5377 :         list_for_each_entry_safe(entry, tmp, &amp;free_list, list) {</span></span>
 <span id="L26"><span class="lineNum">      26</span>                 :<span class="tlaGNC">          14 :                 sock_kfree_s(sk, entry, sizeof(*entry));</span></span>
 <span id="L27"><span class="lineNum">      27</span>                 :             :         }</span>
-<span id="L28"><span class="lineNum">      28</span>                 :<span class="tlaGNC">        5349 : }</span></span>
+<span id="L28"><span class="lineNum">      28</span>                 :<span class="tlaGNC">        5363 : }</span></span>
 <span id="L29"><span class="lineNum">      29</span>                 :             : </span>
 <span id="L30"><span class="lineNum">      30</span>                 :             : static struct mptcp_pm_addr_entry *</span>
 <span id="L31"><span class="lineNum">      31</span>                 :<span class="tlaGNC">          72 : mptcp_userspace_pm_lookup_addr(struct mptcp_sock *msk,</span></span>
@@ -642,7 +642,7 @@
 <span id="L563"><span class="lineNum">     563</span>                 :<span class="tlaGNC">          20 :         spin_unlock_bh(&amp;msk-&gt;pm.lock);</span></span>
 <span id="L564"><span class="lineNum">     564</span>                 :<span class="tlaGNC">          20 :         mptcp_subflow_shutdown(sk, ssk, RCV_SHUTDOWN | SEND_SHUTDOWN);</span></span>
 <span id="L565"><span class="lineNum">     565</span>                 :<span class="tlaGNC">          20 :         mptcp_close_ssk(sk, ssk, mptcp_subflow_ctx(ssk));</span></span>
-<span id="L566"><span class="lineNum">     566</span>       [<span class="tlaUNC" title="Branch &quot;58 -&gt; 60&quot; was not taken"> - </span>][<span class="tlaUNC" title="Branch &quot;59 -&gt; 61&quot; was not executed"> # </span>]:<span class="tlaGNC">          20 :         MPTCP_INC_STATS(sock_net(sk), MPTCP_MIB_RMSUBFLOW);</span></span>
+<span id="L566"><span class="lineNum">     566</span>       [<span class="tlaUNC" title="Branch &quot;59 -&gt; 61&quot; was not executed"> # </span>][<span class="tlaUNC" title="Branch &quot;58 -&gt; 60&quot; was not taken"> - </span>]:<span class="tlaGNC">          20 :         MPTCP_INC_STATS(sock_net(sk), MPTCP_MIB_RMSUBFLOW);</span></span>
 <span id="L567"><span class="lineNum">     567</span>                 :<span class="tlaGNC">          20 : release_sock:</span></span>
 <span id="L568"><span class="lineNum">     568</span>                 :<span class="tlaGNC">          20 :         release_sock(sk);</span></span>
 <span id="L569"><span class="lineNum">     569</span>                 :             : </span>
